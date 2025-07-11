@@ -1,6 +1,7 @@
 # Wizzle
 
-[!NOTE] As part of a challenge, this project was entirely vibe coded using Github Copilot and Builder.io
+[!NOTE]
+As part of a challenge, this project was entirely vibe coded using Github Copilot and Builder.io
 
 Wizzle is a social wishlist web application built with Ruby on Rails. It allows users to create wishlists, share them with friends, ask and answer questions about wishlist items, and track gift history. The app supports friend invitations (including inviting non-users), notifications, and inline editing for a smooth user experience.
 
