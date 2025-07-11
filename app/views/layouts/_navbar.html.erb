@@ -1,0 +1,22 @@
+<nav class="custom-navbar">
+  <div class="navbar-left">
+    <%= link_to 'Home', root_path %>
+  </div>
+  <div class="navbar-right">
+    <% if signed_in? %>
+      <%= link_to 'Profile', profile_path, class: "profile-link" %>
+      <%= link_to "Friend's Wishlists", friends_wishlists_path, class: "friends-wishlists-link" %>
+      <%= link_to "Friends", friends_path, class: "friends-link" %>
+      <% if @pending_friend_invites_count.to_i > 0 %>
+        <span class="navbar-badge"><%= @pending_friend_invites_count %></span>
+      <% end %>
+      <%= link_to "Questions", questions_path, class: "questions-link" %>
+      <% if @new_wishlist_item_notes_count.to_i > 0 %>
+        <span class="navbar-badge" title="New questions"><%= @new_wishlist_item_notes_count %></span>
+      <% end %>
+      <%= button_to 'Sign out', sign_out_path, method: :delete, class: "signout-btn" %>
+    <% else %>
+      <%= link_to 'Sign in', sign_in_path, class: "signin-link" %>
+    <% end %>
+  </div>
+</nav>

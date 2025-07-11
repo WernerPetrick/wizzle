@@ -1,0 +1,66 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-header">
+      <h1 class="auth-title">Welcome Back</h1>
+      <p class="auth-subtitle">Sign in to access your wishlists and connect with friends</p>
+    </div>
+
+    <div class="auth-form">
+      <%= form_for :session, url: session_path, html: { class: "form" } do |form| %>
+        <div class="form-group">
+          <%= form.label :email, "Email Address", class: "form-label" %>
+          <%= form.email_field :email, class: "form-input", placeholder: "your@email.com", required: true %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :password, "Password", class: "form-label" %>
+          <%= form.password_field :password, class: "form-input", placeholder: "Enter your password", required: true %>
+        </div>
+
+        <div class="form-actions">
+          <%= form.submit "Sign In", class: "btn-primary btn-full" %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="auth-footer">
+      <div class="auth-links">
+        <% if Clearance.configuration.allow_sign_up? %>
+          <p>
+            Don't have an account? 
+            <%= link_to "Sign up here", sign_up_path, class: "auth-link" %>
+          </p>
+        <% end %>
+        <% if Clearance.configuration.allow_password_reset? %>
+          <p>
+            <%= link_to "Forgot your password?", new_password_path, class: "auth-link" %>
+          </p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="auth-welcome">
+    <div class="welcome-content">
+      <h3 class="welcome-title">Continue Your Journey</h3>
+      <p class="welcome-description">
+        Access your personalized dashboard, manage your wishlists, and stay connected 
+        with friends and their latest wishes.
+      </p>
+      <div class="welcome-features">
+        <div class="feature-highlight">
+          <span class="feature-number">📊</span>
+          <span class="feature-label">Dashboard</span>
+        </div>
+        <div class="feature-highlight">
+          <span class="feature-number">🎯</span>
+          <span class="feature-label">Quick Access</span>
+        </div>
+        <div class="feature-highlight">
+          <span class="feature-number">🔔</span>
+          <span class="feature-label">Updates</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

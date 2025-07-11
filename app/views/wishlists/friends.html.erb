@@ -1,0 +1,63 @@
+<div class="page-container">
+  <header class="page-header">
+    <div class="header-content">
+      <h1 class="page-title">Shared Wishlists</h1>
+      <p class="page-subtitle">Discover wishlists your friends have shared with you</p>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <% if @wishlists.any? %>
+      <div class="shared-wishlists-grid">
+        <% @wishlists.each do |wishlist| %>
+          <article class="shared-wishlist-card">
+            <div class="card-header">
+              <h2 class="wishlist-title"><%= wishlist.title %></h2>
+              <div class="shared-meta">
+                <div class="shared-by-info">
+                  <span class="shared-by-avatar">
+                    <%= (wishlist.user.name&.first || wishlist.user.email.first).upcase %>
+                  </span>
+                  <div class="shared-by-details">
+                    <span class="shared-by-label">Shared by</span>
+                    <span class="shared-by-name"><%= wishlist.user.name.presence || wishlist.user.email %></span>
+                  </div>
+                </div>
+                <div class="wishlist-stats">
+                  <span class="item-count-badge">
+                    <%= pluralize(wishlist.wishlist_items.count, 'item') %>
+                  </span>
+                </div>
+              </div>
+            </div>
+            
+            <% if wishlist.description.present? %>
+              <p class="wishlist-description"><%= truncate(wishlist.description, length: 150) %></p>
+            <% end %>
+            
+            <div class="card-footer">
+              <%= link_to "View Wishlist", wishlist_path(wishlist), class: "btn-primary" %>
+              <div class="sharing-indicator">
+                <span class="share-icon">🎁</span>
+                <span class="share-text">Shared with you</span>
+              </div>
+            </div>
+          </article>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="empty-state">
+        <div class="empty-icon">🤝</div>
+        <h2 class="empty-title">No shared wishlists yet</h2>
+        <p class="empty-description">
+          When friends share their wishlists with you, they'll appear here. 
+          Ask your friends to add you to their wishlists to start discovering their wishes!
+        </p>
+        <div class="empty-actions">
+          <%= link_to "Manage Friends", friends_path, class: "btn-secondary" %>
+          <%= link_to "Create Your Own", new_wishlist_path, class: "btn-primary" %>
+        </div>
+      </div>
+    <% end %>
+  </main>
+</div>

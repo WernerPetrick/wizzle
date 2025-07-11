@@ -1,0 +1,25 @@
+<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background-color: #f9f9f9; border-radius: 8px; border: 1px solid #e0e0e0; color: #333;">
+  <h1 style="color: #4CAF50; text-align: center; font-size: 28px; margin-bottom: 16px;">🎉 You've Been Invited!</h1>
+
+  <p style="font-size: 16px; line-height: 1.6; text-align: center;">
+    <strong><%= @inviter.name || @inviter.email %></strong> has invited you to connect on <strong>Wizzle</strong> — the easiest way to create and share your wishlists with friends and family.
+  </p>
+
+  <p style="font-size: 16px; line-height: 1.6; text-align: center; margin-top: 20px;">
+    Join now to explore, share, and discover what your friends are wishing for.
+  </p>
+
+  <div style="text-align: center; margin: 30px 0;">
+    <a href="<%= @signup_url %>" style="background-color: #4CAF50; color: #fff; padding: 12px 24px; text-decoration: none; border-radius: 4px; font-size: 16px; display: inline-block;">Accept Invitation</a>
+  </div>
+
+  <p style="font-size: 14px; color: #777; text-align: center;">
+    Already have an account? <a href="<%= sign_in_url %>" style="color: #4CAF50; text-decoration: none;">Log in here</a>.
+  </p>
+
+  <hr style="border: none; border-top: 1px solid #ddd; margin: 30px 0;">
+
+  <p style="font-size: 12px; color: #aaa; text-align: center;">
+    This invitation was sent to you by <%= @inviter.email %>. If you don't wish to receive further invitations, please ignore this email.
+  </p>
+</div>

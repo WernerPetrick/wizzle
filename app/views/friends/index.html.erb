@@ -1,0 +1,181 @@
+<div class="page-container">
+  <header class="page-header">
+    <div class="header-content">
+      <h1 class="page-title">Your Friends</h1>
+      <p class="page-subtitle">Manage your connections and share wishlists</p>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <!-- Invite Friends Section -->
+    <section class="invite-section">
+      <div class="section-card">
+        <h2 class="section-title">Invite New Friends</h2>
+        <p class="section-description">Send an invitation to connect and share wishlists with friends</p>
+        
+        <%= form_with url: friends_path, method: :post, local: true, html: { class: "invite-form" } do |f| %>
+          <div class="form-group">
+            <%= f.label :email, "Friend's Email Address", class: "form-label" %>
+            <div class="input-group">
+              <%= f.email_field :email, required: true, class: "form-input", placeholder: "friend@example.com" %>
+              <%= f.submit "Send Invitation", class: "btn-primary" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </section>
+
+    <!-- Incoming Invitations Section -->
+    <% if @incoming_invitations.any? %>
+      <section class="incoming-invitations-section">
+        <div class="section-card">
+          <div class="section-header">
+            <h2 class="section-title">Incoming Invitations</h2>
+            <span class="invitation-count">
+              <%= pluralize(@incoming_invitations.count, 'invitation') %>
+            </span>
+          </div>
+          <p class="section-description">Friend requests waiting for your response</p>
+          
+          <div class="invitations-grid">
+            <% @incoming_invitations.each do |invitation| %>
+              <article class="invitation-card">
+                <div class="invitation-info">
+                  <div class="inviter-avatar">
+                    <%= (invitation.user.name&.first || invitation.user.email.first).upcase %>
+                  </div>
+                  <div class="inviter-details">
+                    <h3 class="inviter-name">
+                      <%= invitation.user.name.presence || invitation.user.email.split('@').first.humanize %>
+                    </h3>
+                    <p class="inviter-email"><%= invitation.user.email %></p>
+                    <p class="invitation-time">
+                      Sent <%= time_ago_in_words(invitation.created_at) %> ago
+                    </p>
+                  </div>
+                </div>
+                
+                <div class="invitation-actions">
+                  <%= button_to "Accept", accept_friend_path(invitation), 
+                      method: :patch, 
+                      class: "btn-primary btn-sm",
+                      data: { confirm: "Accept friend request from #{invitation.user.email}?" } %>
+                  <%= button_to "Decline", decline_friend_path(invitation), 
+                      method: :delete, 
+                      class: "btn-outline btn-sm",
+                      data: { confirm: "Decline friend request from #{invitation.user.email}?" } %>
+                </div>
+              </article>
+            <% end %>
+          </div>
+        </div>
+      </section>
+    <% end %>
+
+    <!-- Pending Invitations Section -->
+    <% if @pending_invitations.any? %>
+      <section class="pending-invitations-section">
+        <div class="section-card">
+          <div class="section-header">
+            <h2 class="section-title">Pending Invitations</h2>
+            <span class="invitation-count">
+              <%= pluralize(@pending_invitations.count, 'pending') %>
+            </span>
+          </div>
+          <p class="section-description">Invitations you've sent that are waiting for a response</p>
+          
+          <div class="pending-list">
+            <% @pending_invitations.each do |invitation| %>
+              <div class="pending-item">
+                <div class="pending-info">
+                  <div class="pending-avatar">
+                    <%= invitation.friend.email.first.upcase %>
+                  </div>
+                  <div class="pending-details">
+                    <span class="pending-email"><%= invitation.friend.email %></span>
+                    <span class="pending-time">
+                      Sent <%= time_ago_in_words(invitation.created_at) %> ago
+                    </span>
+                  </div>
+                </div>
+                <div class="pending-status">
+                  <span class="status-badge">Pending</span>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </section>
+    <% end %>
+
+    <!-- Friends List Section -->
+    <section class="friends-section">
+      <% if @friends.any? %>
+        <div class="section-card">
+          <div class="section-header">
+            <h2 class="section-title">Your Friends</h2>
+            <span class="friends-count">
+              <%= pluralize(@friends.count, 'friend') %>
+            </span>
+          </div>
+          <p class="section-description">Connect with your friends and share wishlists</p>
+          
+          <div class="friends-grid">
+            <% @friends.each do |friend| %>
+              <article class="friend-card">
+                <div class="friend-info">
+                  <div class="friend-avatar">
+                    <%= (friend.name&.first || friend.email.first).upcase %>
+                  </div>
+                  <div class="friend-details">
+                    <h3 class="friend-name">
+                      <%= friend.name.presence || friend.email.split('@').first.humanize %>
+                    </h3>
+                    <p class="friend-email"><%= friend.email %></p>
+                  </div>
+                </div>
+                
+                <% shared_wishlists = SharedWishlist.where(user: friend) %>
+                <% if shared_wishlists.any? %>
+                  <div class="shared-access">
+                    <h4 class="access-title">Has access to:</h4>
+                    <ul class="shared-wishlists">
+                      <% shared_wishlists.each do |shared| %>
+                        <li class="shared-item">
+                          <span class="wishlist-icon">📝</span>
+                          <span class="wishlist-name"><%= shared.wishlist.title %></span>
+                        </li>
+                      <% end %>
+                    </ul>
+                  </div>
+                <% else %>
+                  <div class="no-shared">
+                    <span class="no-shared-text">No shared wishlists yet</span>
+                  </div>
+                <% end %>
+                
+                <div class="friend-actions">
+                  <%= link_to "View Profile", user_path(friend), class: "btn-outline btn-sm" %>
+                </div>
+              </article>
+            <% end %>
+          </div>
+        </div>
+      <% else %>
+        <div class="empty-state">
+          <div class="empty-icon">👥</div>
+          <h2 class="empty-title">No friends yet</h2>
+          <p class="empty-description">
+            Start building your network by inviting friends! Once connected, you can share 
+            wishlists and discover what your friends are wishing for.
+          </p>
+          <div class="empty-actions">
+            <button onclick="document.querySelector('.form-input').focus()" class="btn-primary">
+              Invite Your First Friend
+            </button>
+          </div>
+        </div>
+      <% end %>
+    </section>
+  </main>
+</div>

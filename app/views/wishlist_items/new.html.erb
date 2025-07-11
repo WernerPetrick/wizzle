@@ -1,0 +1,20 @@
+<div class="wishlist-item-form">
+  <h2>Add Item to Wishlist</h2>
+  <%= form_for [@wishlist, @wishlist_item] do |f| %>
+    <div>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+    <div>
+      <%= f.label :url %>
+      <%= f.text_field :url %>
+    </div>
+    <div>
+      <%= f.label :notes %>
+      <%= f.text_area :notes %>
+    </div>
+    <div>
+      <%= f.submit "Add Item" %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,99 @@
+<div class="page-container">
+  <header class="page-header">
+    <div class="header-content">
+      <h1 class="page-title">Questions & Notes</h1>
+      <p class="page-subtitle">Reply to anonymous notes your friends have sent about your wishlist items</p>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <% if @notes.any? %>
+      <section class="questions-section">
+        <div class="section-card">
+          <div class="section-header">
+            <h2 class="section-title">Pending Questions</h2>
+            <span class="questions-count">
+              <%= pluralize(@notes.count, 'question') %>
+            </span>
+          </div>
+          <p class="section-description">
+            Your friends have sent anonymous notes about your wishlist items. Reply to help them choose the perfect gift!
+          </p>
+
+          <div class="questions-grid">
+            <% @notes.each do |note| %>
+              <article class="question-card">
+                <div class="question-header">
+                  <div class="item-info">
+                    <div class="item-icon">🎁</div>
+                    <div class="item-details">
+                      <h3 class="item-name"><%= note.wishlist_item.name %></h3>
+                      <% if note.wishlist_item.wishlist.present? %>
+                        <div class="wishlist-info">
+                          From: <%= link_to note.wishlist_item.wishlist.title, wishlist_path(note.wishlist_item.wishlist), class: "wishlist-link" %>
+                        </div>
+                      <% end %>
+                    </div>
+                  </div>
+                  <div class="question-meta">
+                    <span class="question-time">
+                      <%= time_ago_in_words(note.created_at) %> ago
+                    </span>
+                  </div>
+                </div>
+
+                <div class="question-content">
+                  <div class="question-label">Anonymous Question:</div>
+                  <div class="question-body">
+                    <%= note.body %>
+                  </div>
+                </div>
+
+                <div class="reply-section">
+                  <div class="reply-form">
+                    <%= form_with url: reply_wishlist_wishlist_item_wishlist_item_note_path(note.wishlist_item.wishlist, note.wishlist_item, note), method: :patch, local: true, html: { class: "question-reply-form" } do |f| %>
+                      <div class="form-group">
+                        <%= f.label :owner_reply, "Your Reply", class: "form-label" %>
+                        <%= f.text_area :owner_reply,
+                            rows: 3,
+                            class: "form-textarea",
+                            placeholder: "Help your friend by answering their question...",
+                            value: note.owner_reply %>
+                      </div>
+                      <div class="form-actions">
+                        <%= f.submit "Send Reply", class: "btn-primary btn-sm" %>
+                        <span class="reply-help">Your reply will be sent anonymously to your friend</span>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+
+                <% if note.owner_reply.present? %>
+                  <div class="existing-reply">
+                    <div class="reply-label">Your Previous Reply:</div>
+                    <div class="reply-content">
+                      <%= note.owner_reply %>
+                    </div>
+                  </div>
+                <% end %>
+              </article>
+            <% end %>
+          </div>
+        </div>
+      </section>
+    <% else %>
+      <div class="empty-state">
+        <div class="empty-icon">💬</div>
+        <h2 class="empty-title">No questions yet!</h2>
+        <p class="empty-description">
+          You're all caught up! Your friends haven't sent any new notes about your wishlist items yet.
+          When they do, you'll be able to reply and help them choose the perfect gifts.
+        </p>
+        <div class="empty-actions">
+          <%= link_to "View Your Wishlists", profile_path, class: "btn-primary" %>
+          <%= link_to "Invite More Friends", friends_path, class: "btn-outline" %>
+        </div>
+      </div>
+    <% end %>
+  </main>
+</div>

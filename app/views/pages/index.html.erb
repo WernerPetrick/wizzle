@@ -1,0 +1,45 @@
+<main class="landing-container">
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">Wizzle</h1>
+      <p class="hero-subtitle">Create, share, and manage wishlists with friends—simply.</p>
+      <%= link_to "Get Started", (signed_in? ? profile_path : sign_in_path), class: "primary-button" %>
+    </div>
+  </section>
+
+  <section class="content-grid">
+    <div class="content-card">
+      <h2 class="card-title">About Wizzle</h2>
+      <p class="card-description">
+        A modern wishlist app designed for effortless sharing and collaboration with friends. 
+        Organize your wishes, invite friends, and keep gifting simple and stress-free.
+      </p>
+    </div>
+
+    <div class="content-card features-card">
+      <h2 class="card-title">Features</h2>
+      <div class="features-grid">
+        <div class="feature-item">
+          <span class="feature-icon">📝</span>
+          <span class="feature-text">Effortless wishlist creation</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">🤝</span>
+          <span class="feature-text">Invite friends to view and interact</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">✅</span>
+          <span class="feature-text">Mark items as "being bought"</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">🎁</span>
+          <span class="feature-text">Clean, distraction-free interface</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <%= link_to "Start Your Wishlist", (signed_in? ? profile_path : sign_up_path), class: "primary-button large" %>
+  </section>
+</main>

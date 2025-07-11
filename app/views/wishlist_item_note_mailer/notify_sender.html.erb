@@ -1,0 +1,9 @@
+<p>
+  Your anonymous question about "<strong><%= @wishlist_item.name %></strong>" has been answered by the wishlist owner:
+</p>
+<blockquote style="margin: 1em 0; padding: 1em; background: #f9f9f9; border-left: 4px solid #4CAF50;">
+  <%= @note.owner_reply %>
+</blockquote>
+<p>
+  You can view this item and more on <%= link_to "Wizzle", root_url %>.
+</p>

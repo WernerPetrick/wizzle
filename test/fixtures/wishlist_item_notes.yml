@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  wishlist_item: one
+  body: MyText
+
+two:
+  wishlist_item: two
+  body: MyText
