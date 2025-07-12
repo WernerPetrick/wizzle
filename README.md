@@ -27,7 +27,7 @@ Wizzle is a social wishlist web application built with Ruby on Rails. It allows 
 
 1. **Clone the repository:**
    ```sh
-   git clone https://github.com/yourusername/wizzle.git
+   git clone https://github.com/WernerPetrick/wizzle
    cd wizzle
    ```
 
@@ -40,6 +40,8 @@ Wizzle is a social wishlist web application built with Ruby on Rails. It allows 
    ```sh
    bin/rails db:create db:migrate
    ```
+
+   You will need to set the ENV variables `TURSO_AUTH_TOKEN` & `TURSO_DATABASE_URL`
 
 4. **Start the server:**
    ```sh
