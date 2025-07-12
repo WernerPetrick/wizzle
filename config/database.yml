@@ -6,4 +6,9 @@ development:
   <<: *default
   url: <%= ENV['TURSO_DATABASE_URL'] %>
   auth_token: <%= ENV['TURSO_AUTH_TOKEN'] %>
-  path: storage/development.sqlite3 # For embedded replica
+  path: storage/development.sqlite3
+
+production:
+  <<: *default
+  url: <%= ENV['TURSO_DATABASE_URL'] %>
+  auth_token: <%= ENV['TURSO_AUTH_TOKEN'] %>
