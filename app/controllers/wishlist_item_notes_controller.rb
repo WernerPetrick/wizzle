@@ -7,7 +7,10 @@ class WishlistItemNotesController < ApplicationController
       body: params[:body],
       sender: current_user
     )
-    WishlistItemNoteMailer.notify_owner(@note).deliver_later
+    owner = @wishlist_item.wishlist.user
+    if owner.notify_wishlist_question?
+      WishlistItemNoteMailer.notify_owner(@note).deliver_now
+    end
     redirect_to wishlist_path(@wishlist_item.wishlist), notice: "Your anonymous note was sent!"
   end
 
@@ -15,7 +18,10 @@ class WishlistItemNotesController < ApplicationController
     @note = WishlistItemNote.find(params[:id])
     if @note.wishlist_item.wishlist.user == current_user
       @note.update(owner_reply: params[:owner_reply])
-      WishlistItemNoteMailer.notify_sender(@note).deliver_later if @note.sender.present?
+      sender = @note.sender
+      if sender && sender.notify_question_reply?
+        WishlistItemNoteMailer.notify_sender(@note).deliver_now
+      end
     end
     redirect_to wishlist_path(@note.wishlist_item.wishlist), notice: "Reply sent."
   end

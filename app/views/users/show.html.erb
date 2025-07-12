@@ -13,6 +13,12 @@
             <%= @user.name.presence || @user.email.split('@').first.humanize %>
           </h1>
           <p class="user-email"><%= @user.email %></p>
+          <% if @user.birthday.present? %>
+            <p class="user-birthday">
+              <strong>Birthday:</strong>
+              <%= @user.birthday.strftime("%B %d, %Y") %>
+            </p>
+          <% end %>
           <div class="user-stats">
             <div class="stat-item">
               <span class="stat-number"><%= @user.wishlists.count %></span>

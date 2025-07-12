@@ -1,0 +1,10 @@
+<p>
+  Hi <%= @user.name || @user.email %>,
+</p>
+<p>
+  Your birthday is <%= @days_until == 30 ? "in one month" : "in 7 days" %>!  
+  Make sure your wishlist is up to date so your friends know what to get you.
+</p>
+<p>
+  <%= link_to "Update your wishlist", profile_path %>
+</p>

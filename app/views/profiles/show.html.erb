@@ -143,6 +143,48 @@
     <% end %>
   </ul>
 
+  <%= form_for current_user, url: profile_path, method: :patch, html: { class: "settings-form" } do |f| %>
+    <section class="settings-section">
+      <div class="section-header">
+        <h2 class="section-title">Email Notification Settings</h2>
+        <p class="section-description">Choose which email notifications you'd like to receive.</p>
+      </div>
+
+      <div class="settings-card">
+        <% [
+          [:notify_friend_invite, "Friend invitations"],
+          [:notify_wishlist_question, "Questions about your wishlist items"],
+          [:notify_question_reply, "Replies to questions you've asked"]
+        ].each do |field, label| %>
+          <div class="form-group">
+            <%= f.check_box field %>
+            <%= f.label field, label %>
+          </div>
+        <% end %>
+      </div>
+    </section>
+
+    <section class="settings-section">
+      <div class="section-header">
+        <h2 class="section-title">Profile Settings</h2>
+        <p class="section-description">Update your personal info and notification preferences.</p>
+      </div>
+
+      <div class="settings-card">
+        <div class="form-group">
+          <%= f.label :birthday, "Your Birthday" %>
+          <%= f.date_field :birthday, class: "form-input" %>
+        </div>
+      </div>
+    </section>
+
+    <div class="form-actions">
+      <%= f.submit "Save Settings", class: "btn-primary" %>
+    </div>
+
+  <% end %>
+
+
 </div>
 
 

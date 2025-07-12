@@ -14,6 +14,10 @@
       <%= f.text_area :notes %>
     </div>
     <div>
+      <%= f.label :image, "Item Image" %>
+      <%= f.file_field :image %>
+    </div>
+    <div>
       <%= f.submit "Add Item" %>
     </div>
   <% end %>

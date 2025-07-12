@@ -11,7 +11,9 @@ class FriendsController < ApplicationController
     friend = User.find_by(email: params[:email])
     if friend && friend != current_user
       friendship = current_user.friendships.create(friend: friend, status: "pending")
-      FriendInviteMailer.invite(friendship).deliver_now
+      if friend.notify_friend_invite?
+        FriendInviteMailer.invite(friendship).deliver_now
+      end
       redirect_to friends_path, notice: "Invitation sent to #{friend.email}."
     elsif params[:email].present? && params[:email] != current_user.email
       # Invite non-user

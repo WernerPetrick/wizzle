@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get "shared_wishlists/create"
   get "shared_wishlists/destroy"
+  resource :profile, only: [:show, :update]
   resources :users, controller: "users", only: [:create, :new]
   resources :friends, only: [:index, :create] do
     member do
@@ -25,7 +26,6 @@ Rails.application.routes.draw do
       end
     end
   end
-  get "profile", to: "profiles#show", as: :profile
   get "friends_wishlists", to: "wishlists#friends", as: :friends_wishlists
   get "questions", to: "questions#index", as: :questions
   get "users/:id", to: "users#show", as: :user

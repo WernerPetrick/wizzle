@@ -55,6 +55,9 @@ class WishlistsController < ApplicationController
   end
 
   def wishlist_params
-    params.require(:wishlist).permit(:title, :description, wishlist_items_attributes: [:name, :url, :notes])
+    params.require(:wishlist).permit(
+      :title, :description,
+      wishlist_items_attributes: [:id, :name, :url, :notes, :image, :_destroy]
+    )
   end
 end
