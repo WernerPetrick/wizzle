@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class UsersController < Clearance::UsersController
   before_action :require_login
   skip_before_action :require_login, only: [:new, :create]
 
@@ -8,7 +8,6 @@ class UsersController < ApplicationController
         invitation = Invitation.find_by(token: params[:invite_token], accepted: false)
         if invitation && invitation.email == user.email
           invitation.update(accepted: true)
-          # Create reciprocal friendships
           Friendship.create(user: invitation.inviter, friend: user, status: "accepted")
           Friendship.create(user: user, friend: invitation.inviter, status: "accepted")
         end
