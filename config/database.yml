@@ -81,9 +81,8 @@ test:
 production:
   primary: &primary_production
     <<: *default
-    database: wizzle_production
-    username: wizzle
-    password: <%= ENV["WIZZLE_DATABASE_PASSWORD"] %>
+    url: <%= ENV["DATABASE_URL"] %>
+    pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %> 
   cache:
     <<: *primary_production
     database: wizzle_production_cache
