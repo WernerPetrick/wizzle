@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  skip_before_action :require_login, only: [:new, :create]
   before_action :require_login
+  skip_before_action :require_login, only: [:create]
 
   def create
     super do |user|
