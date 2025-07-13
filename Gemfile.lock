@@ -178,9 +178,6 @@ GEM
       logger (~> 1.6)
     letter_opener (1.10.0)
       launchy (>= 2.2, < 4)
-    libsql_activerecord (0.0.2)
-      activerecord (~> 8.0)
-      turso_libsql (~> 0.2)
     lint_roller (1.1.0)
     logger (1.7.0)
     loofah (2.24.1)
@@ -232,6 +229,7 @@ GEM
     parser (3.3.8.0)
       ast (~> 2.4.1)
       racc
+    pg (1.5.9)
     pp (0.6.2)
       prettyprint
     prettyprint (0.2.0)
@@ -380,8 +378,6 @@ GEM
     turbo-rails (2.0.16)
       actionpack (>= 7.1.0)
       railties (>= 7.1.0)
-    turso_libsql (0.2.1)
-      ffi (~> 1.17)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode (0.4.4.5)
@@ -426,7 +422,7 @@ DEPENDENCIES
   jbuilder
   kamal
   letter_opener
-  libsql_activerecord
+  pg
   propshaft
   puma (>= 5.0)
   rails (~> 8.0.2)
