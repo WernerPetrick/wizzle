@@ -1,0 +1,5 @@
+<% if wishlist.wishlist_items.any? %>
+  <span class="item-count">
+    <%= pluralize(wishlist.wishlist_items.count, 'item') %>
+  </span>
+<% end %>

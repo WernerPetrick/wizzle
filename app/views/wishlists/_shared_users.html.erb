@@ -1,0 +1,35 @@
+<% if wishlist.shared_users.any? %>
+  <div class="shared-users">
+    <h3 class="shared-title">Shared with:</h3>
+    <div class="shared-users-list">
+      <% wishlist.shared_users.each do |user| %>
+        <turbo-frame id="shared_user_<%= user.id %>">
+          <div class="shared-user-item">
+            <div class="user-info">
+              <div class="user-avatar">
+                <%= (user.name&.first || user.email.first).upcase %>
+              </div>
+              <div class="user-details">
+                <span class="user-name">
+                  <%= user.name.presence || user.email.split('@').first.humanize %>
+                </span>
+                <span class="user-email"><%= user.email %></span>
+              </div>
+            </div>
+            <div class="user-actions">
+              <%= button_to "Remove", wishlist_shared_wishlist_path(wishlist, user),
+                  method: :delete,
+                  class: "btn-outline btn-sm",
+                  form: { data: { turbo_frame: "shared_user_#{user.id}" } },
+                  data: { confirm: "Remove #{user.email}'s access to this wishlist?" } %>
+            </div>
+          </div>
+        </turbo-frame>
+      <% end %>
+    </div>
+  </div>
+<% else %>
+  <div class="no-shared-users">
+    <p class="text-muted">Not shared with anyone yet.</p>
+  </div>
+<% end %>

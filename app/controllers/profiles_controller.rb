@@ -4,11 +4,13 @@ class ProfilesController < ApplicationController
   end
 
   def update
-    @user = current_user
-    if @user.update(params.require(:user).permit(:birthday, :notify_friend_invite, :notify_wishlist_question, :notify_question_reply))
-      redirect_to profile_path, notice: "Settings updated!"
+    if current_user.update(profile_params)
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to profile_path, notice: "Settings updated!" }
+      end
     else
-      render :show
+      render turbo_stream: turbo_stream.replace("profile_settings", partial: "profiles/settings_form", locals: { user: current_user })
     end
   end
 end

@@ -1,0 +1,13 @@
+<%= form_with(model: wishlist, data: { turbo_frame: "user_wishlists" }) do |f| %>
+  <div class="form-group">
+    <%= f.label :title, "Wishlist Title" %>
+    <%= f.text_field :title, required: true %>
+  </div>
+  <div class="form-group">
+    <%= f.label :description, "Description" %>
+    <%= f.text_area :description %>
+  </div>
+  <div class="form-actions">
+    <%= f.submit "Create Wishlist", class: "btn-primary" %>
+  </div>
+<% end %>

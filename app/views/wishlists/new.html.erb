@@ -24,22 +24,19 @@
         </section>
 
         <!-- Wishlist Items Section -->
-        <section class="wishlist-items-section">
+        <section class="wishlist-items-section" data-controller="wishlist-items">
           <div class="items-header">
             <h2 class="section-title">Wishlist Items</h2>
-            <button type="button" id="add-item-btn" class="btn-secondary">
-              <span class="btn-icon">+</span>
-              Add Item
-            </button>
+            <button type="button" data-action="wishlist-items#add" class="btn-secondary">Add Item</button>
           </div>
 
-          <div id="wishlist-items-container" class="wishlist-items-container">
+          <div id="wishlist-items-container" data-wishlist-items-target="container" class="wishlist-items-container">
             <% @wishlist.wishlist_items.each_with_index do |item, idx| %>
               <%= f.fields_for :wishlist_items, item do |item_fields| %>
                 <div class="wishlist-item-group" data-item-index="<%= idx %>">
                   <div class="item-header">
                     <h3 class="item-title">Item <%= idx + 1 %></h3>
-                    <button type="button" class="remove-item-btn" data-action="remove-item">
+                    <button type="button" class="remove-item-btn" data-action="wishlist-items#remove">
                       <span class="remove-icon">×</span>
                     </button>
                   </div>
@@ -67,7 +64,7 @@
           </div>
 
           <div class="items-actions">
-            <button type="button" id="add-another-item" class="btn-outline">
+            <button type="button" data-action="wishlist-items#add" class="btn-outline">
               <span class="btn-icon">📝</span>
               Add Another Item
             </button>
@@ -91,25 +88,26 @@
   <div class="wishlist-item-group" data-item-index="">
     <div class="item-header">
       <h3 class="item-title">Item <span class="item-number"></span></h3>
-      <button type="button" class="remove-item-btn" data-action="remove-item">
+      <button type="button" class="remove-item-btn" data-action="wishlist-items#remove">
         <span class="remove-icon">×</span>
       </button>
     </div>
-    
     <div class="item-fields">
       <div class="form-group">
         <label class="form-label">Item Name</label>
-        <input type="text" class="form-input" placeholder="What are you wishing for?">
+        <input type="text" name="" id="" class="form-input" placeholder="What are you wishing for?">
       </div>
-
       <div class="form-group">
         <label class="form-label">Link (Optional)</label>
-        <input type="url" class="form-input" placeholder="https://example.com/product">
+        <input type="url" name="" id="" class="form-input" placeholder="https://example.com/product">
       </div>
-
       <div class="form-group">
         <label class="form-label">Notes (Optional)</label>
-        <textarea rows="2" class="form-textarea" placeholder="Size, color, specific details..."></textarea>
+        <textarea rows="2" name="" id="" class="form-textarea" placeholder="Size, color, specific details..."></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Image (Optional)</label>
+        <input type="file" name="" id="" class="form-input" accept="image/*" capture="environment">
       </div>
     </div>
   </div>

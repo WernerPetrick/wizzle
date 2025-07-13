@@ -1,0 +1,21 @@
+<article class="modern-wishlist-card" id="wishlist_<%= wishlist.id %>">
+  <div class="card-header">
+    <h3 class="wishlist-title"><%= wishlist.title %></h3>
+    <div class="wishlist-meta">
+      <span class="item-count"><%= pluralize(wishlist.wishlist_items.count, 'item') %></span>
+      <% if wishlist.shared_wishlists.any? %>
+        <span class="shared-indicator">
+          <span class="share-icon">👥</span>
+          Shared with <%= pluralize(wishlist.shared_wishlists.count, 'friend') %>
+        </span>
+      <% end %>
+    </div>
+  </div>
+  <% if wishlist.description.present? %>
+    <p class="wishlist-description"><%= truncate(wishlist.description, length: 120) %></p>
+  <% end %>
+  <div class="card-actions">
+    <%= link_to "View Details", wishlist_path(wishlist), class: "btn-primary" %>
+    <%= button_to "Delete", wishlist_path(wishlist), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "btn-danger", form: { data: { turbo_stream: true } } %>
+  </div>
+</article>

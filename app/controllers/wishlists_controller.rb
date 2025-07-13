@@ -10,9 +10,12 @@ class WishlistsController < ApplicationController
   def create
     @wishlist = current_user.wishlists.new(wishlist_params)
     if @wishlist.save
-      redirect_to @wishlist, notice: "Wishlist created!"
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to profile_path, notice: "Wishlist created!" }
+      end
     else
-      render :new
+      render turbo_stream: turbo_stream.replace("user_wishlists", partial: "wishlists/form", locals: { wishlist: @wishlist })
     end
   end
 
@@ -38,7 +41,10 @@ class WishlistsController < ApplicationController
   def destroy
     @wishlist = current_user.wishlists.find(params[:id])
     @wishlist.destroy
-    redirect_to profile_path, notice: "Wishlist deleted."
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to profile_path, notice: "Wishlist deleted." }
+    end
   end
 
   def friends

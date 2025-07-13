@@ -1,0 +1,2 @@
+<%= turbo_stream.prepend "user_wishlists", partial: "wishlists/card", locals: { wishlist: @wishlist } %>
+<%= turbo_stream.replace "user_wishlists", partial: "wishlists/form", locals: { wishlist: Wishlist.new } %>

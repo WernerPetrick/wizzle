@@ -1,0 +1,23 @@
+<%= form_with(model: [wishlist, wishlist_item], data: { turbo_frame: "wishlist_items_#{wishlist.id}" }, html: { multipart: true }) do |f| %>
+  <div class="form-row">
+    <div class="form-group">
+      <%= f.label :name, "Item Name", class: "form-label" %>
+      <%= f.text_field :name, class: "form-input", placeholder: "What would you like?" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :url, "Link (Optional)", class: "form-label" %>
+      <%= f.text_field :url, class: "form-input", placeholder: "https://..." %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :notes, "Notes (Optional)", class: "form-label" %>
+    <%= f.text_area :notes, class: "form-textarea", rows: 3, placeholder: "Any additional details..." %>
+  </div>
+  <div class="form-group">
+    <%= f.label :image, "Image (Optional)", class: "form-label" %>
+    <%= f.file_field :image, class: "form-input", accept: "image/*", capture: "environment" %>
+  </div>
+  <div class="form-actions">
+    <%= f.submit "Add Item", class: "btn-primary" %>
+  </div>
+<% end %>

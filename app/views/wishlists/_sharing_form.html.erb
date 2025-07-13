@@ -1,0 +1,9 @@
+<%= form_with url: wishlist_shared_wishlists_path(wishlist), method: :post, local: false, html: { class: "share-form" } do |f| %>
+  <div class="form-group">
+    <%= f.label :email, "Friend's Email Address", class: "form-label" %>
+    <div class="input-group">
+      <%= f.email_field :email, required: true, class: "form-input form-input-large", placeholder: "friend@example.com" %>
+      <%= f.submit "Send Invitation", class: "btn-primary" %>
+    </div>
+  </div>
+<% end %>

@@ -1,40 +1,70 @@
 class SharedWishlistsController < ApplicationController
   before_action :require_login
+  before_action :set_wishlist
 
   def create
-    @wishlist = current_user.wishlists.find(params[:wishlist_id])
-    emails = params[:emails].to_s.split(/[\r\n,]+/).map(&:strip).reject(&:blank?)
-    invited = []
-    not_found = []
-
-    emails.each do |email|
-      friend = User.find_by(email: email)
-      if friend && friend != current_user
-        @wishlist.shared_users << friend unless @wishlist.shared_users.include?(friend)
-        invited << email
-      else
-        not_found << email
+    user = User.find_by(email: params[:email])
+    
+    if user.nil?
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace("sharing_form", 
+            partial: "wishlists/sharing_form_with_error", 
+            locals: { wishlist: @wishlist, error: "User with email #{params[:email]} not found." })
+        end
+        format.html { redirect_to @wishlist, alert: "User with email #{params[:email]} not found." }
       end
+      return
     end
 
-    message = if not_found.any?
-      "Some users not found: #{not_found.join(', ')}. Others invited: #{invited.join(', ')}"
-    else
-      "Invited: #{invited.join(', ')}"
+    if @wishlist.shared_users.include?(user)
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace("sharing_form", 
+            partial: "wishlists/sharing_form_with_error", 
+            locals: { wishlist: @wishlist, error: "Wishlist is already shared with #{user.email}." })
+        end
+        format.html { redirect_to @wishlist, alert: "Wishlist is already shared with #{user.email}." }
+      end
+      return
     end
 
-    flash[:notice] = message
+    @wishlist.shared_users << user
 
     respond_to do |format|
-      format.html { redirect_to @wishlist }
-      format.wizzle_flash { render partial: "layouts/flash" }
+      format.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.replace("sharing_form", 
+            partial: "wishlists/sharing_form", locals: { wishlist: @wishlist }),
+          turbo_stream.replace("shared_users_list", 
+            partial: "shared_users", locals: { wishlist: @wishlist })
+        ]
+      end
+      format.html { redirect_to @wishlist, notice: "Wishlist shared with #{user.email}!" }
     end
   end
 
   def destroy
+    user = User.find(params[:id])
+    @wishlist.shared_users.delete(user)
+
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.remove("shared_user_#{user.id}"),
+          turbo_stream.replace("shared_users_list", 
+            partial: "shared_users", locals: { wishlist: @wishlist })
+        ]
+      end
+      format.html { redirect_to @wishlist, notice: "Removed #{user.email}'s access to this wishlist." }
+    end
+  end
+
+  private
+
+  def set_wishlist
     @wishlist = current_user.wishlists.find(params[:wishlist_id])
-    friend = User.find(params[:id])
-    @wishlist.shared_users.delete(friend)
-    redirect_to @wishlist, notice: "Access revoked for #{friend.email}"
+  rescue ActiveRecord::RecordNotFound
+    redirect_to profile_path, alert: "You do not have permission to modify this wishlist."
   end
 end

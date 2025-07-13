@@ -1,0 +1,62 @@
+<div class="wishlist-item <%= 'bought' if item.being_bought? %>">
+  <div class="item-content">
+    <% if item.image.present? %>
+      <div class="item-image">
+        <%= image_tag item.image, alt: item.name %>
+      </div>
+    <% end %>
+    
+    <div class="item-details">
+      <h3 class="item-name"><%= item.name %></h3>
+      
+      <% if item.notes.present? %>
+        <p class="item-notes"><%= item.notes %></p>
+      <% end %>
+      
+      <% if item.url.present? %>
+        <div class="item-link">
+          <%= link_to "View Product", item.url, target: "_blank", rel: "noopener", class: "link-external" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  
+  <div class="item-actions">
+    <% if wishlist.user == current_user %>
+      <!-- Owner actions -->
+      <div class="owner-actions">
+        <%= link_to "Edit", edit_wishlist_wishlist_item_path(wishlist, item), 
+            class: "btn-outline btn-sm",
+            data: { turbo_frame: "wishlist_item_#{item.id}" } %>
+        <%= button_to "Delete", wishlist_wishlist_item_path(wishlist, item), 
+            method: :delete,
+            class: "btn-outline btn-sm btn-danger",
+            form: { data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } } %>
+      </div>
+      
+      <% if item.being_bought? %>
+        <div class="bought-status">
+          <span class="status-badge bought">Being Bought</span>
+        </div>
+      <% end %>
+    <% else %>
+      <!-- Friend actions -->
+      <div class="friend-actions">
+        <% unless item.being_bought? %>
+          <%= button_to "Mark as Bought", mark_bought_wishlist_wishlist_item_path(wishlist, item),
+              method: :patch,
+              class: "btn-primary btn-sm",
+              form: { data: { turbo_method: :patch } } %>
+        <% else %>
+          <%= button_to "Unmark", unmark_bought_wishlist_wishlist_item_path(wishlist, item),
+              method: :patch,
+              class: "btn-outline btn-sm",
+              form: { data: { turbo_method: :patch } } %>
+          <div class="bought-status">
+            <span class="status-badge bought">Being Bought</span>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
