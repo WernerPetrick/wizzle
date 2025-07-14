@@ -1,45 +1,126 @@
-<main class="landing-container">
-  <section class="hero-section">
-    <div class="hero-content">
-      <h1 class="hero-title">Wizzle</h1>
-      <p class="hero-subtitle">Create, share, and manage wishlists with friends—simply.</p>
-      <%= link_to "Get Started", (signed_in? ? profile_path : sign_in_path), class: "primary-button" %>
-    </div>
-  </section>
-
-  <section class="content-grid">
-    <div class="content-card">
-      <h2 class="card-title">About Wizzle</h2>
-      <p class="card-description">
-        A modern wishlist app designed for effortless sharing and collaboration with friends. 
-        Organize your wishes, invite friends, and keep gifting simple and stress-free.
-      </p>
-    </div>
-
-    <div class="content-card features-card">
-      <h2 class="card-title">Features</h2>
-      <div class="features-grid">
-        <div class="feature-item">
-          <span class="feature-icon">📝</span>
-          <span class="feature-text">Effortless wishlist creation</span>
+<main class="colorful-landing">
+  <section class="hero-banner">
+    <div class="hero-background">
+            <div class="floating-shapes">
+        <div class="shape shape-1">○</div>
+        <div class="shape shape-2">□</div>
+        <div class="shape shape-3">△</div>
+        <div class="shape shape-4">◇</div>
+        <div class="shape shape-5">○</div>
+        <div class="shape shape-6">□</div>
+      </div>
+      <div class="hero-content-wrapper">
+                <div class="hero-text">
+          <h1 class="hero-main-title">The <strong>simplest</strong> way<br>to share wishes</h1>
+          <p class="hero-description">Create thoughtful wishlists, share with friends, and make gift-giving effortless for everyone involved.</p>
+          <%= link_to "Get started", (signed_in? ? profile_path : sign_up_path), class: "hero-cta-button" %>
         </div>
-        <div class="feature-item">
-          <span class="feature-icon">🤝</span>
-          <span class="feature-text">Invite friends to view and interact</span>
-        </div>
-        <div class="feature-item">
-          <span class="feature-icon">✅</span>
-          <span class="feature-text">Mark items as "being bought"</span>
-        </div>
-        <div class="feature-item">
-          <span class="feature-icon">🎁</span>
-          <span class="feature-text">Clean, distraction-free interface</span>
+        <div class="hero-illustration">
+          <div class="celebration-character">
+            <div class="character-body"></div>
+                        <div class="gift-tree">
+              <div class="tree-top">⬟</div>
+              <div class="tree-trunk"></div>
+            </div>
+            <div class="magic-rays"></div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="cta-section">
-    <%= link_to "Start Your Wishlist", (signed_in? ? profile_path : sign_up_path), class: "primary-button large" %>
+  <section class="events-section">
+    <div class="section-container">
+            <h2 class="section-title">For every occasion</h2>
+      <div class="event-cards">
+        <div class="event-card birthday-card">
+          <div class="event-icon">🎂</div>
+          <div class="event-info">
+            <div class="event-date">Coming Soon</div>
+            <div class="event-label">Birthday Magic</div>
+          </div>
+        </div>
+        <div class="event-card holiday-card">
+          <div class="event-icon">🎅</div>
+          <div class="event-info">
+            <div class="event-date">25.12</div>
+            <div class="event-label">Holiday Joy</div>
+          </div>
+        </div>
+        <div class="event-card celebration-card">
+          <div class="event-icon">🥳</div>
+          <div class="event-info">
+            <div class="event-date">31.12</div>
+            <div class="event-label">New Year</div>
+          </div>
+        </div>
+        <div class="event-card special-card">
+          <div class="event-icon">💖</div>
+          <div class="event-info">
+            <div class="event-date">Any Day</div>
+            <div class="event-label">Special Moments</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features-showcase">
+    <div class="section-container">
+      <div class="feature-highlight">
+        <div class="feature-content">
+                    <h2 class="feature-title">Thoughtful giving made simple</h2>
+          <p class="feature-description">
+            Create beautiful wishlists and invite your friends to see what makes you happy. 
+            Make gift-giving a delightful experience for everyone!
+          </p>
+          <div class="feature-benefits">
+            <div class="benefit-item">
+              <span class="benefit-icon">✨</span>
+              <span class="benefit-text">Easy wishlist creation</span>
+            </div>
+            <div class="benefit-item">
+              <span class="benefit-icon">👥</span>
+              <span class="benefit-text">Friend collaboration</span>
+            </div>
+            <div class="benefit-item">
+              <span class="benefit-icon">🎯</span>
+              <span class="benefit-text">Perfect gift coordination</span>
+            </div>
+          </div>
+        </div>
+        <div class="feature-visual">
+          <div class="wishlist-preview">
+            <div class="preview-card">
+              <div class="preview-header">
+                <div class="preview-title">My Dream List</div>
+                <div class="preview-share">👥 Shared</div>
+              </div>
+              <div class="preview-items">
+                <div class="preview-item">🎮 Gaming Console</div>
+                <div class="preview-item">📚 Favorite Books</div>
+                <div class="preview-item">🎨 Art Supplies</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="final-cta">
+    <div class="cta-container">
+      <div class="cta-content">
+        <h2 class="cta-title">Ready to spread some joy?</h2>
+        <p class="cta-subtitle">Join thousands of friends making gift-giving magical</p>
+        <%= link_to "Start Your Wishlist Journey", (signed_in? ? profile_path : sign_up_path), class: "final-cta-button" %>
+      </div>
+      <div class="cta-sparkles">
+        <div class="sparkle sparkle-1">✨</div>
+        <div class="sparkle sparkle-2">⭐</div>
+        <div class="sparkle sparkle-3">🌟</div>
+        <div class="sparkle sparkle-4">💫</div>
+      </div>
+    </div>
   </section>
 </main>

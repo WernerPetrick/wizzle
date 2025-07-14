@@ -1,0 +1,383 @@
+/* ===== MINIMALIST BLACK & WHITE PAGES - COHESIVE DESIGN SYSTEM ===== */
+
+.colorful-page {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  overflow-x: hidden;
+  background: #ffffff;
+  min-height: 100vh;
+  padding-top: 100px;
+  color: #000000;
+  line-height: 1.6;
+}
+
+/* ===== MINIMALIST PAGE HEADERS ===== */
+.magical-page-header,
+.magical-hero {
+  position: relative;
+  background: #ffffff;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 4rem 2rem;
+  margin-top: -80px;
+  padding-top: 6rem;
+  text-align: center;
+}
+
+.wishlist-hero-magical {
+  position: relative;
+  background: #fafafa;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 4rem 2rem;
+  margin-top: -80px;
+  padding-top: 6rem;
+  text-align: center;
+}
+
+.magical-hero-content,
+.page-header-content {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.magical-page-title,
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: 200;
+  color: #000000;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.magical-page-subtitle,
+.hero-subtitle {
+  font-size: 1.4rem;
+  color: #666666;
+  margin-bottom: 2rem;
+  font-weight: 300;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ===== CONTENT SECTIONS ===== */
+.magical-section {
+  padding: 4rem 2rem;
+  background: #ffffff;
+}
+
+.magical-section:nth-child(even) {
+  background: #fafafa;
+}
+
+.magical-section-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.magical-section-title {
+  font-size: 2.5rem;
+  font-weight: 200;
+  color: #000000;
+  margin-bottom: 3rem;
+  text-align: center;
+  letter-spacing: -0.02em;
+}
+
+.magical-section-content {
+  color: #666666;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  font-weight: 300;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* ===== CARD LAYOUTS ===== */
+.magical-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.magical-card {
+  background: #ffffff;
+  border: 1px solid #f0f0f0;
+  padding: 3rem 2rem;
+  text-align: center;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.magical-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  border-color: #e0e0e0;
+}
+
+.magical-card-icon {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  color: #000000;
+  opacity: 0.8;
+}
+
+.magical-card-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #000000;
+  margin-bottom: 1rem;
+}
+
+.magical-card-description {
+  color: #666666;
+  line-height: 1.5;
+  font-weight: 300;
+  margin: 0;
+}
+
+/* ===== PROFILE & USER PAGES ===== */
+.profile-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: #ffffff;
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.profile-name {
+  font-size: 2.5rem;
+  font-weight: 200;
+  color: #000000;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.profile-meta {
+  color: #666666;
+  font-weight: 300;
+  font-size: 1.1rem;
+}
+
+/* ===== WISHLIST COMPONENTS ===== */
+.wishlist-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.wishlist-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.wishlist-title {
+  font-size: 2.5rem;
+  font-weight: 200;
+  color: #000000;
+  letter-spacing: -0.02em;
+}
+
+.wishlist-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.wishlist-items {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.wishlist-item {
+  background: #ffffff;
+  border: 1px solid #f0f0f0;
+  padding: 2rem;
+  transition: all 0.2s ease;
+}
+
+.wishlist-item:hover {
+  border-color: #e0e0e0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.wishlist-item-title {
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: #000000;
+  margin-bottom: 0.5rem;
+}
+
+.wishlist-item-description {
+  color: #666666;
+  font-weight: 300;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.wishlist-item-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #999999;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ===== FRIENDS & SHARING ===== */
+.friends-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.friend-card {
+  background: #ffffff;
+  border: 1px solid #f0f0f0;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.friend-card:hover {
+  border-color: #e0e0e0;
+  transform: translateY(-1px);
+}
+
+.friend-name {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #000000;
+  margin-bottom: 0.5rem;
+}
+
+.friend-status {
+  color: #666666;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ===== FORMS IN PAGES ===== */
+.page-form {
+  max-width: 600px;
+  margin: 2rem auto;
+  background: #ffffff;
+  border: 1px solid #f0f0f0;
+  padding: 3rem;
+}
+
+.page-form-title {
+  font-size: 2rem;
+  font-weight: 200;
+  color: #000000;
+  margin-bottom: 2rem;
+  text-align: center;
+  letter-spacing: -0.02em;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+  .colorful-page {
+    padding-top: 80px;
+  }
+
+  .magical-page-header,
+  .magical-hero,
+  .wishlist-hero-magical {
+    padding: 3rem 1rem;
+    margin-top: -70px;
+    padding-top: 4rem;
+  }
+
+  .magical-page-title,
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .magical-page-subtitle,
+  .hero-subtitle {
+    font-size: 1.2rem;
+  }
+
+  .magical-section {
+    padding: 3rem 1rem;
+  }
+
+  .magical-section-title {
+    font-size: 2rem;
+  }
+
+  .magical-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .profile-container,
+  .wishlist-container {
+    padding: 1rem;
+  }
+
+  .wishlist-header {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .wishlist-title {
+    font-size: 2rem;
+  }
+
+  .friends-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page-form {
+    margin: 1rem;
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .magical-page-title,
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .magical-section-title {
+    font-size: 1.8rem;
+  }
+
+  .wishlist-title {
+    font-size: 1.8rem;
+  }
+
+  .magical-card,
+  .wishlist-item,
+  .friend-card {
+    padding: 1.5rem;
+  }
+
+  .page-form {
+    padding: 1.5rem;
+  }
+
+  .page-form-title {
+    font-size: 1.8rem;
+  }
+}
