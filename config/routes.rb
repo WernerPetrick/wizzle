@@ -29,5 +29,6 @@ Rails.application.routes.draw do
   get "friends_wishlists", to: "wishlists#friends", as: :friends_wishlists
   get "questions", to: "questions#index", as: :questions
   get "users/:id", to: "users#show", as: :user
+  get "/w/:token", to: "wishlists#public_show", as: :public_wishlist
   root "pages#index"
 end

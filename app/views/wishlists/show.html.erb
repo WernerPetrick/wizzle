@@ -221,6 +221,14 @@
             </div>
           <% end %>
 
+          <% if @wishlist.public_token.present? %>
+            <div class="share-link-section">
+              <label>Share this link with anyone:</label>
+              <input type="text" readonly value="<%= public_wishlist_url(@wishlist.public_token) %>" class="share-link-input">
+              <button onclick="navigator.clipboard.writeText('<%= public_wishlist_url(@wishlist.public_token) %>')">Copy Link</button>
+            </div>
+          <% end %>
+
           <!-- Shared Users List -->
           <% if @wishlist.shared_users.any? %>
             <div class="shared-users">

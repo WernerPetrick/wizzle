@@ -1,6 +1,7 @@
 class WishlistsController < ApplicationController
   before_action :require_login
   before_action :require_owner, only: [:destroy, :add_items]
+  skip_before_action :require_login, only: [:public_show]
 
   def new
     @wishlist = current_user.wishlists.new
@@ -24,6 +25,16 @@ class WishlistsController < ApplicationController
       return
     end
     @wishlist_items = @wishlist.wishlist_items
+  end
+
+  def public_show
+    @wishlist = Wishlist.find_by(public_token: params[:token])
+    if @wishlist.nil?
+      redirect_to root_path, alert: "Wishlist not found."
+    else
+      @wishlist_items = @wishlist.wishlist_items
+      render :public_show, layout: "public"
+    end
   end
 
   def add_items
