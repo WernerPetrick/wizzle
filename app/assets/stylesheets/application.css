@@ -8,3 +8,11 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+@import url("reset.css");
+@import url("custom.css");
+@import url("navbar.css");
+@import url("colorful-landing.css");
+@import url("magical-pages.css");
+@import url("how-it-works.css");
+@import url("pages.css");
