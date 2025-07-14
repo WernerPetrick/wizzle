@@ -11,5 +11,8 @@ class QuestionsController < ApplicationController
     @notes = WishlistItemNote.where(wishlist_item_id: wishlist_item_ids, owner_reply: [nil, ""])
       .includes(:wishlist_item)
       .order(created_at: :desc)
+
+    # Mark these notes as seen
+    WishlistItemNote.where(id: @notes.map(&:id)).update_all(seen: true)
   end
 end

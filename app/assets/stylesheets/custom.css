@@ -143,6 +143,20 @@ button[type="submit"]:hover,
 	background: #fafafa;
 }
 
+.form-textarea {
+	width: 100%;
+}
+
+.private-note {
+	background: #f9f9f9;
+	border-left: 4px solid #d32f2f;
+}
+.note-privacy-label {
+	font-size: 0.85em;
+	color: #d32f2f;
+	margin-left: 0.5em;
+}
+
 /* Flash messages */
 .flash {
 	padding: 1rem 2rem;
@@ -200,7 +214,7 @@ table tr:hover {
 	max-width: 1200px;
 	margin: 0 auto;
 	padding: 4rem 2rem;
-	margin-top: 100px;
+	margin-top: 109px;
 	background: #ffffff;
 	min-height: 100vh;
 }

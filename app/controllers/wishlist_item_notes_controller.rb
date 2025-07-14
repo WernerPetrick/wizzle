@@ -5,7 +5,8 @@ class WishlistItemNotesController < ApplicationController
     @wishlist_item = WishlistItem.find(params[:wishlist_item_id])
     @note = @wishlist_item.wishlist_item_notes.create(
       body: params[:body],
-      sender: current_user
+      sender: current_user,
+      private: params[:private] == "1"
     )
     owner = @wishlist_item.wishlist.user
     if owner.notify_wishlist_question?

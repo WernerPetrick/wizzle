@@ -86,21 +86,19 @@
             <!-- Anonymous Notes -->
             <% if @wishlist.user == current_user || item.wishlist_item_notes.any? { |note| note.sender == current_user } %>
               <div class="anonymous-notes">
-                <h4>Anonymous Notes</h4>
+                <h4>Notes & Questions</h4>
                 <% item.wishlist_item_notes.each do |note| %>
-                  <% if @wishlist.user == current_user || note.sender == current_user %>
-                    <div class="note-item">
+                  <% if !note.private || (@wishlist.user == current_user) %>
+                    <div class="note-item <%= 'private-note' if note.private %>">
                       <p><%= note.body %></p>
+                      <% if note.private %>
+                        <span class="note-privacy-label">(Private)</span>
+                      <% end %>
                       <% if note.owner_reply.present? %>
                         <div class="note-reply">
                           <strong>Owner's reply:</strong>
                           <p><%= note.owner_reply %></p>
                         </div>
-                      <% elsif @wishlist.user == current_user %>
-                        <%= form_with url: reply_wishlist_wishlist_item_wishlist_item_note_path(@wishlist, item, note), method: :patch, local: true do |f| %>
-                          <%= f.text_area :owner_reply, rows: 1, placeholder: "Send a reply..." %>
-                          <%= f.submit "Reply", class: "btn secondary" %>
-                        <% end %>
                       <% end %>
                     </div>
                   <% end %>
@@ -111,10 +109,14 @@
             <!-- Friend Actions -->
             <% if @wishlist.user != current_user %>
               <div class="friend-actions">
-                <!-- Anonymous Note Form -->
+                <!-- Note Form -->
                 <%= form_with url: wishlist_wishlist_item_wishlist_item_notes_path(@wishlist, item), method: :post, local: true do |f| %>
                   <div class="text-field">
-                    <%= f.text_area :body, rows: 2, placeholder: "Send an anonymous note..." %>
+                    <%= f.text_area :body, rows: 2, placeholder: "Leave a comment or question..." %>
+                  </div>
+                  <div class="form-group">
+                    <%= f.check_box :private %>
+                    <%= f.label :private, "Make this note private (only owner can see)" %>
                   </div>
                   <%= f.submit "Send Note", class: "btn secondary" %>
                 <% end %>

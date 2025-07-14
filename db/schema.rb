@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_12_130959) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_14_183133) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -104,6 +104,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_12_130959) do
     t.datetime "updated_at", precision: nil, null: false
     t.integer "sender_id"
     t.text "owner_reply"
+    t.boolean "private"
+    t.boolean "seen"
     t.index ["wishlist_item_id"], name: "index_wishlist_item_notes_on_wishlist_item_id"
   end
 
@@ -124,6 +126,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_12_130959) do
     t.text "description"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
+    t.string "public_token"
+    t.index ["public_token"], name: "index_wishlists_on_public_token", unique: true
     t.index ["user_id"], name: "index_wishlists_on_user_id"
   end
 end
