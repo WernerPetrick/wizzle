@@ -193,11 +193,13 @@
       <p class="modal-description">Invite friends to view your wishlist.</p>
       <form id="share-form" method="post">
         <div class="form-group">
-          <label for="friend-emails" class="form-label">Friend's Email Addresses</label>
-          <textarea name="emails" id="friend-emails" rows="4" 
-                    placeholder="Enter one email address per line&#10;example@email.com&#10;friend@email.com" 
-                    required class="form-textarea"></textarea>
-          <small class="form-help">Separate multiple emails with line breaks</small>
+          <label for="friend-select" class="form-label">Select Friends to Share With</label>
+          <select name="friend_ids[]" id="friend-select" multiple required class="form-select">
+            <% @friends.each do |friend| %>
+              <option value="<%= friend.id %>"><%= friend.name.presence || friend.email %></option>
+            <% end %>
+          </select>
+          <small class="form-help">Hold Ctrl (Windows) or Command (Mac) to select multiple friends</small>
         </div>
         <input type="hidden" name="wishlist_id" id="modal-wishlist-id">
         <div class="modal-actions">
