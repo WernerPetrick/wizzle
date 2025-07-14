@@ -191,13 +191,23 @@
       <h2>Share Wishlist</h2>
       <p>Invite friends to view your wishlist and help with gift ideas</p>
 
-      <%= form_with url: wishlist_shared_wishlists_path(@wishlist), method: :post, local: true do |f| %>
-        <div class="text-field">
-          <%= f.label :email, "Friend's Email Address" %>
-          <%= f.email_field :email, required: true, placeholder: "friend@example.com" %>
-        </div>
-        <%= f.submit "Send Invitation", class: "btn" %>
-      <% end %>
+          <%= form_with url: wishlist_shared_wishlists_path(@wishlist), method: :post, local: true, html: { class: "share-form" } do |f| %>
+            <div class="form-group">
+              <%= f.label :email, "Friend's Email Address", class: "form-label" %>
+              <div class="input-group">
+                <%= f.email_field :email, required: true, class: "form-input form-input-large", placeholder: "friend@example.com" %>
+                <%= f.submit "Send Invitation", class: "btn-primary" %>
+              </div>
+            </div>
+          <% end %>
+
+          <% if @wishlist.public_token.present? %>
+            <div class="share-link-section">
+              <label>Share this link with anyone:</label>
+              <input type="text" readonly value="<%= public_wishlist_url(@wishlist.public_token) %>" class="share-link-input">
+              <button onclick="navigator.clipboard.writeText('<%= public_wishlist_url(@wishlist.public_token) %>')">Copy Link</button>
+            </div>
+          <% end %>
 
       <!-- Shared Users List -->
       <% if @wishlist.shared_users.any? %>

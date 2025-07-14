@@ -30,5 +30,6 @@ Rails.application.routes.draw do
   get "questions", to: "questions#index", as: :questions
   get "how_it_works", to: "pages#how_it_works", as: :how_it_works
   get "users/:id", to: "users#show", as: :user
+  get "/w/:token", to: "wishlists#public_show", as: :public_wishlist
   root "pages#index"
 end

@@ -1,0 +1,88 @@
+<div class="page-container">
+  <!-- Wishlist Header -->
+  <header class="page-header">
+    <div class="header-content">
+      <h1 class="page-title"><%= @wishlist.title %></h1>
+      <% if @wishlist.description.present? %>
+        <p class="page-subtitle"><%= @wishlist.description %></p>
+      <% end %>
+      <div class="wishlist-meta">
+        <span class="item-count-badge">
+          <%= pluralize(@wishlist_items.count, 'item') %>
+        </span>
+        <span class="owner-info">
+          Created by <%= @wishlist.user.name.presence || @wishlist.user.email.split('@').first.humanize %>
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <!-- Wishlist Items Section -->
+    <section class="items-section">
+      <div class="section-card">
+        <div class="section-header">
+          <h2 class="section-title">Wishlist Items</h2>
+          <% if @wishlist_items.any? %>
+            <span class="item-count">
+              <%= pluralize(@wishlist_items.count, 'item') %>
+            </span>
+          <% end %>
+        </div>
+
+        <% if @wishlist_items.any? %>
+          <div class="items-grid">
+            <% @wishlist_items.each do |item| %>
+              <article class="item-card">
+                <div class="item-main-row" style="display: flex; align-items: center;">
+                  <% if item.image.attached? %>
+                    <%= image_tag item.image, class: "wishlist-item-image", style: "margin-right: 1rem; border-radius: 8px;" %>
+                  <% end %>
+                  <div class="item-header">
+                    <h3 class="item-name"><%= item.name %></h3>
+                    <% if item.being_bought %>
+                      <span class="bought-status">
+                        Already being bought ✓
+                      </span>
+                    <% end %>
+                  </div>
+                </div>
+
+                <% if item.url.present? %>
+                  <div class="item-url">
+                    <%= link_to "View Item", item.url, target: "_blank", class: "item-link" %>
+                  </div>
+                <% end %>
+
+                <% if item.notes.present? %>
+                  <p class="item-notes"><%= item.notes %></p>
+                <% end %>
+              </article>
+            <% end %>
+          </div>
+        <% else %>
+          <div class="empty-state">
+            <div class="empty-icon">📝</div>
+            <h3 class="empty-title">No items yet</h3>
+            <p class="empty-description">
+              This wishlist doesn't have any items yet.
+            </p>
+          </div>
+        <% end %>
+      </div>
+    </section>
+
+    <!-- Public View Information -->
+    <section class="info-section">
+      <div class="section-card">
+        <h2 class="section-title">About This Wishlist</h2>
+        <p class="section-description">
+          This is a public view of <%= @wishlist.user.name.presence || @wishlist.user.email.split('@').first.humanize %>'s wishlist.
+        </p>
+        <div class="public-actions">
+          <%= link_to "Create Your Own Wishlist", sign_up_path, class: "btn-primary" %>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
