@@ -25,6 +25,11 @@ class WishlistsController < ApplicationController
       return
     end
     @wishlist_items = @wishlist.wishlist_items
+
+    respond_to do |format|
+      format.html
+      format.any { head :not_acceptable }
+    end
   end
 
   def public_show

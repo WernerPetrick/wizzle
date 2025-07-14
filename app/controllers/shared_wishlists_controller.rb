@@ -3,17 +3,17 @@ class SharedWishlistsController < ApplicationController
 
   def create
     @wishlist = current_user.wishlists.find(params[:wishlist_id])
-    emails = params[:emails].to_s.split(/[\r\n,]+/).map(&:strip).reject(&:blank?)
+    friend_ids = params[:friend_ids] || []
     invited = []
     not_found = []
 
-    emails.each do |email|
-      friend = User.find_by(email: email)
+    friend_ids.each do |id|
+      friend = User.find_by(id: id)
       if friend && friend != current_user
         @wishlist.shared_users << friend unless @wishlist.shared_users.include?(friend)
-        invited << email
+        invited << friend.email
       else
-        not_found << email
+        not_found << id
       end
     end
 
@@ -24,11 +24,7 @@ class SharedWishlistsController < ApplicationController
     end
 
     flash[:notice] = message
-
-    respond_to do |format|
-      format.html { redirect_to @wishlist }
-      format.wizzle_flash { render partial: "layouts/flash" }
-    end
+    redirect_to @wishlist
   end
 
   def destroy

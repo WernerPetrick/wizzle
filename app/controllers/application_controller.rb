@@ -18,10 +18,10 @@ class ApplicationController < ActionController::Base
 
   def set_new_wishlist_item_notes
     if signed_in?
-      # Count notes for items owned by current_user that have not been replied to
       @new_wishlist_item_notes_count = WishlistItemNote.joins(wishlist_item: :wishlist)
         .where(wishlist_items: { wishlist_id: current_user.wishlists.pluck(:id) })
         .where(owner_reply: [nil, ""])
+        .where(seen: [false, nil])
         .count
     end
   end

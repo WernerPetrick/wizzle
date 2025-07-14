@@ -85,4 +85,5 @@ Rails.application.configure do
   #
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+  Mime::Type.register "text/vnd.wizzle.flash", :wizzle_flash
 end
