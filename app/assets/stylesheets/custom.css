@@ -180,6 +180,10 @@ button[type="submit"]:hover,
 	color: #ffffff;
 }
 
+.hero-illustration img {
+	width: 48rem;
+}
+
 /* Tables */
 table {
 	width: 100%;

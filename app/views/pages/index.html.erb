@@ -16,14 +16,7 @@
           <%= link_to "Get started", (signed_in? ? profile_path : sign_up_path), class: "hero-cta-button" %>
         </div>
         <div class="hero-illustration">
-          <div class="celebration-character">
-            <div class="character-body"></div>
-                        <div class="gift-tree">
-              <div class="tree-top">⬟</div>
-              <div class="tree-trunk"></div>
-            </div>
-            <div class="magic-rays"></div>
-          </div>
+          <%= image_tag "wizzle_logo.png" %>
         </div>
       </div>
     </div>
@@ -34,28 +27,36 @@
             <h2 class="section-title">For every occasion</h2>
       <div class="event-cards">
         <div class="event-card birthday-card">
-          <div class="event-icon">🎂</div>
+          <div class="event-icon">
+            <%= image_tag "party_cake.png" %>
+          </div>
           <div class="event-info">
             <div class="event-date">Coming Soon</div>
             <div class="event-label">Birthday Magic</div>
           </div>
         </div>
         <div class="event-card holiday-card">
-          <div class="event-icon">🎅</div>
+          <div class="event-icon">
+            <%= image_tag "santa_claus.png" %>
+          </div>
           <div class="event-info">
             <div class="event-date">25.12</div>
             <div class="event-label">Holiday Joy</div>
           </div>
         </div>
         <div class="event-card celebration-card">
-          <div class="event-icon">🥳</div>
+          <div class="event-icon">
+            <%= image_tag "party_face.png" %>
+          </div>
           <div class="event-info">
             <div class="event-date">31.12</div>
             <div class="event-label">New Year</div>
           </div>
         </div>
         <div class="event-card special-card">
-          <div class="event-icon">💖</div>
+          <div class="event-icon">
+            <%= image_tag "heart.png" %>
+          </div>
           <div class="event-info">
             <div class="event-date">Any Day</div>
             <div class="event-label">Special Moments</div>
@@ -76,15 +77,21 @@
           </p>
           <div class="feature-benefits">
             <div class="benefit-item">
-              <span class="benefit-icon">✨</span>
+              <span class="benefit-icon">
+                <%= image_tag "stars.png" %>
+              </span>
               <span class="benefit-text">Easy wishlist creation</span>
             </div>
             <div class="benefit-item">
-              <span class="benefit-icon">👥</span>
+              <span class="benefit-icon">
+                <%= image_tag "friend_collaboration.png" %>
+              </span>
               <span class="benefit-text">Friend collaboration</span>
             </div>
             <div class="benefit-item">
-              <span class="benefit-icon">🎯</span>
+              <span class="benefit-icon">
+                <%= image_tag "target.png" %>
+              </span>
               <span class="benefit-text">Perfect gift coordination</span>
             </div>
           </div>
