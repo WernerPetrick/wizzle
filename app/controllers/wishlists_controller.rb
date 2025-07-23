@@ -5,7 +5,7 @@ class WishlistsController < ApplicationController
 
   def new
     @wishlist = current_user.wishlists.new
-    5.times { @wishlist.wishlist_items.build }
+    2.times { @wishlist.wishlist_items.build }
   end
 
   def create
