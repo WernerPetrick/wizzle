@@ -42,12 +42,22 @@
                 <%= item_fields.label :image, "Image (Optional)" %>
                 <%= item_fields.file_field :image, accept: "image/*" %>
               </div>
+
+              
             </div>
           <% end %>
         <% end %>
       </div>
 
       <button type="button" id="add-another-item" class="btn secondary">Add Another Item</button>
+
+
+      <div class="text-field text-field-inline">
+        <label>
+          <%= f.check_box :private %>
+          Make this wishlist private (only you can see it)
+        </label>
+      </div>
 
       <div class="form-actions">
         <%= link_to "Cancel", profile_path, class: "btn secondary" %>
@@ -62,7 +72,7 @@
     <h3>Item <span class="item-number"></span></h3>
     <button type="button" class="remove-item-btn btn secondary" data-action="remove-item">Remove</button>
     
-    <div class="text-field">
+    <div class="text-field mt-2">
       <label>Item Name</label>
       <input type="text" placeholder="What are you wishing for?">
     </div>

@@ -1,90 +1,79 @@
 <div class="colorful-page friends-wishlists-page">
-  <!-- Minimalist Header -->
   <header class="page-header">
     <div class="page-header-container">
-      <h1 class="page-title">Shared Wishlists</h1>
-      <p class="page-subtitle">Discover the wishes your friends have shared with you</p>
+      <h1 class="page-title">Friends' Wishlists</h1>
+      <p class="page-subtitle">
+        Discover what your friends are wishing for.<br>
+        Public wishlists appear automatically—private ones require sharing.
+      </p>
     </div>
   </header>
 
-  <div class="page-content">
+  <main class="page-content">
     <section class="shared-wishlists">
       <div class="section-container">
         <% if @wishlists.any? %>
           <div class="section-header">
             <h2 class="section-title">Available Wishlists</h2>
             <div class="count-indicator">
-              <%= pluralize(@wishlists.count, 'shared wishlist') %>
+              <%= pluralize(@wishlists.count, 'wishlist') %>
             </div>
           </div>
-          
-          <div class="wishlists-grid">
+          <div class="wishlists-grid sleek-grid">
             <% @wishlists.each do |wishlist| %>
-              <article class="wishlist-card">
+              <article class="wishlist-card sleek-card">
                 <div class="wishlist-header">
-                  <h3 class="wishlist-title"><%= wishlist.title %></h3>
-                  <div class="wishlist-author">
-                    <div class="author-avatar">
-                      <%= (wishlist.user.name&.first || wishlist.user.email.first).upcase %>
-                    </div>
-                    <div class="author-info">
-                      <span class="author-label">Shared by</span>
-                      <span class="author-name"><%= wishlist.user.name.presence || wishlist.user.email.split('@').first.humanize %></span>
-                    </div>
+                  <div class="wishlist-avatar">
+                    <%= (wishlist.user.name&.first || wishlist.user.email.first).upcase %>
+                  </div>
+                  <div class="wishlist-info">
+                    <h3 class="wishlist-title"><%= wishlist.title %></h3>
+                    <span class="wishlist-author">
+                      by <%= wishlist.user.name.presence || wishlist.user.email.split('@').first.humanize %>
+                    </span>
                   </div>
                 </div>
-                
                 <div class="wishlist-meta">
-                  <div class="meta-item">
-                    <span class="meta-number"><%= wishlist.wishlist_items.count %></span>
-                    <span class="meta-label">items</span>
-                  </div>
+                  <span class="meta-number"><%= wishlist.wishlist_items.count %></span>
+                  <span class="meta-label">items</span>
                 </div>
-                
                 <% if wishlist.description.present? %>
-                  <div class="wishlist-description">
-                    <p><%= truncate(wishlist.description, length: 120) %></p>
-                  </div>
+                  <p class="wishlist-description"><%= truncate(wishlist.description, length: 120) %></p>
                 <% end %>
-
-                <!-- Items Preview -->
                 <% if wishlist.wishlist_items.any? %>
                   <div class="items-preview">
-                    <h4 class="preview-title">Items Preview</h4>
-                    <div class="preview-list">
+                    <ul class="preview-list">
                       <% wishlist.wishlist_items.limit(3).each do |item| %>
-                        <div class="preview-item">
+                        <li class="preview-item">
                           <span class="item-name"><%= truncate(item.name, length: 30) %></span>
                           <% if item.being_bought %>
                             <span class="item-status">Reserved</span>
                           <% end %>
-                        </div>
+                        </li>
                       <% end %>
                       <% if wishlist.wishlist_items.count > 3 %>
-                        <div class="preview-more">
-                          + <%= wishlist.wishlist_items.count - 3 %> more items
-                        </div>
+                        <li class="preview-more">
+                          + <%= wishlist.wishlist_items.count - 3 %> more
+                        </li>
                       <% end %>
-                    </div>
+                    </ul>
                   </div>
                 <% end %>
-                
                 <div class="wishlist-footer">
                   <%= link_to "View Wishlist", wishlist_path(wishlist), class: "btn primary" %>
-                  <div class="sharing-indicator">
-                    <span class="sharing-text">Shared</span>
-                  </div>
                 </div>
               </article>
             <% end %>
           </div>
         <% else %>
           <div class="empty-state">
-            <div class="empty-icon">○</div>
-            <h2 class="empty-title">No shared wishlists yet</h2>
+            <div class="empty-icon">
+              <%= image_tag "friends.png" %>
+            </div>
+            <h2 class="empty-title">No wishlists from friends yet</h2>
             <p class="empty-description">
-              When friends share their wishlists with you, they'll appear here. 
-              Ask your friends to add you to their wishlists to start exploring their wishes.
+              When your friends create wishlists, their public ones will automatically appear here.<br>
+              If you don't see a wishlist, it may be private—ask your friends to share it with you!
             </p>
             <div class="empty-actions">
               <%= link_to "Manage Friends", friends_path, class: "btn secondary" %>
@@ -94,5 +83,5 @@
         <% end %>
       </div>
     </section>
-  </div>
+  </main>
 </div>
