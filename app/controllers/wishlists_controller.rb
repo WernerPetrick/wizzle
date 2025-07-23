@@ -72,7 +72,10 @@ class WishlistsController < ApplicationController
   end
 
   def friends
-    @wishlists = current_user.wishlists_shared_with_me.where(private: [false, nil])
+    @wishlists = Wishlist.where(
+      user_id: current_user.friends.pluck(:id),
+      private: [false, nil]
+    )
   end
 
   private
