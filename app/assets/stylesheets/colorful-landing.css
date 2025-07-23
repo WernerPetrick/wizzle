@@ -502,27 +502,76 @@
 	opacity: 0.1;
 }
 
+.sparkle-1 {
+	top: 10%;
+	left: 15%;
+	animation: float1 7s ease-in-out infinite;
+}
+.sparkle-2 {
+	top: 60%;
+	left: 80%;
+	animation: float2 9s ease-in-out infinite;
+}
+.sparkle-3 {
+	top: 30%;
+	left: 60%;
+	animation: float3 8s ease-in-out infinite;
+}
+.sparkle-4 {
+	top: 70%;
+	left: 25%;
+	animation: float4 10s ease-in-out infinite;
+}
+
 .sparkle {
 	position: absolute;
-	font-size: 2rem;
+	width: 5rem;
 	color: #ffffff;
 }
 
-.sparkle-1 {
-	top: 15%;
-	left: 10%;
+@keyframes float1 {
+	0% {
+		transform: translateY(0) scale(1) rotate(0deg);
+	}
+	50% {
+		transform: translateY(-20px) scale(1.1) rotate(8deg);
+	}
+	100% {
+		transform: translateY(0) scale(1) rotate(0deg);
+	}
 }
-.sparkle-2 {
-	top: 25%;
-	right: 15%;
+@keyframes float2 {
+	0% {
+		transform: translateY(0) scale(1) rotate(0deg);
+	}
+	50% {
+		transform: translateY(25px) scale(0.95) rotate(-6deg);
+	}
+	100% {
+		transform: translateY(0) scale(1) rotate(0deg);
+	}
 }
-.sparkle-3 {
-	top: 65%;
-	left: 20%;
+@keyframes float3 {
+	0% {
+		transform: translateY(0) scale(1) rotate(0deg);
+	}
+	50% {
+		transform: translateY(-15px) scale(1.05) rotate(12deg);
+	}
+	100% {
+		transform: translateY(0) scale(1) rotate(0deg);
+	}
 }
-.sparkle-4 {
-	top: 75%;
-	right: 25%;
+@keyframes float4 {
+	0% {
+		transform: translateY(0) scale(1) rotate(0deg);
+	}
+	50% {
+		transform: translateY(18px) scale(1.08) rotate(-10deg);
+	}
+	100% {
+		transform: translateY(0) scale(1) rotate(0deg);
+	}
 }
 
 /* ===== RESPONSIVE DESIGN ===== */

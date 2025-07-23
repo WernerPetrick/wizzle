@@ -123,10 +123,18 @@
         <%= link_to "Start Your Wishlist Journey", (signed_in? ? profile_path : sign_up_path), class: "final-cta-button" %>
       </div>
       <div class="cta-sparkles">
-        <div class="sparkle sparkle-1">✨</div>
-        <div class="sparkle sparkle-2">⭐</div>
-        <div class="sparkle sparkle-3">🌟</div>
-        <div class="sparkle sparkle-4">💫</div>
+        <div class="sparkle sparkle-1">
+          <%= image_tag "shimmering-star.png" %>
+        </div>
+        <div class="sparkle sparkle-2">
+          <%= image_tag "shooting-star.png" %>
+        </div>
+        <div class="sparkle sparkle-3">
+          <%= image_tag "sparkling-star.png" %>
+        </div>
+        <div class="sparkle sparkle-4">
+          <%= image_tag "star.png" %>
+        </div>
       </div>
     </div>
   </section>

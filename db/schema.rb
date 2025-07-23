@@ -10,12 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_13_195312) do
 ActiveRecord::Schema[8.0].define(version: 2025_07_14_183133) do
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "pg_catalog.plpgsql"
-
-  create_table "active_storage_attachments", id: :serial, force: :cascade do |t|
+  create_table "active_storage_attachments", id: :integer, force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
     t.bigint "record_id", null: false
@@ -25,7 +21,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_14_183133) do
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
-  create_table "active_storage_blobs", id: :serial, force: :cascade do |t|
+  create_table "active_storage_blobs", id: :integer, force: :cascade do |t|
     t.string "key", null: false
     t.string "filename", null: false
     t.string "content_type"
@@ -37,13 +33,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_14_183133) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "active_storage_variant_records", id: :serial, force: :cascade do |t|
+  create_table "active_storage_variant_records", id: :integer, force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "friendships", id: :serial, force: :cascade do |t|
+  create_table "friendships", id: :integer, force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "friend_id", null: false
     t.datetime "created_at", precision: nil, null: false
@@ -53,7 +49,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_14_183133) do
     t.index ["user_id"], name: "index_friendships_on_user_id"
   end
 
-  create_table "gift_histories", id: :serial, force: :cascade do |t|
+  create_table "gift_histories", id: :integer, force: :cascade do |t|
     t.integer "giver_id"
     t.integer "recipient_id"
     t.integer "wishlist_item_id"
@@ -63,7 +59,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_14_183133) do
     t.datetime "updated_at", precision: nil, null: false
   end
 
-  create_table "invitations", id: :serial, force: :cascade do |t|
+  create_table "invitations", id: :integer, force: :cascade do |t|
     t.string "email"
     t.integer "inviter_id"
     t.string "token"
@@ -72,7 +68,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_14_183133) do
     t.datetime "updated_at", precision: nil, null: false
   end
 
-  create_table "shared_wishlists", id: :serial, force: :cascade do |t|
+  create_table "shared_wishlists", id: :integer, force: :cascade do |t|
     t.bigint "wishlist_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: nil, null: false
@@ -81,7 +77,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_14_183133) do
     t.index ["wishlist_id"], name: "index_shared_wishlists_on_wishlist_id"
   end
 
-  create_table "users", id: :serial, force: :cascade do |t|
+  create_table "users", id: :integer, force: :cascade do |t|
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.string "email", null: false
@@ -98,7 +94,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_14_183133) do
     t.index ["remember_token"], name: "index_users_on_remember_token", unique: true
   end
 
-  create_table "wishlist_item_notes", id: :serial, force: :cascade do |t|
+  create_table "wishlist_item_notes", id: :integer, force: :cascade do |t|
     t.bigint "wishlist_item_id", null: false
     t.text "body"
     t.datetime "created_at", precision: nil, null: false
@@ -110,7 +106,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_14_183133) do
     t.index ["wishlist_item_id"], name: "index_wishlist_item_notes_on_wishlist_item_id"
   end
 
-  create_table "wishlist_items", id: :serial, force: :cascade do |t|
+  create_table "wishlist_items", id: :integer, force: :cascade do |t|
     t.bigint "wishlist_id", null: false
     t.string "name"
     t.string "url"
@@ -121,7 +117,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_14_183133) do
     t.index ["wishlist_id"], name: "index_wishlist_items_on_wishlist_id"
   end
 
-  create_table "wishlists", id: :serial, force: :cascade do |t|
+  create_table "wishlists", id: :integer, force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "title"
     t.text "description"
