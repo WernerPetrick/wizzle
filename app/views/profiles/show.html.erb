@@ -15,7 +15,7 @@
       </div>
       <div class="profile-stats">
         <div class="stat-item">
-          <div class="stat-number"><%= current_user.wishlists.count %></div>
+          <div class="stat-number"><%= @wishlists.count %></div>
           <div class="stat-label">Wishlists</div>
         </div>
         <div class="stat-item">
@@ -67,16 +67,16 @@
       <div class="section-container">
         <div class="section-header">
           <h2 class="section-title">Your Wishlists</h2>
-          <% if current_user.wishlists.any? %>
+          <% if @wishlists.any? %>
             <div class="count-indicator">
-              <%= pluralize(current_user.wishlists.count, 'wishlist') %>
+              <%= pluralize(@wishlists.count, 'wishlist') %>
             </div>
           <% end %>
         </div>
         
-        <% if current_user.wishlists.any? %>
+        <% if @wishlists.any? %>
           <div class="wishlists-grid">
-            <% current_user.wishlists.each do |wishlist| %>
+            <% @wishlists.each do |wishlist| %>
               <article class="wishlist-card">
                 <div class="wishlist-header">
                   <h3 class="wishlist-title"><%= wishlist.title %></h3>
@@ -88,6 +88,9 @@
                       <span class="shared-count">
                         <%= pluralize(wishlist.shared_wishlists.count, 'friend') %>
                       </span>
+                    <% end %>
+                    <% if wishlist.private? %>
+                      <span class="privacy-badge" title="Private">🔒</span>
                     <% end %>
                   </div>
                 </div>

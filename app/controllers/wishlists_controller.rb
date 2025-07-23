@@ -18,12 +18,26 @@ class WishlistsController < ApplicationController
   end
 
   def show
-    @wishlist = current_user.wishlists.find_by(id: params[:id]) ||
-                current_user.wishlists_shared_with_me.find_by(id: params[:id])
+    @wishlist = current_user.wishlists.find_by(id: params[:id])
+
+    unless @wishlist
+      @wishlist = Wishlist.joins(:shared_wishlists)
+        .where(id: params[:id], shared_wishlists: { user_id: current_user.id })
+        .first
+    end
+
+    unless @wishlist
+      wishlist = Wishlist.find_by(id: params[:id], private: [false, nil])
+      if wishlist && current_user.friends.include?(wishlist.user)
+        @wishlist = wishlist
+      end
+    end
+
     if @wishlist.nil?
       redirect_to profile_path, alert: "You do not have access to this wishlist."
       return
     end
+
     @wishlist_items = @wishlist.wishlist_items
 
     respond_to do |format|
@@ -58,7 +72,7 @@ class WishlistsController < ApplicationController
   end
 
   def friends
-    @wishlists = current_user.wishlists_shared_with_me
+    @wishlists = current_user.wishlists_shared_with_me.where(private: [false, nil])
   end
 
   private
@@ -72,7 +86,7 @@ class WishlistsController < ApplicationController
 
   def wishlist_params
     params.require(:wishlist).permit(
-      :title, :description,
+      :title, :description, :private,
       wishlist_items_attributes: [:id, :name, :url, :notes, :image, :_destroy]
     )
   end

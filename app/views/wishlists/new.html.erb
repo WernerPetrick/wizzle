@@ -42,6 +42,11 @@
                 <%= item_fields.label :image, "Image (Optional)" %>
                 <%= item_fields.file_field :image, accept: "image/*" %>
               </div>
+
+              <div class="text-field">
+                <%= f.check_box :private %>
+                <%= f.label :private, "Make this wishlist private (only you can see it)" %>
+              </div>
             </div>
           <% end %>
         <% end %>
