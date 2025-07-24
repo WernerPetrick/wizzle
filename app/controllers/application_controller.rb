@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   include Clearance::Controller
   before_action :set_pending_friend_invites
   before_action :set_new_wishlist_item_notes
+  before_action :set_latest_news
   
 
   def after_sign_in_path_for(_user)
@@ -9,6 +10,10 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def set_latest_news
+    @latest_news = "New: Wishlists are now public by default."
+  end
 
   def set_pending_friend_invites
     if signed_in?

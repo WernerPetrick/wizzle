@@ -1,0 +1,8 @@
+<% if flash[:news].present? || @latest_news.present? %>
+  <div id="notification-bar" class="notification-bar">
+    <span class="notification-message">
+      <%= flash[:news] || @latest_news %>
+    </span>
+    <button class="notification-close" onclick="document.getElementById('notification-bar').style.display='none'">×</button>
+  </div>
+<% end %>
