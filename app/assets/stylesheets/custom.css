@@ -406,6 +406,142 @@ ol li {
 	}
 }
 
+.sleek-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+	gap: 2rem;
+	margin-top: 2rem;
+}
+
+.sleek-card,
+.wishlist-card {
+	background: #fff;
+	border-radius: 1.2rem;
+	box-shadow: 0 4px 24px rgba(0, 0, 0, 0.07);
+	padding: 2rem 1.5rem 1.5rem 1.5rem;
+	min-height: 340px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	transition: box-shadow 0.2s;
+	width: 100%;
+	max-width: 370px;
+}
+
+.sleek-card:hover {
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+.wishlist-header {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	margin-bottom: 1rem;
+}
+
+.wishlist-avatar {
+	background: #000;
+	color: #fff;
+	border-radius: 50%;
+	width: 44px;
+	height: 44px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.5rem;
+	font-weight: 700;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.wishlist-info {
+	flex: 1;
+}
+
+.wishlist-title {
+	font-size: 1.2rem;
+	font-weight: 600;
+	margin: 0;
+}
+
+.wishlist-author {
+	font-size: 0.95rem;
+	color: #888;
+}
+
+.wishlist-meta {
+	margin-bottom: 0.5rem;
+	font-size: 0.95rem;
+	color: #555;
+}
+
+.wishlist-description {
+	font-size: 1rem;
+	color: #333;
+	margin-bottom: 1rem;
+}
+
+.items-preview {
+	margin-bottom: 1rem;
+}
+
+.preview-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.preview-item {
+	font-size: 0.97rem;
+	color: #222;
+	margin-bottom: 0.3rem;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.item-status {
+	background: #ffe0e0;
+	color: #d32f2f;
+	border-radius: 0.5em;
+	padding: 0.1em 0.5em;
+	font-size: 0.85em;
+}
+
+.preview-more {
+	font-size: 0.9rem;
+	color: #888;
+}
+
+.wishlist-footer {
+	margin-top: auto;
+	text-align: right;
+}
+
+.text-field-inline {
+	display: flex;
+	margin-top: 2rem;
+	align-items: center;
+	gap: 0.5em;
+}
+
+.text-field-inline label {
+	display: flex;
+	align-items: center;
+	line-height: 1.2;
+}
+
+.text-field-inline input[type="checkbox"] {
+	margin: 0;
+	margin-right: 12px;
+	vertical-align: middle;
+	width: 18px;
+	height: 18px;
+}
+
+.remove-item-btn {
+	margin-bottom: 2rem;
+}
+
 .notification-bar {
 	position: fixed;
 	top: 0;

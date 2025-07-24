@@ -17,7 +17,6 @@ class UsersController < Clearance::UsersController
 
   def show
     @user = User.find(params[:id])
-    @shared_wishlists = @user.wishlists.joins(:shared_wishlists)
-      .where(shared_wishlists: { user_id: current_user.id })
+    @shared_wishlists = @user.wishlists.where(private: [false, nil])
   end
 end
