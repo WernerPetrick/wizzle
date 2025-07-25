@@ -1,37 +1,60 @@
 <div class="page-container">
-  <div class="content-section">
-    <h1 class="page-form-title"><%= @post.new_record? ? "New Blog Post" : "Edit Blog Post" %></h1>
-    <%= form_for [:admin, @post], html: { multipart: true } do |f| %>
-      <div class="text-field">
-        <%= f.label :title %>
-        <%= f.text_field :title, class: "form-input" %>
-      </div>
-      <div class="text-field">
-        <%= f.label :body, "Content (Markdown supported)" %>
-        <%= f.text_area :body, rows: 15, class: "form-input" %>
-      </div>
-      <div class="text-field">
-        <%= f.label :image, "Header Image (optional)" %>
-        <%= f.file_field :image %>
-      </div>
-      <div class="text-field">
-        <%= f.label :published %>
-        <%= f.check_box :published %>
-      </div>
-      <div class="form-actions">
-        <%= link_to "Cancel", admin_blog_posts_path, class: "btn secondary" %>
-        <%= f.submit @post.new_record? ? "Create Blog Post" : "Update Blog Post", class: "btn primary" %>
-      </div>
-    <% end %>
+  <div class="content-section" style="display: flex; gap: 2.5rem; align-items: flex-start;">
+    <!-- Blog Post Form -->
+    <div style="flex: 2;">
+      <h1 class="page-form-title"><%= @post.new_record? ? "New Blog Post" : "Edit Blog Post" %></h1>
+      <%= form_for [:admin, @post], html: { multipart: true } do |f| %>
+        <div class="text-field">
+          <%= f.label :title %>
+          <%= f.text_field :title, class: "form-input" %>
+        </div>
+        <div class="text-field">
+          <%= f.label :body, "Content (Markdown supported)" %>
+          <%= f.text_area :body, rows: 15, class: "form-input" %>
+        </div>
+        <div class="text-field">
+          <%= f.label :image, "Header Image (optional)" %>
+          <%= f.file_field :image %>
+        </div>
+        <div class="text-field">
+          <%= f.label :published %>
+          <%= f.check_box :published %>
+        </div>
+        <div class="form-actions">
+          <%= link_to "Cancel", admin_blog_posts_path, class: "btn secondary" %>
+          <%= f.submit @post.new_record? ? "Create Blog Post" : "Update Blog Post", class: "btn primary" %>
+        </div>
+      <% end %>
 
-    <hr style="margin:2.5rem 0;">
+      <hr style="margin:2.5rem 0;">
 
-    <div class="text-field">
-      <label>Upload Inline Image for Markdown</label>
-      <input type="file" id="markdown-image-upload">
-      <input type="text" id="markdown-image-url" class="form-input" placeholder="Image URL will appear here" readonly>
-      <small>Paste this URL into your Markdown using <code>![](url)</code></small>
+      <div class="text-field">
+        <label>Upload Inline Image for Markdown</label>
+        <input type="file" id="markdown-image-upload">
+        <input type="text" id="markdown-image-url" class="form-input" placeholder="Image URL will appear here" readonly>
+        <small>Paste this URL into your Markdown using <code>![](url)</code></small>
+      </div>
     </div>
+
+    <!-- Markdown Cheatsheet -->
+    <aside style="flex: 1; background: #fafafa; border: 1px solid #eee; border-radius: 1rem; padding: 1.5rem; font-size: 0.97rem; color: #222;">
+      <h3 style="margin-top:0; font-size:1.1rem; font-weight:600;">Markdown Cheatsheet</h3>
+      <ul style="list-style:none; padding:0; margin:0;">
+        <li><strong>Heading:</strong> <code># H1</code>, <code>## H2</code></li>
+        <li><strong>Bold:</strong> <code>**bold**</code></li>
+        <li><strong>Italic:</strong> <code>*italic*</code></li>
+        <li><strong>Link:</strong> <code>[text](url)</code></li>
+        <li><strong>Image:</strong> <code>![alt](url)</code></li>
+        <li><strong>List:</strong> <code>- item</code></li>
+        <li><strong>Numbered List:</strong> <code>1. item</code></li>
+        <li><strong>Code:</strong> <code>`code`</code></li>
+        <li><strong>Blockquote:</strong> <code>&gt; quote</code></li>
+        <li><strong>Horizontal Rule:</strong> <code>---</code></li>
+      </ul>
+      <div style="margin-top:1rem; color:#888; font-size:0.95em;">
+        <strong>Tip:</strong> You can upload images below and paste the URL into your Markdown!
+      </div>
+    </aside>
   </div>
 </div>
 
