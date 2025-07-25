@@ -12,9 +12,6 @@
 
 ActiveRecord::Schema[8.0].define(version: 2025_07_14_183133) do
   create_table "active_storage_attachments", id: :integer, force: :cascade do |t|
-ActiveRecord::Schema[8.0].define(version: 2025_07_24_181345) do
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "pg_catalog.plpgsql"
 
   create_table "active_storage_attachments", id: :serial, force: :cascade do |t|
     t.string "name", null: false
