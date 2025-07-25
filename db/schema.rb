@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_23_131409) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_24_181345) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -40,6 +40,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_23_131409) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "blog_posts", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
+    t.boolean "published"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "published_at"
+    t.index ["user_id"], name: "index_blog_posts_on_user_id"
   end
 
   create_table "friendships", id: :serial, force: :cascade do |t|
@@ -92,6 +103,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_23_131409) do
     t.boolean "notify_wishlist_question"
     t.boolean "notify_question_reply"
     t.date "birthday"
+    t.boolean "admin"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email"
     t.index ["remember_token"], name: "index_users_on_remember_token", unique: true
@@ -131,4 +143,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_23_131409) do
     t.index ["public_token"], name: "index_wishlists_on_public_token", unique: true
     t.index ["user_id"], name: "index_wishlists_on_user_id"
   end
+
+  add_foreign_key "blog_posts", "users"
 end
