@@ -1,0 +1,63 @@
+<div class="page-container">
+  <div class="content-section">
+    <h1 class="page-form-title"><%= @post.new_record? ? "New Blog Post" : "Edit Blog Post" %></h1>
+    <%= form_for [:admin, @post], html: { multipart: true } do |f| %>
+      <div class="text-field">
+        <%= f.label :title %>
+        <%= f.text_field :title, class: "form-input" %>
+      </div>
+      <div class="text-field">
+        <%= f.label :body, "Content (Markdown supported)" %>
+        <%= f.text_area :body, rows: 15, class: "form-input" %>
+      </div>
+      <div class="text-field">
+        <%= f.label :image, "Header Image (optional)" %>
+        <%= f.file_field :image %>
+      </div>
+      <div class="text-field">
+        <%= f.label :published %>
+        <%= f.check_box :published %>
+      </div>
+      <div class="form-actions">
+        <%= link_to "Cancel", admin_blog_posts_path, class: "btn secondary" %>
+        <%= f.submit @post.new_record? ? "Create Blog Post" : "Update Blog Post", class: "btn primary" %>
+      </div>
+    <% end %>
+
+    <hr style="margin:2.5rem 0;">
+
+    <div class="text-field">
+      <label>Upload Inline Image for Markdown</label>
+      <input type="file" id="markdown-image-upload">
+      <input type="text" id="markdown-image-url" class="form-input" placeholder="Image URL will appear here" readonly>
+      <small>Paste this URL into your Markdown using <code>![](url)</code></small>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  var uploadInput = document.getElementById("markdown-image-upload");
+  var urlInput = document.getElementById("markdown-image-url");
+  if(uploadInput) {
+    uploadInput.addEventListener("change", function() {
+      var file = uploadInput.files[0];
+      if(!file) return;
+      var formData = new FormData();
+      formData.append("image", file);
+      fetch("/admin/image_uploads", {
+        method: "POST",
+        headers: { "X-CSRF-Token": document.querySelector('meta[name=\"csrf-token\"]').content },
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        urlInput.value = data.url;
+        urlInput.select();
+        document.execCommand("copy");
+        alert("Image uploaded! URL copied to clipboard. Paste it into your Markdown.");
+      });
+    });
+  }
+});
+</script>

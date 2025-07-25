@@ -7,4 +7,9 @@ class User < ApplicationRecord
   has_many :friends, through: :friendships, class_name: "User"
   has_many :gift_histories_given, class_name: "GiftHistory", foreign_key: "giver_id"
   has_many :gift_histories_received, class_name: "GiftHistory", foreign_key: "recipient_id"
+
+
+  def admin?
+    admin
+  end
 end

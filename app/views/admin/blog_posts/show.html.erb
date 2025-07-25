@@ -1,0 +1,18 @@
+<div class="page-container">
+  <div class="content-section">
+    <h1 class="page-form-title"><%= @post.title %></h1>
+    <div class="blog-meta" style="color:#666;font-size:1rem;margin-bottom:2rem;">
+      <%= @post.published_at&.strftime("%b %d, %Y") %>
+      <% unless @post.published? %>
+        <span style="color:#d32f2f;font-weight:500;">(Unpublished)</span>
+      <% end %>
+    </div>
+    <div class="blog-body" style="margin-bottom:2rem;">
+      <%= markdown(@post.body).html_safe %>
+    </div>
+    <div class="form-actions">
+      <%= link_to "Edit", edit_admin_blog_post_path(@post), class: "btn small" %>
+      <%= link_to "Back", admin_blog_posts_path, class: "btn secondary small" %>
+    </div>
+  </div>
+</div>

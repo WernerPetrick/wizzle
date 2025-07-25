@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Wizzle Blog</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", media: "all" %>
+    <%= javascript_include_tag "application" %>
+  </head>
+  <body class="blog-layout" style="background:#fff; color:#000;">
+    <header class="blog-header" style="background:#fff; border-bottom:1px solid #f0f0f0; padding:2rem 0; text-align:center;">
+      <div class="container" style="max-width:900px; margin:0 auto;">
+        <h1 style="font-size:2.5rem; font-weight:200; margin:0;">
+          <%= link_to "Wizzle Blog", blog_root_url(subdomain: 'blog'), style: "color:#000; text-decoration:none;" %>
+        </h1>
+        <p style="color:#666; font-weight:300; margin-top:0.5rem;">
+          I'm building Wizzle in public! Follow the journey here on the blog, or <a href="#newsletter" style="color:#666; text-decoration:underline;">subscribe to the newsletter</a> to get every update.
+        </p>
+      </div>
+    </header>
+    <main class="blog-content" style="max-width:900px; margin:0 auto; padding:3rem 1rem;">
+      <%= yield %>
+    </main>
+    <footer class="blog-footer" style="background:#fafafa; border-top:1px solid #f0f0f0; text-align:center; padding:2rem 0; color:#666;">
+      &copy; <%= Time.current.year %> Wizzle Blog
+    </footer>
+  </body>
+</html>

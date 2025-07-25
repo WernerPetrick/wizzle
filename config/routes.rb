@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  constraints subdomain: 'blog' do
+    scope module: 'blog' do
+      resources :posts, only: [:index, :show]
+      root to: 'posts#index', as: :blog_root
+    end
+  end
+
+  namespace :admin do
+    resources :image_uploads, only: [:create]
+    resources :blog_posts
+  end
+
   get "shared_wishlists/create"
   get "shared_wishlists/destroy"
   resource :profile, only: [:show, :update]
