@@ -10,10 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_14_183133) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_24_181345) do
   create_table "active_storage_attachments", id: :integer, force: :cascade do |t|
-
-  create_table "active_storage_attachments", id: :serial, force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
     t.bigint "record_id", null: false
@@ -41,14 +39,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_14_183133) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "blog_posts", force: :cascade do |t|
+  create_table "blog_posts", id: :integer, force: :cascade do |t|
     t.string "title"
     t.text "body"
     t.boolean "published"
     t.bigint "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "published_at"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "published_at", precision: nil
     t.index ["user_id"], name: "index_blog_posts_on_user_id"
   end
 
@@ -142,6 +140,4 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_14_183133) do
     t.index ["public_token"], name: "index_wishlists_on_public_token", unique: true
     t.index ["user_id"], name: "index_wishlists_on_user_id"
   end
-
-  add_foreign_key "blog_posts", "users"
 end
