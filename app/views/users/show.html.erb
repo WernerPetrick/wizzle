@@ -111,7 +111,9 @@
         </div>
       <% else %>
         <div class="empty-state">
-          <div class="empty-icon">🎁</div>
+          <div class="empty-icon">
+            <%= image_tag "gift.png" %>
+          </div>
           <h3 class="empty-title">No shared wishlists yet</h3>
           <p class="empty-description">
             <%= @user.name.presence || @user.email.split('@').first.humanize %> 

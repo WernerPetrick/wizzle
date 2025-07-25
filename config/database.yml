@@ -13,16 +13,16 @@
 # gem "pg"
 #
 default: &default
-  adapter: postgresql
-  encoding: unicode
-  # For details on connection pooling, see Rails configuration guide
-  # https://guides.rubyonrails.org/configuring.html#database-pooling
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+   adapter: libsql
+   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 
 development:
   <<: *default
   database: wizzle_development
+  url: <%= ENV['TURSO_DATABASE_URL'] %>
+  auth_token: <%= ENV['TURSO_AUTH_TOKEN'] %>
+  path: storage/development.sqlite3 # For embedded replica
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
