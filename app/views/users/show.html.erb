@@ -24,10 +24,6 @@
               <span class="stat-number"><%= @user.wishlists.count %></span>
               <span class="stat-label">Wishlists</span>
             </div>
-            <div class="stat-item">
-              <span class="stat-number"><%= @shared_wishlists.count %></span>
-              <span class="stat-label">Shared with you</span>
-            </div>
           </div>
         </div>
       </div>
@@ -107,7 +103,6 @@
               <div class="wishlist-actions">
                 <%= link_to "View Full Wishlist", wishlist_path(wishlist), class: "btn-primary" %>
                 <div class="access-indicator">
-                  <span class="access-icon">👁️</span>
                   <span class="access-text">View access</span>
                 </div>
               </div>

@@ -1,6 +1,7 @@
 class ProfilesController < ApplicationController
   def show
     @user = current_user
+    @wishlists = current_user.wishlists.where(private: [false, nil])
     @friends = current_user.friends 
   end
 

@@ -1,0 +1,34 @@
+<% if @posts.any? %>
+  <% latest = @posts.first %>
+  <!-- Latest Blog Post (large card) -->
+  <section class="blog-latest">
+    <div class="latest-card">
+      <h2 class="latest-title"><%= latest.title %></h2>
+      <p class="latest-meta"><%= latest.published_at&.strftime("%b %d, %Y") || latest.created_at.strftime("%b %d, %Y") %></p>
+      <p class="latest-excerpt"><%= truncate(strip_tags(latest.body), length: 180) %></p>
+      <%= link_to "Read More", post_path(latest, subdomain: 'blog'), class: "btn primary" %>
+    </div>
+  </section>
+
+  <% if @posts.size > 1 %>
+    <!-- Grid of Other Blog Posts (small cards) -->
+    <section class="blog-grid">
+      <h3 class="grid-title">All Posts</h3>
+      <div class="posts-grid">
+        <% @posts.offset(1).each do |post| %>
+          <article class="post-card">
+            <h4 class="post-title"><%= post.title %></h4>
+            <p class="post-meta"><%= post.published_at&.strftime("%b %d, %Y") || post.created_at.strftime("%b %d, %Y") %></p>
+            <p class="post-excerpt"><%= truncate(strip_tags(post.body), length: 100) %></p>
+            <%= link_to "Read More", post_path(post, subdomain: 'blog'), class: "btn outline small" %>
+          </article>
+        <% end %>
+      </div>
+    </section>
+  <% end %>
+<% else %>
+  <div class="empty-state">
+    <h2>No blog posts yet</h2>
+    <p>Stay tuned for updates from the Wizzle team.</p>
+  </div>
+<% end %>

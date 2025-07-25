@@ -10,15 +10,27 @@ class FriendsController < ApplicationController
   def create
     friend = User.find_by(email: params[:email])
     if friend && friend != current_user
+      token = SecureRandom.hex(16)
+      invitation = Invitation.create!(
+        email: friend.email,
+        inviter_id: current_user.id,
+        token: token,
+        accepted: false
+      )
       friendship = current_user.friendships.create(friend: friend, status: "pending")
       if friend.notify_friend_invite?
-        FriendInviteMailer.invite(friendship).deliver_now
+        FriendInviteMailer.invite(invitation).deliver_now
       end
       redirect_to friends_path, notice: "Invitation sent to #{friend.email}."
     elsif params[:email].present? && params[:email] != current_user.email
       # Invite non-user
       token = SecureRandom.hex(16)
-      Invitation.create(email: params[:email], inviter_id: current_user.id, token: token, accepted: false)
+      Invitation.create!(
+        email: params[:email],
+        inviter_id: current_user.id,
+        token: token,
+        accepted: false
+      )
       FriendInviteMailer.invite_non_user(params[:email], current_user, token).deliver_now
       redirect_to friends_path, notice: "Invitation sent to #{params[:email]}."
     else

@@ -4,6 +4,10 @@ class UsersController < Clearance::UsersController
 
   def create
     super do |user|
+      Rails.logger.info "User created: #{user.email}"
+      if user.persisted?
+        UserMailer.welcome_email(user).deliver_now
+      end
       if params[:invite_token].present?
         invitation = Invitation.find_by(token: params[:invite_token], accepted: false)
         if invitation && invitation.email == user.email
@@ -17,7 +21,6 @@ class UsersController < Clearance::UsersController
 
   def show
     @user = User.find(params[:id])
-    @shared_wishlists = @user.wishlists.joins(:shared_wishlists)
-      .where(shared_wishlists: { user_id: current_user.id })
+    @shared_wishlists = @user.wishlists.where(private: [false, nil])
   end
 end

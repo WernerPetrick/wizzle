@@ -1,0 +1,38 @@
+<div class="page-container">
+  <div class="content-section">
+    <h1 class="page-form-title">Blog Posts</h1>
+
+    <div class="form-actions" style="margin-bottom:2rem;">
+      <%= link_to "New Blog Post", new_admin_blog_post_path, class: "btn primary" %>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Published</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @posts.each do |post| %>
+          <tr>
+            <td><%= post.title %></td>
+            <td>
+              <% if post.published? %>
+                <span style="color:#008000;font-weight:500;">Yes</span>
+              <% else %>
+                <span style="color:#888;">No</span>
+              <% end %>
+            </td>
+            <td class="actions-cell">
+              <%= link_to "Show", admin_blog_post_path(post), class: "btn secondary small" %>
+              <%= link_to "Edit", edit_admin_blog_post_path(post), class: "btn small" %>
+                <%= button_to "Delete", admin_blog_post_path(post), method: :delete, data: { confirm: "Are you sure?" }, class: "btn danger small", form: { style: "display:inline" } %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
