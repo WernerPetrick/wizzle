@@ -1,9 +1,11 @@
 class FriendInviteMailer < ApplicationMailer
-  def invite(friendship)
-    @inviter = friendship.user
-    @friend = friendship.friend
+  def invite(invitation)
+    @inviter = invitation.inviter
+    @friend_email = invitation.email
+    @accept_invitation_url = accept_invitation_url(token: invitation.token)
+    @login_url = sign_in_url
     mail(
-      to: @friend.email,
+      to: @friend_email,
       subject: "#{@inviter.name || @inviter.email} invited you to be friends on Wizzle!"
     )
   end
