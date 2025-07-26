@@ -60,7 +60,7 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem 'libsql_activerecord'
+gem 'pg'
 gem "clearance"
 gem "letter_opener", group: :development
 gem "sidekiq"
