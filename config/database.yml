@@ -1,17 +1,16 @@
 default: &default
-  adapter: libsql
+  adapter: sqlite3
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  url: <%= ENV['TURSO_DATABASE_URL'] %>
-  auth_token: <%= ENV['TURSO_AUTH_TOKEN'] %>
+  timeout: 5000
+  database: <%= ENV["TURSO_DATABASE_URL"]
+               &.gsub("libsql://", "")
+               &.concat("?authToken=#{ENV["TURSO_AUTH_TOKEN"]}") %>
 
 development:
   <<: *default
-  database: wizzle_development
 
 test:
   <<: *default
-  database: wizzle_test
 
 production:
   <<: *default
-  database: wizzle_production
