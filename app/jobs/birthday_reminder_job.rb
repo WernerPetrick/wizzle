@@ -8,7 +8,7 @@ class BirthdayReminderJob < ApplicationJob
       birthday_this_year = user.birthday.change(year: today.year)
       days_until = (birthday_this_year - today).to_i
       if days_until == 30 || days_until == 7
-        WishlistReminderMailer.birthday_reminder(user, days_until).deliver_later
+        WishlistReminderMailer.birthday_reminder(user, days_until).deliver_now
       end
     end
   end
