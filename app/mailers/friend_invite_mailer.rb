@@ -3,7 +3,7 @@ class FriendInviteMailer < ApplicationMailer
     @inviter = invitation.inviter
     @friend_email = invitation.email
     @accept_invitation_url = accept_invitation_url(token: invitation.token)
-    @login_url = sign_in_url
+    @login_url = sign_in_path
     mail(
       to: @friend_email,
       subject: "#{@inviter.name || @inviter.email} invited you to be friends on Wizzle!"

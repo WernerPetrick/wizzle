@@ -1,4 +1,6 @@
 class UserMailer < ApplicationMailer
+  default from: "welcome@wizzle.gifts"
+  
   def welcome_email(user)
     @user = user
     mail(
