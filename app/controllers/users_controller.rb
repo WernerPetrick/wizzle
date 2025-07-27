@@ -4,10 +4,6 @@ class UsersController < Clearance::UsersController
 
   def create
     super do |user|
-      Rails.logger.info "User created: #{user.email}"
-      if user.persisted?
-        UserMailer.welcome_email(user).deliver_now
-      end
       if params[:invite_token].present?
         invitation = Invitation.find_by(token: params[:invite_token], accepted: false)
         if invitation && invitation.email == user.email

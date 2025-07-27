@@ -8,8 +8,15 @@ class User < ApplicationRecord
   has_many :gift_histories_given, class_name: "GiftHistory", foreign_key: "giver_id"
   has_many :gift_histories_received, class_name: "GiftHistory", foreign_key: "recipient_id"
 
+  after_create :send_welcome_email
 
   def admin?
     admin
+  end
+
+  private 
+
+  def send_welcome_email
+    UserMailer.welcome_email(self).deliver_later
   end
 end
