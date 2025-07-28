@@ -12,7 +12,7 @@
       <h4>Follow Along</h4>
       <ul>
         <li><%= link_to "Blog", blog_root_url(subdomain: "blog"), target: "_blank", rel: "noopener" %></li>
-        <li><a href="#">About Wizzle</a></li>
+        <li><%= link_to "About Wizzle", about_path, rel: "noopener" %></li>
         <li><a href="#">Request a Feature</a></li>
       </ul>
     </div>
@@ -20,7 +20,7 @@
       <h4>We're Here to Help</h4>
       <ul>
         <li><a href="#">Frequently Asked Questions</a></li>
-        <li><a href="#">Roadmap</a></li>
+        <li><%= link_to "Roadmap", roadmap_path, rel: "noopener" %></li>
       </ul>
     </div>
   </div>
