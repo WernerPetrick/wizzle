@@ -10,6 +10,9 @@ class User < ApplicationRecord
 
   after_create :send_welcome_email
 
+  validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :password, presence: true, length: { minimum: 8 }, if: :password_required?
+
   def admin?
     admin
   end
@@ -18,5 +21,9 @@ class User < ApplicationRecord
 
   def send_welcome_email
     UserMailer.welcome_email(self).deliver_now
+  end
+
+  def password_required?
+    new_record? || password.present?
   end
 end
