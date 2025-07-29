@@ -1,0 +1,31 @@
+<div class="page-container">
+  <div class="content-section" style="max-width: 1000px; margin: 0 auto;">
+    <h1 class="page-title" style="font-size: 2.5rem; font-weight: 200; color: #000; margin-bottom: 2rem; text-align: center;">
+      Roadmap Items
+    </h1>
+
+    <div style="text-align: right; margin-bottom: 2rem;">
+      <%= link_to "New Item", new_admin_roadmap_item_path, class: "btn primary" %>
+    </div>
+
+    <% grouped = @roadmap_items.group_by(&:status) %>
+    <div class="roadmap-status-tables" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+      <% RoadmapItem.statuses.keys.each do |status| %>
+        <% items = grouped[status] || [] %>
+        <div class="roadmap-status-table" style="background: #fff; border-radius: 1rem; border: 1px solid #eee; box-shadow: 0 2px 12px rgba(0,0,0,0.03); padding: 1.5rem;">
+          <h2 style="font-size: 1.3rem; font-weight: 500; color: #222; margin-bottom: 1rem; text-transform: capitalize;">
+            <%= status.humanize %>
+          </h2>
+          <div data-controller="sortable" data-sortable-url-value="<%= sort_admin_roadmap_items_path(status: status) %>">
+            <ul id="sortable-roadmap-items-<%= status %>"
+                data-sortable-target="list"
+                data-status="<%= status %>"
+                style="list-style: none; padding: 0; margin: 0;">
+              <%= render partial: "roadmap_item", collection: items, as: :roadmap_item %>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

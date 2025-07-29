@@ -1,0 +1,6 @@
+<li id="item-<%= roadmap_item.id %>" data-id="<%= roadmap_item.id %>">
+  <strong><%= roadmap_item.title %></strong>
+  (<%= roadmap_item.status %>)
+  <%= link_to "Edit", edit_admin_roadmap_item_path(roadmap_item) %> |
+  <%= link_to "Delete", admin_roadmap_item_path(roadmap_item), method: :delete, data: { confirm: "Are you sure?" } %>
+</li>
