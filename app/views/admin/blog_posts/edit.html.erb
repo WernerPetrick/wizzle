@@ -3,28 +3,7 @@
     <!-- Blog Post Form -->
     <div style="flex: 2;">
       <h1 class="page-form-title"><%= @post.new_record? ? "New Blog Post" : "Edit Blog Post" %></h1>
-      <%= form_for [:admin, @post], html: { multipart: true } do |f| %>
-        <div class="text-field">
-          <%= f.label :title %>
-          <%= f.text_field :title, class: "form-input" %>
-        </div>
-        <div class="text-field">
-          <%= f.label :body, "Content (Markdown supported)" %>
-          <%= f.text_area :body, rows: 15, class: "form-input" %>
-        </div>
-        <div class="text-field">
-          <%= f.label :image, "Header Image (optional)" %>
-          <%= f.file_field :image %>
-        </div>
-        <div class="text-field">
-          <%= f.label :published %>
-          <%= f.check_box :published %>
-        </div>
-        <div class="form-actions">
-          <%= link_to "Cancel", admin_blog_posts_path, class: "btn secondary" %>
-          <%= f.submit @post.new_record? ? "Create Blog Post" : "Update Blog Post", class: "btn primary" %>
-        </div>
-      <% end %>
+      <%= render "form", post: @post %>
 
       <hr style="margin:2.5rem 0;">
 

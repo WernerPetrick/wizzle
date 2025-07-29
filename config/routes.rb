@@ -51,6 +51,7 @@ Rails.application.routes.draw do
   get "friends_wishlists", to: "wishlists#friends", as: :friends_wishlists
   get "questions", to: "questions#index", as: :questions
   get "how_it_works", to: "pages#how_it_works", as: :how_it_works
+  get "about", to: "pages#about", as: :about
   get "users/:id", to: "users#show", as: :user
   get "/w/:token", to: "wishlists#public_show", as: :public_wishlist
   get '/roadmap', to: 'roadmap_items#index', as: :roadmap

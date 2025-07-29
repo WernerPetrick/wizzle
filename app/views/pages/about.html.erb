@@ -1,0 +1,48 @@
+<div class="page-container">
+  <div class="content-section" style="max-width: 800px; margin: 0 auto; padding: 3rem 1rem;">
+    <h1 class="page-title" style="font-size: 3rem; font-weight: 200; color: #000; margin-bottom: 2rem; text-align: center;">
+      Wizzle is a simple, social wishlist app that makes gifting easy.
+    </h1>
+    <p style="color: #666; font-size: 1.25rem; line-height: 1.7; font-weight: 300; margin-bottom: 2rem; text-align: center;">
+      Wizzle started with a gift mix-up at Christmas. Two people (myself included) bought the same present for the same person — and while it was well-intentioned, it was awkward.
+    </p>
+    <p style="color: #666; font-size: 1.25rem; line-height: 1.7; font-weight: 300; margin-bottom: 2rem; text-align: center;">
+      That moment stuck with me. I thought, “Why isn’t there a simple, shared space where people can put what they actually want — and where others can quietly find it?”
+    </p>
+    <p style="color: #666; font-size: 1.25rem; line-height: 1.7; font-weight: 300; margin-bottom: 2rem; text-align: center;">
+      Wizzle is my answer to that: a clean, social wishlist platform that makes giving easier, and getting a little more joyful.
+    </p>
+    <p style="color: #666; font-size: 1.25rem; line-height: 1.7; font-weight: 300; margin-bottom: 2rem; text-align: center;">
+      It’s not just about stuff — it’s about thoughtfulness, connection, and making sure your gifts truly land.
+    </p>
+    <p style="color: #666; font-size: 1.25rem; line-height: 1.7; font-weight: 300; margin-bottom: 2rem; text-align: center;">
+      Thanks for being here. I can’t wait to see what you wish for.
+    </p>
+    <div style="margin-bottom: 2.5rem;">
+      <h2 style="font-size: 2rem; font-weight: 200; color: #000; margin-bottom: 1rem;">What Makes Wizzle Special?</h2>
+      <p style="color: #666; font-size: 1.25rem; line-height: 1.7; font-weight: 300; margin-bottom: 2rem; text-align: center;">
+        At its heart, Wizzle is built on simplicity. No noise. No ads. No algorithms. Just you, your wishlist, and the people you care about. Share your wishes with friends, or keep them just for yourself. It’s completely up to you.
+      </p>
+
+      <h4 style="font-size: 1.4rem; font-weight: 200; color: #000; margin-bottom: 1rem;">
+        What really makes Wizzle shine is how quietly helpful it is:
+      </h4>
+      <ul style="color: #222; font-size: 1.1rem; line-height: 1.7; font-weight: 400; margin-bottom: 2rem;">
+        <li>Friends can ask anonymous questions about items — no pressure, just clarity.</li>
+        <li>You’ll never get the same gift twice — others can mark when they’re getting something (anonymously, of course).</li>
+        <li>It works on any device, no app required.</li>
+        <li>And yes, it’s built for birthdays, holidays, weddings, or simply because.</li>
+      </ul>
+    </div>
+    <div style="margin-bottom: 2.5rem;">
+      <h2 style="font-size: 2rem; font-weight: 200; color: #000; margin-bottom: 1rem;">Connect With Me</h2>
+      <p style="color: #666; font-size: 1.1rem; line-height: 1.7; font-weight: 300;">
+        Have feedback, ideas, or questions? I'd love to hear from you! 
+        Reach out anytime via <a href="mailto:feedback@wizzle.gifts" style="color: #4CAF50;">feedback@wizzle.gifts</a> or connect on <a href="https://www.linkedin.com/in/petrickwerner01/" target="_blank" style="color: #4CAF50;">LinkedIn</a>.
+      </p>
+    </div>
+    <div style="text-align: center; margin-top: 3rem;">
+      <%= link_to "Start Your Wishlist Journey", (signed_in? ? profile_path : sign_up_path), class: "btn primary large" %>
+    </div>
+  </div>
+</div>

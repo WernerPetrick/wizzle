@@ -217,8 +217,8 @@ table tr:hover {
 .page-container {
 	max-width: 1200px;
 	margin: 0 auto;
-	padding: 4rem 2rem;
-	margin-top: 109px;
+	padding: 2rem 2rem;
+	/* margin-top: 109px; */
 	background: #ffffff;
 	min-height: 100vh;
 }
@@ -350,10 +350,6 @@ ol li {
 	#clearance.password-reset {
 		margin: 2rem 1rem;
 		padding: 2rem;
-	}
-
-	.page-container {
-		padding: 2rem 1rem;
 	}
 
 	.content-section h1 {
