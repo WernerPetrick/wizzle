@@ -40,6 +40,8 @@ Rails.application.routes.draw do
   end
   get "/accept_invitation", to: "invitations#accept", as: :accept_invitation
   get "friends_wishlists", to: "wishlists#friends", as: :friends_wishlists
+  get "feature_requests", to: "pages#feature_requests", as: :feature_requests
+  post "feature_requests", to: "pages#submit_feature_request"
   get "questions", to: "questions#index", as: :questions
   get "how_it_works", to: "pages#how_it_works", as: :how_it_works
   get "users/:id", to: "users#show", as: :user
