@@ -1,0 +1,35 @@
+<div class="page-container">
+  <div class="content-section" style="max-width: 800px; margin: 0 auto;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+      <h1 class="page-title" style="font-size: 2.5rem; font-weight: 200; color: #000; margin: 0;">
+        My Communities
+      </h1>
+      <%= link_to "Create Community", new_community_path, class: "btn primary" %>
+    </div>
+
+    <% if @communities.any? %>
+      <div class="communities-grid" style="display: grid; gap: 2rem;">
+        <% @communities.each do |community| %>
+          <div class="sleek-card" style="background: #fff; border-radius: 1.2rem; border: 1px solid #eee; padding: 2rem; box-shadow: 0 2px 12px rgba(0,0,0,0.03);">
+            <h3 style="font-size: 1.4rem; font-weight: 500; color: #000; margin-bottom: 0.5rem;">
+              <%= link_to community.name, community, style: "text-decoration: none; color: inherit;" %>
+            </h3>
+            <p style="color: #666; font-weight: 300; line-height: 1.5; margin-bottom: 1rem;">
+              <%= truncate(community.description, length: 150) %>
+            </p>
+            <div style="display: flex; justify-content: space-between; align-items: center; color: #888; font-size: 0.9rem;">
+              <span><%= pluralize(community.members.count, 'member') %></span>
+              <span>Created by <%= community.creator.email %></span>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="sleek-card" style="background: #fff; border-radius: 1.2rem; border: 1px solid #eee; padding: 3rem; text-align: center; box-shadow: 0 2px 12px rgba(0,0,0,0.03);">
+        <h3 style="font-size: 1.5rem; font-weight: 300; color: #666; margin-bottom: 1rem;">No Communities Yet</h3>
+        <p style="color: #888; margin-bottom: 2rem;">Create or join a community to start sharing wishlists with groups of friends.</p>
+        <%= link_to "Create Your First Community", new_community_path, class: "btn primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

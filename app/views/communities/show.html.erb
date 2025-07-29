@@ -1,0 +1,42 @@
+<div class="page-container">
+  <div class="content-section" style="max-width: 800px; margin: 0 auto;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+      <h1 class="page-title" style="font-size: 2.5rem; font-weight: 200; color: #000; margin: 0;">
+        <%= @community.name %>
+      </h1>
+      <% if @community.creator == current_user %>
+        <%= link_to "Edit Community", edit_community_path(@community), class: "btn secondary" %>
+      <% end %>
+    </div>
+
+    <% if @community.description.present? %>
+      <p style="color: #666; font-size: 1.2rem; line-height: 1.7; font-weight: 300; margin-bottom: 2rem;">
+        <%= @community.description %>
+      </p>
+    <% end %>
+
+    <h2 style="font-size: 1.5rem; font-weight: 500; color: #000; margin-bottom: 1rem;">
+      Members (<%= @members.count %>)
+    </h2>
+
+    <div class="members-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem;">
+      <% @members.each do |member| %>
+        <div class="sleek-card" style="background: #fff; border-radius: 1rem; border: 1px solid #eee; padding: 1.5rem; box-shadow: 0 2px 12px rgba(0,0,0,0.03);">
+          <h4 style="font-size: 1.2rem; font-weight: 500; color: #000; margin-bottom: 0.5rem;">
+            <%= member.email %>
+          </h4>
+          <p style="color: #666; font-size: 0.9rem; margin-bottom: 1rem;">
+            <%= pluralize(member.wishlists.count, 'wishlist') %>
+          </p>
+          <% if member != current_user %>
+            <%= link_to "View Profile", user_path(member), class: "btn small" %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+    <div style="margin-top: 3rem; text-align: center;">
+      <%= link_to "← Back to Communities", communities_path, class: "btn secondary" %>
+    </div>
+  </div>
+</div>
