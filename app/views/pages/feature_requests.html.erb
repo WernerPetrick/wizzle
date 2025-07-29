@@ -1,0 +1,59 @@
+<div class="page-container">
+  <div class="content-section" style="max-width: 700px; margin: 0 auto; padding:1rem;">
+    <h1 class="page-title" style="font-size: 2.5rem; font-weight: 200; color: #000; margin-bottom: 2rem; text-align: center;">
+      Got a Feature Idea?
+    </h1>
+
+    <p style="color: #666; font-size: 1.15rem; line-height: 1.7; font-weight: 300; margin-bottom: 1.5rem;">
+      I love hearing from the Wizzle community! If you’ve got an idea that could make Wizzle better, share it with me here. Whether it’s a small tweak or a big new feature, I'd love to know what you’re thinking.
+    </p>
+
+    <p style="color: #666; font-size: 1.05rem; line-height: 1.7; font-weight: 300; margin-bottom: 1.2rem;">
+      Submitting a request doesn’t guarantee I'll build it — but if your idea feels like a good fit or I need more detail, I might reach out. (So be sure to include a valid email.)
+    </p>
+
+    <p style="color: #666; font-size: 1.05rem; line-height: 1.7; font-weight: 300; margin-bottom: 2rem;">
+      Please note: I can’t offer compensation for submitted ideas, but I do regularly add the most promising ones to the public roadmap under the “Ideas” section.
+    </p>
+
+    <p style="color: #666; font-size: 1.05rem; line-height: 1.7; font-weight: 300; margin-bottom: 2.5rem;">
+      Thanks for helping shape the future of Wizzle!
+    </p>
+
+    <div class="feature-request-tips" style="background: #f8fafb; border-radius: 1.1rem; border: 1px solid #e0e0e0; box-shadow: 0 1px 6px rgba(0,0,0,0.02); padding: 1.5rem 1.5rem 1.2rem 1.5rem; margin-bottom: 2.5rem;">
+      <h4 style="font-size: 1.25rem; font-weight: 500; color: #222; margin-bottom: 1rem;">
+        Tips for a Helpful Feature Request
+      </h4>
+      <ul style="color: #444; font-size: 1.07rem; line-height: 1.7; font-weight: 400; padding-left: 1.2rem; margin: 0;">
+        <li style="margin-bottom: 0.7rem;">
+          <strong>Be specific:</strong> What problem are you solving? What would the feature actually do?
+        </li>
+        <li style="margin-bottom: 0.7rem;">
+          <strong>Think beyond yourself:</strong> How might other users use this? Is it broadly useful?
+        </li>
+        <li style="margin-bottom: 0.7rem;">
+          <strong>Give context:</strong> Are you a frequent user? Did you hit a roadblock?
+        </li>
+        <li>
+          <strong>Optional, but helpful:</strong> If you have ideas for how it could look or work, include them!
+        </li>
+      </ul>
+    </div>
+
+    <div class="feature-request-form" style="background: #fff; border-radius: 1.2rem; border: 1px solid #eee; box-shadow: 0 2px 12px rgba(0,0,0,0.03); padding: 2rem 2rem; margin-bottom: 2rem;">
+      <%= form_with url: feature_requests_path, method: :post, local: true do |f| %>
+        <div style="margin-bottom: 1.2rem;">
+          <%= f.label :email, "Your Email", style: "font-weight: 500; color: #222;" %><br>
+          <%= f.email_field :email, required: true, class: "form-control", style: "width: 100%; padding: 0.7rem; border-radius: 0.5rem; border: 1px solid #ccc; margin-top: 0.3rem;" %>
+        </div>
+        <div style="margin-bottom: 1.2rem;">
+          <%= f.label :idea, "Your Feature Idea", style: "font-weight: 500; color: #222;" %><br>
+          <%= f.text_area :idea, rows: 5, required: true, class: "form-control", style: "width: 100%; padding: 0.7rem; border-radius: 0.5rem; border: 1px solid #ccc; margin-top: 0.3rem;" %>
+        </div>
+        <div style="text-align: right;">
+          <%= f.submit "Submit Idea", class: "btn primary", style: "padding: 0.7rem 2rem; font-size: 1.1rem;" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

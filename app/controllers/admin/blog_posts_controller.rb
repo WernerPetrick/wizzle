@@ -16,8 +16,11 @@ class Admin::BlogPostsController < ApplicationController
   def create
     @post = BlogPost.new(blog_post_params)
     @post.user = current_user
+    if @post.markdown_file.present?
+      @post.body = @post.markdown_file.read.force_encoding("UTF-8")
+    end
     if @post.save
-      redirect_to admin_blog_posts_path, notice: "Blog post created!"
+      redirect_to admin_blog_post_path(@post), notice: "Blog post created!"
     else
       render :new
     end
@@ -29,8 +32,11 @@ class Admin::BlogPostsController < ApplicationController
 
   def update
     @post = BlogPost.find(params[:id])
-    if @post.update(blog_post_params)
-      redirect_to admin_blog_posts_path, notice: "Blog post updated!"
+    if blog_post_params[:markdown_file].present?
+      @post.body = blog_post_params[:markdown_file].read.force_encoding("UTF-8")
+    end
+    if @post.update(blog_post_params.except(:markdown_file))
+      redirect_to admin_blog_post_path(@post), notice: "Blog post updated!"
     else
       render :edit
     end
@@ -45,7 +51,7 @@ class Admin::BlogPostsController < ApplicationController
   private
 
   def blog_post_params
-    params.require(:blog_post).permit(:title, :body, :published, :image)
+    params.require(:blog_post).permit(:title, :body, :published, :image, :markdown_file)
   end
 
   def require_admin!

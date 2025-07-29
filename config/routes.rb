@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get "communities/create"
   get "communities/edit"
   get "communities/update"
+  get "roadmap_items/index"
   constraints subdomain: 'blog' do
     scope module: 'blog' do
       resources :posts, only: [:index, :show]
@@ -21,6 +22,14 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :image_uploads, only: [:create]
     resources :blog_posts
+  end
+
+  namespace :admin do
+    resources :roadmap_items do
+      collection do
+        post :sort
+      end
+    end
   end
 
   get "shared_wishlists/create"
@@ -52,9 +61,13 @@ Rails.application.routes.draw do
   end
   get "/accept_invitation", to: "invitations#accept", as: :accept_invitation
   get "friends_wishlists", to: "wishlists#friends", as: :friends_wishlists
+  get "feature_requests", to: "pages#feature_requests", as: :feature_requests
+  post "feature_requests", to: "pages#submit_feature_request"
   get "questions", to: "questions#index", as: :questions
   get "how_it_works", to: "pages#how_it_works", as: :how_it_works
+  get "about", to: "pages#about", as: :about
   get "users/:id", to: "users#show", as: :user
   get "/w/:token", to: "wishlists#public_show", as: :public_wishlist
+  get '/roadmap', to: 'roadmap_items#index', as: :roadmap
   root "pages#index"
 end

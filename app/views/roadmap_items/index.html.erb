@@ -1,0 +1,33 @@
+<div class="page-container">
+  <div class="content-section" style="max-width: 900px; margin: 0 auto;">
+    <h1 class="page-title" style="font-size: 3rem; font-weight: 200; color: #000; margin-bottom: 2rem; text-align: center;">
+      Wizzle Roadmap
+    </h1>
+    <p class="section-description" style="color: #666; font-size: 1.2rem; line-height: 1.7; font-weight: 300; text-align: center; margin-bottom: 3rem;">
+      Here’s a peek at what I'm working on, what’s coming up next, and what I've already shipped.
+    </p>
+
+    <% grouped = @roadmap_items.group_by(&:status) %>
+    <div class="sleek-grid" style="display: grid; grid-template-columns: 1fr; gap: 3rem;">
+      <% RoadmapItem.statuses.keys.each do |status| %>
+        <% items = grouped[status.to_s] || [] %>
+        <% next if items.empty? %>
+        <section>
+          <h2 class="section-title" style="font-size: 2rem; font-weight: 200; color: #000; margin-bottom: 1.5rem;">
+            <%= status_label(status) %>
+          </h2>
+          <ul class="roadmap-list" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; list-style: none; padding: 0; margin: 0;">
+            <% items.each do |item| %>
+              <li class="sleek-card" style="background: #fff; border-radius: 1.2rem; border: 1px solid #eee; padding: 2rem 2rem; box-shadow: 0 2px 12px rgba(0,0,0,0.03); display: flex; flex-direction: column; justify-content: flex-start;">
+                <strong class="roadmap-title" style="font-size: 1.3rem; font-weight: 500; color: #000; margin-bottom: 0.5rem; display: block;"><%= item.title %></strong>
+                <% if item.description.present? %>
+                  <p class="roadmap-description" style="color: #666; font-weight: 300; line-height: 1.5; margin-bottom: 0;"><%= item.description %></p>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        </section>
+      <% end %>
+    </div>
+  </div>
+</div>

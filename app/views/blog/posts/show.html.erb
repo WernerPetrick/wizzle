@@ -1,15 +1,17 @@
-<!-- filepath: app/views/blog/posts/show.html.erb -->
-<div class="blog-post-container" style="max-width:700px;margin:0 auto;padding:2.5rem 1rem;">
-  <h1 style="font-size:2.2rem;font-weight:500;margin-bottom:1rem;"><%= @post.title %></h1>
-  <div class="blog-meta" style="color:#888;font-size:1rem;margin-bottom:2rem;">
-    <%= @post.published_at&.strftime("%b %d, %Y") || @post.created_at.strftime("%b %d, %Y") %>
-  </div>
-  <% if @post.image.attached? %>
-    <div class="blog-image" style="margin-bottom:2rem;">
-      <%= image_tag @post.image, style: "max-width:100%;height:auto;border-radius:1rem;" %>
+<div class="page-container">
+  <div class="content-section">
+    <h1 class="page-form-title"><%= @post.title %></h1>
+    <div class="blog-meta" style="color:#666;font-size:1.4rem;margin-bottom:2rem;">
+      <%= @post.published_at&.strftime("%b %d, %Y") %>
+      <% unless @post.published? %>
+        <span style="color:#d32f2f;font-weight:500;">(Unpublished)</span>
+      <% end %>
     </div>
-  <% end %>
-  <div class="blog-body" style="font-size:1.15rem;line-height:1.7;color:#222;">
-    <%= markdown(@post.body).html_safe %>
+    <div class="blog-body" style="margin-bottom:2rem; font-size:1.25rem; line-height:1.7;">
+      <%= markdown(@post.body).html_safe %>
+    </div>
+    <div class="form-actions">
+      <%= link_to "Back", blog_root_path, class: "btn secondary small" %>
+    </div>
   </div>
 </div>

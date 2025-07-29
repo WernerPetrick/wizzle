@@ -62,7 +62,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_29_183720) do
   end
 
   create_table "community_memberships", force: :cascade do |t|
-    t.integer "user_id"
+    t.serial "user_id"
     t.integer "community_id"
     t.string "role"
     t.datetime "created_at", null: false
