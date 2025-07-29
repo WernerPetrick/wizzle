@@ -1,0 +1,14 @@
+<h1><%= @roadmap_item.new_record? ? "New" : "Edit" %> Roadmap Item</h1>
+
+<%= form_with model: [:admin, @roadmap_item], local: true do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %><br>
+
+  <%= f.label :description %>
+  <%= f.text_area :description %><br>
+
+  <%= f.label :status %>
+  <%= f.select :status, RoadmapItem.statuses.keys.map { |s| [s.titleize, s] } %><br>
+
+  <%= f.submit %>
+<% end %>

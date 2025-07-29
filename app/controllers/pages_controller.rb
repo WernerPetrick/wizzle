@@ -10,4 +10,8 @@ class PagesController < ApplicationController
 
   def roadmap
   end
+  
+  def roadmap
+    @roadmap_items = RoadmapItem.order(:position)
+  end
 end
