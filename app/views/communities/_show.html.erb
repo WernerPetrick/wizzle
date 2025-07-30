@@ -32,7 +32,7 @@
               <%= pluralize(member.wishlists.count, 'wishlist') %>
             </p>
             <% if member != current_user %>
-              <%= link_to "View Profile", user_path(member), class: "btn small" %>
+              <%= link_to "View Profile", user_path(member), class: "btn small", data: { turbo_frame: "_top" } %>
             <% end %>
             <% if (@community.creator == current_user || @community.community_memberships.find_by(user: current_user)&.role == "admin") && member != @community.creator && member != current_user %>
               <%= button_to "Remove", community_community_membership_path(@community, @community.community_memberships.find_by(user: member)), method: :delete, data: { confirm: "Remove this member from the community?" }, class: "btn small danger" %>
