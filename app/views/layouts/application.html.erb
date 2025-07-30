@@ -15,9 +15,10 @@
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
-    <%#= javascript_include_tag "application" %>
-    <%#= javascript_include_tag "wishlist_items" %>
-    <%#= javascript_include_tag "wishlist_form" %>
+    <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag "wishlist_items" %>
+    <%= javascript_include_tag "wishlist_form" %>
+    <%= javascript_include_tag "flash" %>
   </head>
 
   <body>

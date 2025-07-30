@@ -1,7 +1,8 @@
 <% if flash[:news].present? || @latest_news.present? %>
-  <div id="notification-bar" class="notification-bar">
+  <% message = flash[:news] || @latest_news %>
+  <div id="notification-bar" data-flash-key="<%= Digest::SHA256.hexdigest(message.to_s) %>" class="notification-bar">
     <span class="notification-message">
-      <%= flash[:news] || @latest_news %>
+      <%= message %>
     </span>
     <button class="notification-close" onclick="document.getElementById('notification-bar').style.display='none'">×</button>
   </div>
