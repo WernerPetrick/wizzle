@@ -10,6 +10,8 @@ class User < ApplicationRecord
   has_many :created_communities, class_name: 'Community', foreign_key: 'creator_id'
   has_many :community_memberships, dependent: :destroy
   has_many :communities, through: :community_memberships
+  has_many :sent_community_invitations, class_name: 'CommunityInvitation', foreign_key: 'inviter_id', dependent: :destroy
+  has_many :received_community_invitations, class_name: 'CommunityInvitation', foreign_key: 'invitee_id', dependent: :destroy
 
   after_create :send_welcome_email
 
@@ -18,6 +20,10 @@ class User < ApplicationRecord
 
   def admin?
     admin
+  end
+
+  def pending_community_invitations
+    received_community_invitations.pending.includes(:community, :inviter)
   end
 
   private 
@@ -29,4 +35,5 @@ class User < ApplicationRecord
   def password_required?
     new_record? || password.present?
   end
+
 end

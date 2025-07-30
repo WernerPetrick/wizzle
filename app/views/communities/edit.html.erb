@@ -1,37 +1,22 @@
-<div class="page-container">
-  <div class="content-section" style="max-width: 600px; margin: 0 auto;">
-    <h1 class="page-title" style="font-size: 2.5rem; font-weight: 200; color: #000; margin-bottom: 2rem; text-align: center;">
-      Edit <%= @community.name %>
-    </h1>
-
-    <div class="sleek-card" style="background: #fff; border-radius: 1.2rem; border: 1px solid #eee; padding: 2rem; box-shadow: 0 2px 12px rgba(0,0,0,0.03);">
-      <%= form_with model: @community, local: true do |f| %>
-        <% if @community.errors.any? %>
-          <div style="background: #fee; border: 1px solid #fcc; color: #c00; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1.5rem;">
-            <h4>Please fix the following errors:</h4>
-            <ul>
-              <% @community.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-              <% end %>
-            </ul>
-          </div>
-        <% end %>
-
-        <div style="margin-bottom: 1.5rem;">
-          <%= f.label :name, "Community Name", style: "font-weight: 500; color: #222;" %><br>
-          <%= f.text_field :name, required: true, style: "width: 100%; padding: 0.7rem; border-radius: 0.5rem; border: 1px solid #ccc; margin-top: 0.3rem;" %>
+<% if turbo_frame_request? %>
+  <turbo-frame id="community_header">
+    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
+      <div>
+        <%= render "form", community: @community %>
+      </div>
+    </div>
+  </turbo-frame>
+<% else %>
+  <div id="main-content">
+    <div class="page-container">
+      <div class="content-section" style="max-width: 600px; margin: 0 auto;">
+        <h1 class="page-title" style="font-size: 2.5rem; font-weight: 200; color: #000; margin-bottom: 2rem; text-align: center;">
+          Edit <%= @community.name %>
+        </h1>
+        <div class="sleek-card" style="background: #fff; border-radius: 1.2rem; border: 1px solid #eee; padding: 2rem; box-shadow: 0 2px 12px rgba(0,0,0,0.03);">
+          <%= render "form", community: @community %>
         </div>
-
-        <div style="margin-bottom: 2rem;">
-          <%= f.label :description, "Description", style: "font-weight: 500; color: #222;" %><br>
-          <%= f.text_area :description, rows: 4, style: "width: 100%; padding: 0.7rem; border-radius: 0.5rem; border: 1px solid #ccc; margin-top: 0.3rem;" %>
-        </div>
-
-        <div style="display: flex; gap: 1rem; justify-content: space-between;">
-          <%= link_to "Cancel", @community, class: "btn secondary" %>
-          <%= f.submit "Update Community", class: "btn primary" %>
-        </div>
-      <% end %>
+      </div>
     </div>
   </div>
-</div>
+<% end %>

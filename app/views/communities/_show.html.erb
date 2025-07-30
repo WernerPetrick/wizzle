@@ -1,0 +1,69 @@
+<div class="page-container">
+  <div class="content-section" style="max-width: 800px; margin: 0 auto;">
+    <turbo-frame id="community_header">
+      <%= render "header", community: @community %>
+    </turbo-frame>
+
+    <h2 style="font-size: 1.5rem; font-weight: 500; color: #000; margin-bottom: 1rem;">
+      Members (<%= community.members.count %>)
+    </h2>
+
+    <turbo-frame id="community_members">
+      <div class="members-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem;">
+        <% community.members.each do |member| %>
+          <div class="sleek-card" style="background: #fff; border-radius: 1rem; border: 1px solid #eee; padding: 1.5rem; box-shadow: 0 2px 12px rgba(0,0,0,0.03);">
+            <h4 style="font-size: 1.2rem; font-weight: 500; color: #000; margin-bottom: 0.5rem;">
+              <%= member.email %>
+            </h4>
+            <% membership = @community.community_memberships.find_by(user: member) %>
+            <% if membership.role == "admin" %>
+              <div style="color: #1976d2; font-size: 0.65rem; font-weight: 500; margin-bottom: 0.5rem;">
+                Admin
+              </div>
+            <% end %>
+              <% if @community.creator == current_user && member != @community.creator %>
+                <% if membership.role == "admin" %>
+                  <%= button_to "Remove Admin", community_community_membership_path(@community, membership, role: "member"), method: :patch, class: "btn small secondary", form: { style: "display:inline;" } %>
+                <% else %>
+                  <%= button_to "Make Admin", community_community_membership_path(@community, membership, role: "admin"), method: :patch, class: "btn small primary", form: { style: "display:inline;" } %>
+                <% end %>
+              <% end %>
+            <p style="color: #666; font-size: 0.9rem; margin-bottom: 1rem;">
+              <%= pluralize(member.wishlists.count, 'wishlist') %>
+            </p>
+            <% if member != current_user %>
+              <%= link_to "View Profile", user_path(member), class: "btn small" %>
+            <% end %>
+            <% if (@community.creator == current_user || @community.community_memberships.find_by(user: current_user)&.role == "admin") && member != @community.creator && member != current_user %>
+              <%= button_to "Remove", community_community_membership_path(@community, @community.community_memberships.find_by(user: member)), method: :delete, data: { confirm: "Remove this member from the community?" }, class: "btn small danger" %>
+            <% end %>
+            
+          </div>
+        <% end %>
+      </div>
+    </turbo-frame>
+
+    <% pending_invitations = @community.community_invitations.pending.includes(:invitee, :inviter) %>
+      <% if pending_invitations.any? %>
+        <div style="margin-top: 2rem;">
+          <h3 style="font-size: 1.2rem; font-weight: 500; color: #000; margin-bottom: 1rem;">
+            Pending Invitations
+          </h3>
+          <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+            <% pending_invitations.each do |invitation| %>
+              <div style="background: #f8f9fa; border-radius: 0.5rem; border: 1px solid #e9ecef; padding: 0.7rem 1.2rem; min-width: 180px; font-size: 0.98rem;">
+                <div>
+                  <strong><%= invitation.invitee.email %></strong>
+                  <div style="color: #888; font-size: 0.9rem;">Invited by <%= invitation.inviter.email %></div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+
+    <div style="margin-top: 3rem; text-align: center;">
+      <%= link_to "← Back to Communities", communities_path, class: "btn secondary" %>
+    </div>
+  </div>
+</div>

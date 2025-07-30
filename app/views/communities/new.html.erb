@@ -27,6 +27,18 @@
           <%= f.text_area :description, rows: 4, style: "width: 100%; padding: 0.7rem; border-radius: 0.5rem; border: 1px solid #ccc; margin-top: 0.3rem;" %>
         </div>
 
+        <div class="field">
+          <%= f.label :avatar, "Profile Picture" %><br>
+          <%= f.file_field :avatar, direct_upload: true %>
+          <% if @community.avatar.attached? %>
+            <div style="margin-top: 1rem;">
+              <%= image_tag @community.avatar, style: "border-radius: 50%;" %>
+              <br>
+              <%= button_to "Remove Picture", remove_avatar_community_path(@community), method: :delete, data: { confirm: "Remove profile picture?" }, class: "btn small danger" %>
+            </div>
+          <% end %>
+        </div>
+
         <div style="display: flex; gap: 1rem; justify-content: space-between;">
           <%= link_to "Cancel", communities_path, class: "btn secondary" %>
           <%= f.submit "Create Community", class: "btn primary" %>

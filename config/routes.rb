@@ -1,10 +1,5 @@
 Rails.application.routes.draw do
-  get "communities/index"
-  get "communities/show"
-  get "communities/new"
-  get "communities/create"
-  get "communities/edit"
-  get "communities/update"
+
   get "roadmap_items/index"
   constraints subdomain: 'blog' do
     scope module: 'blog' do
@@ -13,9 +8,27 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :communities do
+    member do
+      delete :remove_avatar
+    end
+    resources :community_memberships, only: [:destroy, :update]
+  end
+
   resources :communities, only: [:index, :show, :new, :create, :edit, :update] do
     member do
       get :members
+    end
+    resources :community_invitations, only: [:new, :create]
+    resources :community_memberships, only: [:destroy, :update]
+  end
+
+  resources :community_invitations, only: [] do
+    member do
+      patch :accept
+      patch :decline
+      get :accept
+      get :decline
     end
   end
 

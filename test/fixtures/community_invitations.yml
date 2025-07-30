@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  community_id: 1
+  inviter_id: 1
+  invitee_id: 1
+  status: MyString
+
+two:
+  community_id: 1
+  inviter_id: 1
+  invitee_id: 1
+  status: MyString
