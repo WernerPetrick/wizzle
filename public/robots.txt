@@ -1,1 +1,17 @@
-# See https://www.robotstxt.org/robotstxt.html for documentation on how to use the robots.txt file
+# Allow all crawlers access to everything
+User-agent: *
+Disallow: /admin/
+Disallow: /users/
+Disallow: /friends/
+Disallow: /profile
+Disallow: /account
+Disallow: /password
+Disallow: /sign_in
+Disallow: /sign_out
+Disallow: /sign_up
+
+# Allow everything else
+Allow: /
+
+# Sitemap location
+Sitemap: https://www.wizzle.gifts/sitemap.xml.gz

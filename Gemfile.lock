@@ -343,6 +343,8 @@ GEM
       fugit (~> 1.8, >= 1.11.1)
       globalid (>= 1.0.1)
       sidekiq (>= 6.5.0)
+    sitemap_generator (6.3.0)
+      builder (~> 3.0)
     solid_cable (3.0.11)
       actioncable (>= 7.2)
       activejob (>= 7.2)
@@ -432,6 +434,7 @@ DEPENDENCIES
   selenium-webdriver
   sidekiq
   sidekiq-cron
+  sitemap_generator
   solid_cable
   solid_cache
   solid_queue (~> 1.2.1)
