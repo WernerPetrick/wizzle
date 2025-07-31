@@ -66,3 +66,4 @@ gem "letter_opener", group: :development
 gem "sidekiq"
 gem "sidekiq-cron"
 gem 'redcarpet'
+gem 'sitemap_generator'
