@@ -37,6 +37,24 @@
 	margin-bottom: 2rem;
 }
 
+.remember-me-field {
+	display: flex;
+	align-items: center;
+	gap: 0.5em;
+}
+
+.remember-me-field label {
+	margin: 0;
+	font-weight: 400;
+	font-size: 1rem;
+}
+
+.remember-me-field input[type="checkbox"] {
+	margin: 0;
+	width: 18px;
+	height: 18px;
+}
+
 .text-field label,
 .password-field label {
 	display: block;
@@ -76,6 +94,10 @@
 
 .anonymous-notes h4 {
 	margin-top: 1.2rem;
+}
+
+.password-update {
+	margin-top: 18px;
 }
 
 .text-field textarea {

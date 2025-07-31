@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   get "shared_wishlists/create"
   get "shared_wishlists/destroy"
   resource :profile, only: [:show, :update]
+  resource :account, only: [:destroy]
   resources :users, controller: "users", only: [:create, :new]
   resources :friends, only: [:index, :create] do
     member do

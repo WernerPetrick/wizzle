@@ -179,6 +179,18 @@
             </div>
           </div>
         <% end %>
+
+        <div class="password-update">
+          <%= link_to "Change Password", edit_user_password_path(current_user), class: "btn secondary" %>
+          <p class="password-help">You can change your password at any time.</p>
+        </div>
+
+        <div class="account-deletion">
+          <%= button_to "Delete My Account", account_path, method: :delete, data: { confirm: "Are you sure? This cannot be undone." }, class: "btn danger" %>
+          <small class="form-help">
+            This will permanently delete your account and all associated data. It is by design irreversible.
+          </small>
+        </div>
       </div>
     </section>
   </div>
