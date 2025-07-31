@@ -2,6 +2,21 @@
 <html>
   <head>
     <title><%= content_for(:title) || "Wizzle" %></title>
+    <meta name="description" content="<%= content_for?(:meta_description) ? yield(:meta_description) : 'Wizzle is a simple, minimalistic wishlist app. No ads. No noise. Just you, your wishlist, and the people you care about.' %>">   
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wizzle.gifts/">
+    <meta property="og:title" content="Wizzle – Wishlist Sharing for You and Your People">
+    <meta property="og:description" content="No noise. No ads. No algorithms. Wizzle lets you create and share beautiful wishlists — or keep them just for yourself.">
+    <meta property="og:image" content="https://wizzle.gifts/images/og-image.png">
+
+    <!-- Twitter (optional, even without an account) -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Wizzle – Minimalist Wishlist Sharing for You and Your People">
+    <meta property="twitter:description" content="Create and share wishlists with friends. Clean, distraction-free, and built for simplicity.">
+    <meta property="twitter:image" content="https://wizzle.gifts/images/og-image.png">
+
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
