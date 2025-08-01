@@ -1,0 +1,16 @@
+<% content_for :title, "#{@secret_santa.title} - #{@community.name}" %>
+
+<div class="page-container">
+  <div class="content-section" style="max-width: 800px; margin: 0 auto;">
+    <%= render 'shared/page_header',
+        title: @secret_santa.title,
+        back_link: { path: @community, text: "Back to #{@community.name}" } %>
+
+    <turbo-frame id="secret_santa_details">
+      <%= render 'secret_santa_details' %>
+    </turbo-frame>
+
+    <%= render 'my_assignment' if @my_assignment %>
+    <%= render 'admin_section' if @community.can_manage_members?(current_user) %>
+  </div>
+</div>

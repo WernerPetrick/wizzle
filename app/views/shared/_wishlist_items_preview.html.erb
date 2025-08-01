@@ -1,0 +1,22 @@
+<% if wishlist.wishlist_items.any? %>
+  <div style="background: #f8f9fa; border-radius: 0.5rem; padding: 1rem; margin-bottom: 1rem;">
+    <h4 style="font-size: 0.9rem; font-weight: 500; color: #666; margin-bottom: 0.5rem;">
+      Recent items:
+    </h4>
+    <ul style="list-style: none; padding: 0; margin: 0;">
+      <% wishlist.wishlist_items.limit(3).each do |item| %>
+        <li style="padding: 0.25rem 0; color: #666; font-size: 0.85rem;">
+          • <%= truncate(item.name, length: 40) %>
+          <% if item.being_bought? %>
+            <span style="color: #28a745; font-size: 0.8rem;">✓ Reserved</span>
+          <% end %>
+        </li>
+      <% end %>
+      <% if wishlist.wishlist_items.count > 3 %>
+        <li style="padding: 0.25rem 0; color: #999; font-size: 0.8rem; font-style: italic;">
+          +<%= wishlist.wishlist_items.count - 3 %> more items
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

@@ -1,0 +1,11 @@
+<div class="event-card" style="<%= event_card_styles(event) %>">
+  <div style="display: flex; justify-content: space-between; align-items: start;">
+    <div style="flex: 1;">
+      <%= render 'shared/event_header', event: event %>
+      <%= render 'shared/event_description', event: event if event.respond_to?(:description) %>
+      <%= render 'shared/event_wishlists_section', event: event, community: community %>
+    </div>
+    
+    <%= render 'shared/event_admin_actions', event: event, community: community %>
+  </div>
+</div>

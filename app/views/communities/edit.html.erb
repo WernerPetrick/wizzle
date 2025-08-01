@@ -1,0 +1,23 @@
+<% if turbo_frame_request? %>
+  <turbo-frame id="community_header">
+    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
+      <div>
+        <%= render "form", community: @community %>
+      </div>
+    </div>
+  </turbo-frame>
+<% else %>
+  <div id="main-content">
+    <div class="page-container">
+      <div class="content-section" style="max-width: 600px; margin: 0 auto;">
+        <%= render 'shared/page_header',
+            title: "Edit #{@community.name}",
+            back_link: { path: @community, text: "Back to #{@community.name}" } %>
+        
+        <div class="sleek-card" style="background: #fff; border-radius: 1.2rem; border: 1px solid #eee; padding: 2rem; box-shadow: 0 2px 12px rgba(0,0,0,0.03);">
+          <%= render "form", community: @community %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

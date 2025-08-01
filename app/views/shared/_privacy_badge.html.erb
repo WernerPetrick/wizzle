@@ -1,0 +1,14 @@
+<% case wishlist.visibility %>
+<% when 'private' %>
+  <span style="background: #dc3545; color: #fff; padding: 0.2rem 0.5rem; border-radius: 0.3rem; font-size: 0.7rem; margin-left: 0.5rem;">
+    Private
+  </span>
+<% when 'friends_only' %>
+  <span style="background: #ffc107; color: #000; padding: 0.2rem 0.5rem; border-radius: 0.3rem; font-size: 0.7rem; margin-left: 0.5rem;">
+    Friends Only
+  </span>
+<% when 'public' %>
+  <span style="background: #28a745; color: #fff; padding: 0.2rem 0.5rem; border-radius: 0.3rem; font-size: 0.7rem; margin-left: 0.5rem;">
+    Public
+  </span>
+<% end %>

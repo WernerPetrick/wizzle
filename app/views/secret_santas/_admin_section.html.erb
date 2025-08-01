@@ -1,0 +1,11 @@
+<turbo-frame id="admin_actions">
+  <div style="background: #fff; border: 1px solid #eee; border-radius: 1rem; padding: 2rem;">
+    <h3 style="margin-bottom: 1rem;">Admin Actions</h3>
+    
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+      <%= render 'admin_buttons' %>
+    </div>
+    
+    <%= render 'participants_list' if @secret_santa.active? %>
+  </div>
+</turbo-frame>

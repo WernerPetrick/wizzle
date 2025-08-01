@@ -1,0 +1,37 @@
+<div style="margin-bottom: 1.5rem;">
+  <label style="display: block; font-weight: 500; color: #222; margin-bottom: 0.3rem;">
+    Linked Wishlists
+  </label>
+  
+  <div style="background: #f8f9fa; padding: 1rem; border-radius: 0.5rem; max-height: 200px; overflow-y: auto; border: 1px solid #ddd;">
+    <% if available_wishlists.any? %>
+      <% available_wishlists.each do |member| %>
+        <% member.wishlists.each do |wishlist| %>
+          <div style="margin-bottom: 0.5rem;">
+            <label style="display: flex; align-items: center; cursor: pointer;">
+              <%= check_box_tag "wishlist_ids[]", 
+                wishlist.id, 
+                wishlist_checked?(wishlist, local_assigns[:event]), 
+                style: "margin-right: 0.5rem;" %>
+              <span style="font-size: 0.9rem;">
+                <%= wishlist.title %> 
+                <span style="color: #666;">
+                  (by <%= member_display_name(member) %>)
+                </span>
+              </span>
+            </label>
+          </div>
+        <% end %>
+      <% end %>
+    <% else %>
+      <%= render 'shared/empty_state',
+          icon: '📝',
+          title: 'No wishlists available',
+          description: 'Community members need to create wishlists before they can be linked to events.' %>
+    <% end %>
+  </div>
+  
+  <div style="font-size: 0.8rem; color: #666; margin-top: 0.5rem;">
+    Select wishlists to help community members find relevant gifts for this event.
+  </div>
+</div>

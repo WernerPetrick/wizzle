@@ -1,9 +1,34 @@
 Rails.application.routes.draw do
+
   get "roadmap_items/index"
   constraints subdomain: 'blog' do
     scope module: 'blog' do
       resources :posts, only: [:index, :show]
       root to: 'posts#index', as: :blog_root
+    end
+  end
+
+  resources :communities, only: [:index, :show, :new, :create, :edit, :update] do
+    member do
+      get :members
+      delete :remove_avatar
+    end
+    resources :community_invitations, only: [:new, :create]
+    resources :community_memberships, only: [:destroy, :update]
+    resources :community_events, only: [:show, :new, :create, :edit, :update, :destroy]
+    resources :secret_santas, except: [:index] do
+      member do
+        patch :generate_assignments
+      end
+    end
+  end
+
+  resources :community_invitations, only: [] do
+    member do
+      patch :accept
+      patch :decline
+      get :accept
+      get :decline
     end
   end
 

@@ -1,0 +1,25 @@
+<% if @secret_santa.can_edit? %>
+  <%= link_to "Edit", edit_community_secret_santa_path(@community, @secret_santa), 
+      class: "btn secondary" %>
+<% end %>
+
+<% if @secret_santa.can_generate_assignments? %>
+  <%= button_to "Generate Assignments", 
+      generate_assignments_community_secret_santa_path(@community, @secret_santa),
+      method: :patch,
+      data: { 
+        confirm: "This will assign each member a different person to buy for. This cannot be undone!",
+        turbo_frame: "_top"
+      },
+      class: "btn primary" %>
+<% end %>
+
+<div style="margin-left: auto;">
+  <%= link_to "Delete", community_secret_santa_path(@community, @secret_santa), 
+      method: :delete,
+      data: { 
+        confirm: "Are you sure? This will delete the Secret Santa and all assignments!",
+        turbo_method: :delete
+      },
+      class: "btn danger" %>
+</div>

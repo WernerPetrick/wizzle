@@ -1,0 +1,52 @@
+<% content_for :title, "Edit Event - #{@community.name}" %>
+
+<div style="max-width: 600px; margin: 2rem auto; padding: 0 1rem;">
+  <%= render 'shared/page_header',
+      title: 'Edit Event',
+      back_link: { path: @community, text: "Back to #{@community.name}" } %>
+
+  <%= form_with model: [@community, @event], local: true do |form| %>
+    <div style="display: grid; gap: 1.5rem;">
+      
+      <%= render 'shared/form_field',
+          form: form,
+          object: @event,
+          field_name: :title,
+          field_type: :text,
+          label_text: 'Event Title',
+          field_options: {
+            style: "width: 100%; padding: 0.7rem; border: 1px solid #ddd; border-radius: 0.5rem; font-size: 1rem;"
+          } %>
+
+      <%= render 'shared/form_field',
+          form: form,
+          object: @event,
+          field_name: :event_date,
+          field_type: :date,
+          label_text: 'Event Date',
+          field_options: {
+            style: "width: 100%; padding: 0.7rem; border: 1px solid #ddd; border-radius: 0.5rem; font-size: 1rem;"
+          } %>
+
+      <%= render 'shared/form_field',
+          form: form,
+          object: @event,
+          field_name: :description,
+          field_type: :textarea,
+          label_text: 'Description',
+          field_options: {
+            style: "width: 100%; padding: 0.7rem; border: 1px solid #ddd; border-radius: 0.5rem; font-size: 1rem; resize: vertical; min-height: 100px;"
+          } %>
+
+      <%= render 'community_events/wishlist_selection', 
+          available_wishlists: @available_wishlists, 
+          event: @event %>
+
+      <%= render 'shared/form_actions',
+          form: form,
+          submit_text: 'Update Event',
+          cancel_path: @community,
+          cancel_text: 'Cancel' %>
+    </div>
+  <% end %>
+</div>

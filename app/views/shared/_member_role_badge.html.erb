@@ -1,0 +1,6 @@
+<% membership = community.community_memberships.find_by(user: member) %>
+<% if membership&.role == "admin" %>
+  <div style="color: #1976d2; font-size: 0.65rem; font-weight: 500; margin-bottom: 0.5rem;">
+    Admin
+  </div>
+<% end %>

@@ -1,0 +1,13 @@
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+  <h3 style="font-size: 1.3rem; font-weight: 500; color: #000;">
+    <%= title %>
+    <% if local_assigns[:count] %>
+      <span style="color: #666; font-weight: 400;">(<%= count %>)</span>
+    <% end %>
+  </h3>
+  <% if local_assigns[:actions] %>
+    <div class="section-actions">
+      <%= actions %>
+    </div>
+  <% end %>
+</div>

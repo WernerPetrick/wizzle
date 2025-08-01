@@ -58,6 +58,25 @@
               <p class="action-description">Discover friend's wishes</p>
             </div>
           <% end %>
+
+          <% if current_user.pending_community_invitations.any? %>
+            <div class="pending-invitations" style="background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 0.5rem; padding: 1rem; margin-bottom: 2rem;">
+              <h4 style="margin-bottom: 1rem;">Pending Community Invitations</h4>
+              <% current_user.pending_community_invitations.each do |invitation| %>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid #eee;">
+                  <div>
+                    <strong><%= invitation.community.name %></strong>
+                    <span style="color: #666;">- invited by <%= invitation.inviter.email %></span>
+                  </div>
+                  <div style="display: flex; gap: 0.5rem;">
+                    <%= link_to "Accept", accept_community_invitation_path(invitation), method: :patch, class: "btn small primary" %>
+                    <%= link_to "Decline", decline_community_invitation_path(invitation), method: :patch, class: "btn small secondary" %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+
         </div>
       </div>
     </section>

@@ -1,0 +1,26 @@
+<article style="background: #fff; border: 1px solid #eee; border-radius: 1rem; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+  <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+    <div>
+      <h3 style="font-size: 1.2rem; font-weight: 500; color: #000; margin-bottom: 0.5rem;">
+        <%= wishlist.title %>
+      </h3>
+      <div style="color: #666; font-size: 0.9rem;">
+        <%= render 'shared/wishlist_meta', wishlist: wishlist %>
+      </div>
+    </div>
+    
+    <% if local_assigns[:show_actions] && show_actions %>
+      <%= render 'shared/wishlist_actions', wishlist: wishlist %>
+    <% end %>
+  </div>
+
+  <%= render 'shared/wishlist_description', wishlist: wishlist %>
+  <%= render 'shared/wishlist_items_preview', wishlist: wishlist %>
+  
+  <% unless local_assigns[:show_actions] == false %>
+    <div style="margin-top: 1rem;">
+      <%= link_to "View Wishlist", wishlist_path(wishlist), 
+          style: "background: #261B23; color: #fff; padding: 0.5rem 1rem; border-radius: 0.5rem; text-decoration: none; font-size: 0.9rem;" %>
+    </div>
+  <% end %>
+</article>

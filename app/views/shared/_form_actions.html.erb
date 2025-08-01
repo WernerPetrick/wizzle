@@ -1,0 +1,9 @@
+<div style="display: flex; gap: 1rem; justify-content: <%= local_assigns[:alignment] || 'space-between' %>;">
+  <% if local_assigns[:cancel_path] %>
+    <%= link_to local_assigns[:cancel_text] || "Cancel", local_assigns[:cancel_path], 
+        data: { turbo_frame: "_top" },
+        class: "btn secondary" %>
+  <% end %>
+  
+  <%= form.submit submit_text, class: "btn primary" %>
+</div>

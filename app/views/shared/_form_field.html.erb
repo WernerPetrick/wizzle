@@ -1,0 +1,28 @@
+<div style="margin-bottom: 1.5rem;">
+  <%= form.label field_name, label_text, style: "display: block; font-weight: 500; color: #222; margin-bottom: 0.3rem;" %>
+  
+  <% case field_type %>
+  <% when :text %>
+    <%= form.text_field field_name, **field_options %>
+  <% when :textarea %>
+    <%= form.text_area field_name, **field_options %>
+  <% when :date %>
+    <%= form.date_field field_name, **field_options %>
+  <% when :email %>
+    <%= form.email_field field_name, **field_options %>
+  <% when :password %>
+    <%= form.password_field field_name, **field_options %>
+  <% end %>
+  
+  <% if object.errors[field_name].any? %>
+    <div style="color: #dc3545; font-size: 0.9rem; margin-top: 0.25rem;">
+      <%= object.errors[field_name].first %>
+    </div>
+  <% end %>
+  
+  <% if local_assigns[:help_text] %>
+    <div style="font-size: 0.8rem; color: #666; margin-top: 0.5rem;">
+      <%= help_text %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,21 @@
+<% if @my_assignment.receiver.wishlists.any? %>
+  <div style="margin-top: 1rem;">
+    <h4 style="color: #2e7d32; margin-bottom: 0.5rem;">Their Wishlists:</h4>
+    <div style="display: grid; gap: 0.5rem;">
+      <% @my_assignment.receiver.wishlists.each do |wishlist| %>
+        <div style="background: rgba(46, 125, 50, 0.1); padding: 0.75rem; border-radius: 0.5rem;">
+          <%= link_to wishlist.title, wishlist_path(wishlist), 
+              style: "color: #2e7d32; text-decoration: none; font-weight: 500;" %>
+          <span style="color: #666; font-size: 0.9rem; margin-left: 0.5rem;">
+            (<%= pluralize(wishlist.wishlist_items.count, 'item') %>)
+          </span>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% else %>
+  <%= render 'shared/empty_state',
+      icon: '🎁',
+      title: 'No wishlists yet',
+      description: "#{member_display_name(@my_assignment.receiver)} hasn't created any wishlists, but you can still surprise them!" %>
+<% end %>

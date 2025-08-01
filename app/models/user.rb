@@ -7,6 +7,14 @@ class User < ApplicationRecord
   has_many :friends, through: :friendships, class_name: "User"
   has_many :gift_histories_given, class_name: "GiftHistory", foreign_key: "giver_id"
   has_many :gift_histories_received, class_name: "GiftHistory", foreign_key: "recipient_id"
+  has_many :created_communities, class_name: 'Community', foreign_key: 'creator_id'
+  has_many :community_memberships, dependent: :destroy
+  has_many :communities, through: :community_memberships
+  has_many :sent_community_invitations, class_name: 'CommunityInvitation', foreign_key: 'inviter_id', dependent: :destroy
+  has_many :received_community_invitations, class_name: 'CommunityInvitation', foreign_key: 'invitee_id', dependent: :destroy
+  has_many :created_secret_santas, class_name: 'SecretSanta', foreign_key: 'created_by_id'
+  has_many :giver_assignments, class_name: 'SecretSantaAssignment', foreign_key: 'giver_id'
+  has_many :receiver_assignments, class_name: 'SecretSantaAssignment', foreign_key: 'receiver_id'
 
   after_create :send_welcome_email
 
@@ -15,6 +23,10 @@ class User < ApplicationRecord
 
   def admin?
     admin
+  end
+
+  def pending_community_invitations
+    received_community_invitations.pending.includes(:community, :inviter)
   end
 
   private 
@@ -26,4 +38,5 @@ class User < ApplicationRecord
   def password_required?
     new_record? || password.present?
   end
+
 end

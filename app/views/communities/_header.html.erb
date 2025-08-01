@@ -1,0 +1,22 @@
+<turbo-frame id="community_header">
+  <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
+    <% if community.avatar.attached? %>
+      <div>
+        <%= image_tag community.avatar, style: "border-radius: 50%; max-width: 120px;" %>
+      </div>
+    <% end %>
+    <div>
+      <h1 class="page-title" style="font-size: 2.5rem; font-weight: 200; color: #000; margin: 0;">
+        <%= community.name %>
+      </h1>
+      <% if community.description.present? %>
+        <p style="color: #666; font-size: 1.2rem; line-height: 1.7; font-weight: 300; margin-bottom: 0;">
+          <%= community.description %>
+        </p>
+      <% end %>
+      <% if community.creator == current_user || community.community_memberships.find_by(user: current_user)&.role == "admin" %>
+        <%= link_to "Edit Community", edit_community_path(community), data: { turbo_frame: "community_header" }, class: "btn small secondary", style: "margin-top: 1rem;" %>
+      <% end %>
+    </div>
+  </div>
+</turbo-frame>

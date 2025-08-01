@@ -18,6 +18,9 @@
         <%= link_to "Friends", friends_path, class: "friends-link" %>
       </span>
       <span class="navbar-item">
+        <%= link_to "Communities", communities_path %>
+      </span>
+      <span class="navbar-item">
         <%= link_to "Questions", questions_path, class: "questions-link" %>
         <% if @new_wishlist_item_notes_count.to_i > 0 %>
           <span class="navbar-badge" title="New questions"><%= @new_wishlist_item_notes_count %></span>

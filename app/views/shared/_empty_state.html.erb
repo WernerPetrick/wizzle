@@ -1,0 +1,14 @@
+<div class="empty-state" style="text-align: center; color: #666; padding: 3rem 1rem;">
+  <div style="font-size: 3rem; margin-bottom: 1rem;"><%= icon %></div>
+  <h3 style="font-size: 1.3rem; font-weight: 500; margin-bottom: 0.5rem; color: #333;">
+    <%= title %>
+  </h3>
+  <p style="font-size: 1rem; line-height: 1.5; margin-bottom: 1.5rem;">
+    <%= description %>
+  </p>
+  <% if local_assigns[:actions] %>
+    <div class="empty-actions">
+      <%= actions %>
+    </div>
+  <% end %>
+</div>
