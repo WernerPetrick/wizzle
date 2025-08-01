@@ -1,8 +1,7 @@
 <div class="page-container">
   <div class="content-section" style="max-width: 600px; margin: 0 auto;">
-    <h1 class="page-title" style="font-size: 2.5rem; font-weight: 200; color: #000; margin-bottom: 2rem; text-align: center;">
-      Create a Community
-    </h1>
+    <%= render 'shared/page_header',
+        title: 'Create a Community' %>
 
     <div class="sleek-card" style="background: #fff; border-radius: 1.2rem; border: 1px solid #eee; padding: 2rem; box-shadow: 0 2px 12px rgba(0,0,0,0.03);">
       <%= form_with model: @community, local: true do |f| %>
@@ -17,18 +16,30 @@
           </div>
         <% end %>
 
-        <div style="margin-bottom: 1.5rem;">
-          <%= f.label :name, "Community Name", style: "font-weight: 500; color: #222;" %><br>
-          <%= f.text_field :name, required: true, style: "width: 100%; padding: 0.7rem; border-radius: 0.5rem; border: 1px solid #ccc; margin-top: 0.3rem;" %>
-        </div>
+        <%= render 'shared/form_field',
+            form: f,
+            object: @community,
+            field_name: :name,
+            field_type: :text,
+            label_text: 'Community Name',
+            field_options: {
+              required: true,
+              style: "width: 100%; padding: 0.7rem; border-radius: 0.5rem; border: 1px solid #ccc;"
+            } %>
 
-        <div style="margin-bottom: 2rem;">
-          <%= f.label :description, "Description", style: "font-weight: 500; color: #222;" %><br>
-          <%= f.text_area :description, rows: 4, style: "width: 100%; padding: 0.7rem; border-radius: 0.5rem; border: 1px solid #ccc; margin-top: 0.3rem;" %>
-        </div>
+        <%= render 'shared/form_field',
+            form: f,
+            object: @community,
+            field_name: :description,
+            field_type: :textarea,
+            label_text: 'Description',
+            field_options: {
+              rows: 4,
+              style: "width: 100%; padding: 0.7rem; border-radius: 0.5rem; border: 1px solid #ccc;"
+            } %>
 
-        <div class="field">
-          <%= f.label :avatar, "Profile Picture" %><br>
+        <div class="field" style="margin-bottom: 1.5rem;">
+          <%= f.label :avatar, "Profile Picture", style: "display: block; font-weight: 500; margin-bottom: 0.5rem;" %>
           <%= f.file_field :avatar, direct_upload: true %>
           <% if @community.avatar.attached? %>
             <div style="margin-top: 1rem;">
@@ -39,10 +50,11 @@
           <% end %>
         </div>
 
-        <div style="display: flex; gap: 1rem; justify-content: space-between;">
-          <%= link_to "Cancel", communities_path, class: "btn secondary" %>
-          <%= f.submit "Create Community", class: "btn primary" %>
-        </div>
+        <%= render 'shared/form_actions',
+            form: f,
+            submit_text: 'Create Community',
+            cancel_path: communities_path,
+            cancel_text: 'Cancel' %>
       <% end %>
     </div>
   </div>

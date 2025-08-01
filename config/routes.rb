@@ -8,19 +8,19 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :communities do
-    member do
-      delete :remove_avatar
-    end
-    resources :community_memberships, only: [:destroy, :update]
-  end
-
   resources :communities, only: [:index, :show, :new, :create, :edit, :update] do
     member do
       get :members
+      delete :remove_avatar
     end
     resources :community_invitations, only: [:new, :create]
     resources :community_memberships, only: [:destroy, :update]
+    resources :community_events, only: [:show, :new, :create, :edit, :update, :destroy]
+    resources :secret_santas, except: [:index] do
+      member do
+        patch :generate_assignments
+      end
+    end
   end
 
   resources :community_invitations, only: [] do

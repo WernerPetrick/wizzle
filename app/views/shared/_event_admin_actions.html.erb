@@ -1,0 +1,14 @@
+<%# app/views/shared/_event_admin_actions.html.erb %>
+<% if community.can_manage_members?(current_user) && !event.is_a?(User) %>
+  <div style="display: flex; gap: 0.5rem; margin-left: 1rem;">
+    <%= link_to "Edit", edit_community_community_event_path(community, event), 
+        style: "font-size: 0.8rem; color: #1565c0; text-decoration: none;" %>
+    <%= link_to "Delete", [community, event], 
+        method: :delete,
+        data: { 
+          confirm: "Are you sure?",
+          turbo_method: :delete
+        },
+        style: "font-size: 0.8rem; color: #dc3545; text-decoration: none;" %>
+  </div>
+<% end %>

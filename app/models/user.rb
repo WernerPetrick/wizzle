@@ -12,6 +12,9 @@ class User < ApplicationRecord
   has_many :communities, through: :community_memberships
   has_many :sent_community_invitations, class_name: 'CommunityInvitation', foreign_key: 'inviter_id', dependent: :destroy
   has_many :received_community_invitations, class_name: 'CommunityInvitation', foreign_key: 'invitee_id', dependent: :destroy
+  has_many :created_secret_santas, class_name: 'SecretSanta', foreign_key: 'created_by_id'
+  has_many :giver_assignments, class_name: 'SecretSantaAssignment', foreign_key: 'giver_id'
+  has_many :receiver_assignments, class_name: 'SecretSantaAssignment', foreign_key: 'receiver_id'
 
   after_create :send_welcome_email
 

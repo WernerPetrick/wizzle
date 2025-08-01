@@ -1,0 +1,11 @@
+<%= turbo_stream.replace "event_form" do %>
+  <div style="text-align: center; padding: 2rem; color: #28a745;">
+    <p style="font-size: 1.2rem; font-weight: 500;">Event updated successfully!</p>
+    <p>Redirecting...</p>
+    <script>
+      setTimeout(() => {
+        window.location.href = '<%= community_path(@community) %>';
+      }, 1000);
+    </script>
+  </div>
+<% end %>

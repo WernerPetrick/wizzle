@@ -1,0 +1,14 @@
+<turbo-frame id="my_assignment">
+  <div style="background: #e8f5e8; border: 1px solid #4caf50; border-radius: 1rem; padding: 2rem; margin-bottom: 2rem;">
+    <h3 style="color: #2e7d32; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+      🎁 Your Secret Santa Assignment
+    </h3>
+    
+    <p style="font-size: 1.1rem; margin-bottom: 1rem;">
+      You're buying a gift for: 
+      <strong style="color: #2e7d32;"><%= member_display_name(@my_assignment.receiver) %></strong>
+    </p>
+    
+    <%= render 'assignment_wishlists' %>
+  </div>
+</turbo-frame>

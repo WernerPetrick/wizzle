@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_30_084409) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_01_140951) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -59,6 +59,30 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_30_084409) do
     t.integer "creator_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "community_events", force: :cascade do |t|
+    t.bigint "community_id", null: false
+    t.string "title", null: false
+    t.text "description"
+    t.date "event_date", null: false
+    t.string "event_type", null: false
+    t.bigint "created_by_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["community_id"], name: "index_community_events_on_community_id"
+    t.index ["created_by_id"], name: "index_community_events_on_created_by_id"
+    t.index ["event_date"], name: "index_community_events_on_event_date"
+    t.index ["event_type"], name: "index_community_events_on_event_type"
+  end
+
+  create_table "community_events_wishlists", force: :cascade do |t|
+    t.bigint "community_event_id", null: false
+    t.bigint "wishlist_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["community_event_id"], name: "index_community_events_wishlists_on_community_event_id"
+    t.index ["wishlist_id"], name: "index_community_events_wishlists_on_wishlist_id"
   end
 
   create_table "community_invitations", force: :cascade do |t|
@@ -114,6 +138,37 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_30_084409) do
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "secret_santa_assignments", force: :cascade do |t|
+    t.bigint "secret_santa_id", null: false
+    t.bigint "giver_id", null: false
+    t.bigint "receiver_id", null: false
+    t.boolean "gift_purchased", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["giver_id"], name: "index_secret_santa_assignments_on_giver_id"
+    t.index ["receiver_id"], name: "index_secret_santa_assignments_on_receiver_id"
+    t.index ["secret_santa_id", "giver_id"], name: "index_secret_santa_assignments_on_secret_santa_id_and_giver_id", unique: true
+    t.index ["secret_santa_id", "receiver_id"], name: "idx_on_secret_santa_id_receiver_id_63b79ec3fa", unique: true
+    t.index ["secret_santa_id"], name: "index_secret_santa_assignments_on_secret_santa_id"
+  end
+
+  create_table "secret_santas", force: :cascade do |t|
+    t.bigint "community_id", null: false
+    t.bigint "created_by_id", null: false
+    t.string "title", null: false
+    t.text "description"
+    t.date "event_date", null: false
+    t.date "reveal_date"
+    t.decimal "budget_limit", precision: 8, scale: 2
+    t.string "status", default: "draft"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["community_id"], name: "index_secret_santas_on_community_id"
+    t.index ["created_by_id"], name: "index_secret_santas_on_created_by_id"
+    t.index ["event_date"], name: "index_secret_santas_on_event_date"
+    t.index ["status"], name: "index_secret_santas_on_status"
   end
 
   create_table "shared_wishlists", id: :serial, force: :cascade do |t|
@@ -179,4 +234,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_30_084409) do
   end
 
   add_foreign_key "blog_posts", "users"
+  add_foreign_key "community_events", "communities"
+  add_foreign_key "community_events", "users", column: "created_by_id"
+  add_foreign_key "community_events_wishlists", "community_events"
+  add_foreign_key "community_events_wishlists", "wishlists"
+  add_foreign_key "secret_santa_assignments", "secret_santas"
+  add_foreign_key "secret_santa_assignments", "users", column: "giver_id"
+  add_foreign_key "secret_santa_assignments", "users", column: "receiver_id"
+  add_foreign_key "secret_santas", "communities"
+  add_foreign_key "secret_santas", "users", column: "created_by_id"
 end
