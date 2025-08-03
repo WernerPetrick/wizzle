@@ -1,0 +1,25 @@
+<% if event.is_a?(User) %>
+  <!-- Birthday Event Header -->
+  <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+    <%= image_tag "birthday_cake_icon.png", class: "event-icon", style: "height: 32px; width: 32px; margin-bottom: 0.5rem;" %>
+    <strong style="color: #856404;">
+      <%= member_display_name(event) %>'s Birthday
+    </strong>
+    <div style="color: #856404; font-size: 0.9rem;">
+      <%= event.birthday.strftime("%B %d") if event.birthday %>
+    </div>
+  </div>
+<% else %>
+  <!-- Custom Event Header -->
+  <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+    <%# You can use a different icon for custom events if desired %>
+    <%= image_tag "celebration.png", class: "event-icon", style: "height: 32px; width: 32px; margin-bottom: 0.5rem;" if event.respond_to?(:event_date) %>
+    <strong style="color: #1565c0;"><%= event.title %></strong>
+    <div style="color: #1565c0; font-size: 0.9rem;">
+      <%= event.event_date.strftime("%B %d, %Y") %>
+      <% if event.days_until >= 0 %>
+        (<%= pluralize(event.days_until, 'day') %> away)
+      <% end %>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,8 @@
+<div style="background: #f8f9fa; border-radius: 0.5rem; border: 1px solid #e9ecef; padding: 0.7rem 1.2rem; min-width: 180px; font-size: 0.98rem;">
+  <div>
+    <strong><%= invitation.invitee.email %></strong>
+    <div style="color: #888; font-size: 0.9rem;">
+      Invited by <%= member_display_name(invitation.inviter) %>
+    </div>
+  </div>
+</div>

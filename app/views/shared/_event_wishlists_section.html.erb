@@ -1,0 +1,11 @@
+<%# app/views/shared/_event_wishlists_section.html.erb %>
+<% wishlists = event.is_a?(User) ? event.wishlists : event.wishlists %>
+<% if wishlists.any? %>
+  <div style="margin-top: 1rem;">
+    <div style="font-size: 0.8rem; color: <%= event_text_color(event) %>; margin-bottom: 0.5rem;">
+      <%= pluralize(wishlists.count, event.is_a?(User) ? 'wishlist available' : 'wishlist linked') %>
+    </div>
+    <%= link_to "View Wishlists", event_wishlists_path(event, community), 
+        style: "display: inline-block; font-size: 0.9rem; background: #{event_bg_color(event)}; color: #fff; padding: 0.5rem 1rem; border-radius: 0.5rem; text-decoration: none;" %>
+  </div>
+<% end %>

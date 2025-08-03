@@ -1,0 +1,80 @@
+<%= form_with model: [@community, event], local: false, data: { turbo_frame: "event_form" } do |form| %>
+  <div style="display: grid; gap: 1.5rem;">
+    
+    <!-- Title Field -->
+    <div>
+      <%= form.label :title, style: "display: block; font-weight: 500; margin-bottom: 0.5rem;" %>
+      <%= form.text_field :title, 
+          style: "width: 100%; padding: 0.7rem; border: 1px solid #ddd; border-radius: 0.5rem; font-size: 1rem;",
+          placeholder: "e.g., John's Birthday Party, Holiday Celebration" %>
+      <% if event.errors[:title].any? %>
+        <div style="color: #dc3545; font-size: 0.9rem; margin-top: 0.25rem;">
+          <%= event.errors[:title].first %>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Event Date Field -->
+    <div>
+      <%= form.label :event_date, "Event Date", style: "display: block; font-weight: 500; margin-bottom: 0.5rem;" %>
+      <%= form.date_field :event_date, 
+          style: "width: 100%; padding: 0.7rem; border: 1px solid #ddd; border-radius: 0.5rem; font-size: 1rem;",
+          min: Date.current %>
+      <% if event.errors[:event_date].any? %>
+        <div style="color: #dc3545; font-size: 0.9rem; margin-top: 0.25rem;">
+          <%= event.errors[:event_date].first %>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Description Field -->
+    <div>
+      <%= form.label :description, style: "display: block; font-weight: 500; margin-bottom: 0.5rem;" %>
+      <%= form.text_area :description, 
+          style: "width: 100%; padding: 0.7rem; border: 1px solid #ddd; border-radius: 0.5rem; font-size: 1rem; resize: vertical; min-height: 100px;",
+          placeholder: "Optional: Add more details about the event..." %>
+      <% if event.errors[:description].any? %>
+        <div style="color: #dc3545; font-size: 0.9rem; margin-top: 0.25rem;">
+          <%= event.errors[:description].first %>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Wishlist Selection -->
+    <div>
+      <label style="display: block; font-weight: 500; margin-bottom: 0.5rem;">Link Wishlists (Optional)</label>
+      <div style="background: #f8f9fa; padding: 1rem; border-radius: 0.5rem; max-height: 200px; overflow-y: auto;">
+        <% if @available_wishlists.any? %>
+          <% @available_wishlists.each do |member| %>
+            <% member.wishlists.each do |wishlist| %>
+              <div style="margin-bottom: 0.5rem;">
+                <label style="display: flex; align-items: center; cursor: pointer;">
+                  <%= check_box_tag "wishlist_ids[]", wishlist.id, 
+                      (event.persisted? && event.wishlists.include?(wishlist)), 
+                      style: "margin-right: 0.5rem;" %>
+                  <span style="font-size: 0.9rem;">
+                    <%= wishlist.title %> 
+                    <span style="color: #666;">(by <%= member.name.presence || member.email.split('@').first.humanize %>)</span>
+                  </span>
+                </label>
+              </div>
+            <% end %>
+          <% end %>
+        <% else %>
+          <p style="color: #666; font-size: 0.9rem; margin: 0;">No wishlists available to link.</p>
+        <% end %>
+      </div>
+      <div style="font-size: 0.8rem; color: #666; margin-top: 0.5rem;">
+        Link wishlists to help members find relevant gifts for this event.
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <div style="display: flex; gap: 1rem; justify-content: flex-end; padding-top: 1rem;">
+      <%= link_to "Cancel", @community, 
+          style: "padding: 0.7rem 1.5rem; border: 1px solid #ddd; background: #fff; color: #666; text-decoration: none; border-radius: 0.5rem;" %>
+      <%= form.submit event.persisted? ? "Update Event" : "Create Event", 
+          style: "padding: 0.7rem 1.5rem; background: #261B23; color: #fff; border: none; border-radius: 0.5rem; cursor: pointer;" %>
+    </div>
+  </div>
+<% end %>

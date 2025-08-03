@@ -1,0 +1,45 @@
+<div class="page-container">
+  <div class="content-section" style="max-width: 600px; margin: 0 auto;">
+    <h1 class="page-title" style="font-size: 2.5rem; font-weight: 200; color: #000; margin-bottom: 2rem; text-align: center;">
+      Invite Friends to <%= @community.name %>
+    </h1>
+
+    <% if @friends.any? %>
+      <div class="sleek-card" style="background: #fff; border-radius: 1.2rem; border: 1px solid #eee; padding: 2rem; box-shadow: 0 2px 12px rgba(0,0,0,0.03);">
+        <%= form_with model: [@community, @invitation], local: true do |f| %>
+          <% if @invitation.errors.any? %>
+            <div style="background: #fee; border: 1px solid #fcc; color: #c00; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1.5rem;">
+              <h4>Please fix the following errors:</h4>
+              <ul>
+                <% @invitation.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div style="margin-bottom: 2rem;">
+            <%= f.label :invitee_id, "Select a friend to invite:", style: "font-weight: 500; color: #222;" %><br>
+            <%= f.select :invitee_id, 
+                options_from_collection_for_select(@friends, :id, :email), 
+                { prompt: "Choose a friend..." }, 
+                { required: true, style: "width: 100%; padding: 0.7rem; border-radius: 0.5rem; border: 1px solid #ccc; margin-top: 0.3rem;" } %>
+          </div>
+
+          <div style="display: flex; gap: 1rem; justify-content: space-between;">
+            <%= link_to "Cancel", @community, class: "btn secondary" %>
+            <%= f.submit "Send Invitation", class: "btn primary" %>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="sleek-card" style="background: #fff; border-radius: 1.2rem; border: 1px solid #eee; padding: 3rem; text-align: center; box-shadow: 0 2px 12px rgba(0,0,0,0.03);">
+        <h3 style="font-size: 1.5rem; font-weight: 300; color: #666; margin-bottom: 1rem;">No Friends to Invite</h3>
+        <p style="color: #888; margin-bottom: 2rem;">
+          All your friends are already members of this community or have pending invitations.
+        </p>
+        <%= link_to "Back to Community", @community, class: "btn secondary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

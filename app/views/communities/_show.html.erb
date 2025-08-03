@@ -1,0 +1,101 @@
+<div class="page-container">
+  <div class="content-section" style="max-width: 800px; margin: 0 auto;">
+    <turbo-frame id="community_header">
+      <%= render "header", community: @community %>
+    </turbo-frame>
+
+    <div style="margin-top: 3rem;">
+      <%= render 'shared/section_header', 
+          title: 'Upcoming Events',
+          actions: (@community.can_manage_members?(current_user) ? 
+                   link_to("Add Event", new_community_community_event_path(@community), class: "btn small primary") : 
+                   nil) %>
+
+      <div style="display: grid; gap: 1rem;">
+        <!-- Birthday Events -->
+        <% @community.upcoming_birthdays.each do |member| %>
+          <%= render 'shared/event_card', event: member, community: @community %>
+        <% end %>
+
+        <!-- Custom Events -->
+        <% @community.upcoming_events.custom.each do |event| %>
+          <%= render 'shared/event_card', event: event, community: @community %>
+        <% end %>
+
+        <% if @community.upcoming_events.empty? && @community.upcoming_birthdays.empty? %>
+          <%= render 'shared/empty_state', 
+              icon: '📅', 
+              title: 'No upcoming events', 
+              description: 'Events will appear here when they are created.' %>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Secret Santa Events -->
+      <% @community.upcoming_secret_santas.each do |secret_santa| %>
+        <div class="event-card" style="background: #f3e5f5; border: 1px solid #e1bee7; border-radius: 0.7rem; padding: 1rem; margin-top: 1.5rem;">
+          <div style="display: flex; justify-content: space-between; align-items: start;">
+            <div style="flex: 1;">
+              <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                <%= image_tag "santa.png", class: "event-icon", style: "height: 32px; width: 32px; margin-bottom: 0.5rem;" %>
+                <strong style="color: #7b1fa2;">
+                  <%= secret_santa.title %>
+                </strong>
+              </div>
+              <div style="color: #7b1fa2; font-size: 0.9rem; text-align: center;">
+                <%= secret_santa.event_date.strftime("%B %d, %Y") %>
+              </div>
+              <% if secret_santa.description.present? %>
+                <p style="color: #7b1fa2; font-size: 0.85rem; margin-top: 0.5rem; margin-bottom: 1rem; text-align: center;">
+                  <%= truncate(secret_santa.description, length: 100) %>
+                </p>
+              <% end %>
+              <div style="margin-top: 1rem; text-align: center;">
+                <%= link_to "View Secret Santa", community_secret_santa_path(@community, secret_santa), 
+                    style: "display: inline-block; font-size: 0.9rem; background: #7b1fa2; color: #fff; padding: 0.5rem 1rem; border-radius: 0.5rem; text-decoration: none;" %>
+              </div>
+            </div>
+            <%= render 'secret_santa_admin_actions', secret_santa: secret_santa if @community.can_manage_members?(current_user) %>
+          </div>
+        </div>
+      <% end %>
+
+      <!-- Add Secret Santa Button for Admins -->
+      <% if @community.can_manage_members?(current_user) %>
+        <div style="text-align: center; margin-top: 1rem;">
+          <%= link_to "Create Secret Santa", new_community_secret_santa_path(@community), 
+              class: "btn secondary" %>
+        </div>
+      <% end %>
+
+      <div style="margin-top: 3rem;">
+      <%= render 'shared/section_header', 
+        title: 'Members', 
+        count: community.members.count %>
+    </div>
+
+    <turbo-frame id="community_members">
+      <div class="members-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+        <% community.members.each do |member| %>
+          <%= render 'shared/member_card', member: member, community: community %>
+        <% end %>
+      </div>
+    </turbo-frame>
+
+    <% pending_invitations = @community.community_invitations.pending.includes(:invitee, :inviter) %>
+    <% if pending_invitations.any? %>
+      <div style="margin-top: 2rem;">
+        <%= render 'shared/section_header', title: 'Pending Invitations' %>
+        <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+          <% pending_invitations.each do |invitation| %>
+            <%= render 'shared/community_invitation_card', invitation: invitation %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+    <div style="margin-top: 3rem; text-align: center;">
+      <%= link_to "← Back to Communities", communities_path, class: "btn secondary" %>
+    </div>
+  </div>
+</div>

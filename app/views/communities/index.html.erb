@@ -1,0 +1,62 @@
+<div class="page-container">
+  <div class="content-section" style="max-width: 800px; margin: 0 auto;">
+    <% if current_user.pending_community_invitations.any? %>
+        <div class="pending-invitations" style="background: #f8f9fa; border-radius: 1rem; border: 1px solid #e9ecef; padding: 1.5rem; margin-bottom: 2rem;">
+          <h3 style="font-size: 1.3rem; font-weight: 500; color: #000; margin-bottom: 1rem;">
+            Pending Invitations
+          </h3>
+          <% current_user.pending_community_invitations.each do |invitation| %>
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid #dee2e6;">
+              <div>
+                <strong style="color: #000;"><%= invitation.community.name %></strong><br>
+                <span style="color: #666; font-size: 0.9rem;">Invited by <%= invitation.inviter.email %></span>
+              </div>
+              <div style="display: flex; gap: 0.5rem;">
+                <%= button_to "Accept", accept_community_invitation_path(invitation), 
+                  method: :patch, 
+                  data: { confirm: "Join #{invitation.community.name}?" },
+                  class: "btn small primary",
+                style: "padding: 0.3rem 1rem; border-radius: 0.5rem;" %>
+                <%= button_to "Decline", decline_community_invitation_path(invitation), 
+                    method: :patch, 
+                    data: { confirm: "Decline invitation to #{invitation.community.name}?" },
+                    class: "btn small secondary",
+                    style: "padding: 0.3rem 1rem; border-radius: 0.5rem" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+      <h1 class="page-title" style="font-size: 2.5rem; font-weight: 200; color: #000; margin: 0;">
+        My Communities
+      </h1>
+      <%= link_to "Create Community", new_community_path, class: "btn primary" %>
+    </div>
+
+    <% if @communities.any? %>
+      <div class="communities-grid" style="display: grid; gap: 2rem;">
+        <% @communities.each do |community| %>
+          <div class="sleek-card" style="background: #fff; border-radius: 1.2rem; border: 1px solid #eee; padding: 2rem; box-shadow: 0 2px 12px rgba(0,0,0,0.03);">
+            <h3 style="font-size: 1.4rem; font-weight: 500; color: #000; margin-bottom: 0.5rem;">
+              <%= link_to community.name, community, style: "text-decoration: none; color: inherit;" %>
+            </h3>
+            <p style="color: #666; font-weight: 300; line-height: 1.5; margin-bottom: 1rem;">
+              <%= truncate(community.description, length: 150) %>
+            </p>
+            <div style="display: flex; justify-content: space-between; align-items: center; color: #888; font-size: 0.9rem;">
+              <span><%= pluralize(community.members.count, 'member') %></span>
+              <span>Created by <%= community.creator.email %></span>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="sleek-card" style="background: #fff; border-radius: 1.2rem; border: 1px solid #eee; padding: 3rem; text-align: center; box-shadow: 0 2px 12px rgba(0,0,0,0.03);">
+        <h3 style="font-size: 1.5rem; font-weight: 300; color: #666; margin-bottom: 1rem;">No Communities Yet</h3>
+        <p style="color: #888; margin-bottom: 2rem;">Create or join a community to start sharing wishlists with groups of friends.</p>
+        <%= link_to "Create Your First Community", new_community_path, class: "btn primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<span class="item-count">
+  <%= pluralize(wishlist.wishlist_items.count, 'item') %>
+</span>
+<% if wishlist.shared_wishlists.any? %>
+  • <span class="shared-count">
+    shared with <%= pluralize(wishlist.shared_wishlists.count, 'friend') %>
+  </span>
+<% end %>
+<%= render 'shared/privacy_badge', wishlist: wishlist %>

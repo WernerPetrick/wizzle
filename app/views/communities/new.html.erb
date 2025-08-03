@@ -1,0 +1,61 @@
+<div class="page-container">
+  <div class="content-section" style="max-width: 600px; margin: 0 auto;">
+    <%= render 'shared/page_header',
+        title: 'Create a Community' %>
+
+    <div class="sleek-card" style="background: #fff; border-radius: 1.2rem; border: 1px solid #eee; padding: 2rem; box-shadow: 0 2px 12px rgba(0,0,0,0.03);">
+      <%= form_with model: @community, local: true do |f| %>
+        <% if @community.errors.any? %>
+          <div style="background: #fee; border: 1px solid #fcc; color: #c00; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1.5rem;">
+            <h4>Please fix the following errors:</h4>
+            <ul>
+              <% @community.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <%= render 'shared/form_field',
+            form: f,
+            object: @community,
+            field_name: :name,
+            field_type: :text,
+            label_text: 'Community Name',
+            field_options: {
+              required: true,
+              style: "width: 100%; padding: 0.7rem; border-radius: 0.5rem; border: 1px solid #ccc;"
+            } %>
+
+        <%= render 'shared/form_field',
+            form: f,
+            object: @community,
+            field_name: :description,
+            field_type: :textarea,
+            label_text: 'Description',
+            field_options: {
+              rows: 4,
+              style: "width: 100%; padding: 0.7rem; border-radius: 0.5rem; border: 1px solid #ccc;"
+            } %>
+
+        <div class="field" style="margin-bottom: 1.5rem;">
+          <%= f.label :avatar, "Profile Picture", style: "display: block; font-weight: 500; margin-bottom: 0.5rem;" %>
+          <%= f.file_field :avatar, direct_upload: true %>
+          <% if @community.avatar.attached? %>
+            <div style="margin-top: 1rem;">
+              <%= image_tag @community.avatar, style: "border-radius: 50%;" %>
+              <br>
+              <%= button_to "Remove Picture", remove_avatar_community_path(@community), method: :delete, data: { confirm: "Remove profile picture?" }, class: "btn small danger" %>
+            </div>
+          <% end %>
+        </div>
+
+        <%= render 'shared/form_actions',
+            form: f,
+            submit_text: 'Create Community',
+            cancel_path: communities_path,
+            cancel_text: 'Cancel' %>
+      <% end %>
+    </div>
+  </div>
+</div>

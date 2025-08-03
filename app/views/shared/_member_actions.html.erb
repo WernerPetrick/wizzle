@@ -1,0 +1,39 @@
+<div class="member-actions">
+  <!-- Admin Role Management (Creator Only) -->
+  <% if community.can_manage_admin_roles?(current_user, member) %>
+    <% membership = community.community_memberships.find_by(user: member) %>
+    <div style="margin-bottom: 0.5rem;">
+      <% if membership.role == "admin" %>
+        <%= button_to "Remove Admin", 
+            community_community_membership_path(community, membership, role: "member"), 
+            method: :patch, 
+            class: "btn small secondary", 
+            form: { style: "display:inline;" } %>
+      <% else %>
+        <%= button_to "Make Admin", 
+            community_community_membership_path(community, membership, role: "admin"), 
+            method: :patch, 
+            class: "btn small primary", 
+            form: { style: "display:inline;" } %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <!-- Profile Link -->
+  <% if member != current_user %>
+    <%= link_to "View Profile", user_path(member), 
+        class: "btn small", 
+        data: { turbo_frame: "_top" },
+        style: "margin-bottom: 0.5rem;" %>
+  <% end %>
+
+  <!-- Remove Member (Admins Only) -->
+  <% if community.can_remove_member?(current_user, member) %>
+    <% membership = community.community_memberships.find_by(user: member) %>
+    <%= button_to "Remove", 
+        community_community_membership_path(community, membership), 
+        method: :delete, 
+        data: { confirm: "Remove this member from the community?" }, 
+        class: "btn small danger" %>
+  <% end %>
+</div>

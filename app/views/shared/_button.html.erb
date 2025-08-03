@@ -1,0 +1,34 @@
+<%# app/views/shared/_button.html.erb %>
+<% 
+  button_classes = case variant
+  when 'primary'
+    "background: #261B23; color: #fff; border: none;"
+  when 'secondary'
+    "background: #fff; color: #666; border: 1px solid #ddd;"
+  when 'danger'
+    "background: #dc3545; color: #fff; border: none;"
+  else
+    "background: #fff; color: #666; border: 1px solid #ddd;"
+  end
+  
+  size_styles = case size
+  when 'small'
+    "padding: 0.4rem 0.8rem; font-size: 0.8rem;"
+  when 'large'
+    "padding: 0.8rem 2rem; font-size: 1.1rem;"
+  else
+    "padding: 0.7rem 1.5rem; font-size: 1rem;"
+  end
+%>
+
+<% if local_assigns[:url] %>
+  <%= link_to text, url, 
+      style: "#{button_classes} #{size_styles} border-radius: 0.5rem; text-decoration: none; display: inline-block; cursor: pointer;",
+      **html_options %>
+<% else %>
+  <button type="<%= button_type || 'button' %>" 
+          style="<%= button_classes %> <%= size_styles %> border-radius: 0.5rem; cursor: pointer;"
+          <%= html_options.map { |k, v| "#{k}='#{v}'" }.join(' ').html_safe %>>
+    <%= text %>
+  </button>
+<% end %>
