@@ -15,7 +15,7 @@
   </div>
 <% else %>
   <%= render 'shared/empty_state',
-      icon: '🎁',
+      icon: image_tag('santas_bag.png', alt: 'Gift', style: 'height: 2em;'),
       title: 'No wishlists yet',
       description: "#{member_display_name(@my_assignment.receiver)} hasn't created any wishlists, but you can still surprise them!" %>
 <% end %>

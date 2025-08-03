@@ -11,8 +11,7 @@ module SecretSantasHelper
   end
 
   def format_budget(amount)
-    return 'No limit' unless amount
-    "$#{amount}"
+    amount ? amount.to_s : 'No limit'
   end
 
   private
